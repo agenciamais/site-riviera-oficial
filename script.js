@@ -1,4 +1,6 @@
-// --- Código do Menu Hambúrguer para Mobile ---
+// --- script.js ---
+
+// MENU MOBILE
 const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
@@ -24,26 +26,17 @@ function openMenu() {
     if (logo) logo.classList.add("hidden");
 }
 
-hamburger.addEventListener("click", (e) => {
-    e.stopPropagation();
-    const isActive = hamburger.classList.contains('active');
-    if (isActive) {
-        closeMenu();
-    } else {
-        openMenu();
-    }
-});
+if (hamburger) {
+    hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburger.classList.contains('active') ? closeMenu() : openMenu();
+    });
+}
 
-document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
-    closeMenu();
-}));
+document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
+menuOverlay.addEventListener('click', closeMenu);
 
-menuOverlay.addEventListener('click', () => {
-    closeMenu();
-});
-
-
-// --- Código do Carrossel de Banners ---
+// CARROSSEL DE BANNERS
 const slideContainer = document.querySelector(".slider-container");
 if (slideContainer) {
     let slideIndex = 0;
@@ -53,14 +46,13 @@ if (slideContainer) {
     const slideIntervalTime = 5000; 
 
     function updateSlidePosition() {
-        slideContainer.style.transition = "transform 0.5s ease-in-out";
         slideContainer.style.transform = `translateX(${-slideIndex * 100}%)`;
         
         if(progressBar) {
             progressBar.style.transition = 'none';
             progressBar.style.width = '0%';
             setTimeout(() => {
-                progressBar.style.transition = `width ${slideIntervalTime / 1000}s linear`;
+                progressBar.style.transition = `width ${slideIntervalTime}ms linear`;
                 progressBar.style.width = '100%';
             }, 50);
         }
@@ -72,56 +64,44 @@ if (slideContainer) {
     }
 
     let slideInterval = setInterval(nextSlide, slideIntervalTime);
-
     const nextBtn = document.querySelector('.next');
     const prevBtn = document.querySelector('.prev');
 
-    function resetInterval() {
+    const resetInterval = () => {
         clearInterval(slideInterval);
-        updateSlidePosition();
         slideInterval = setInterval(nextSlide, slideIntervalTime);
     }
 
-    if (nextBtn && prevBtn) {
-        nextBtn.addEventListener('click', () => {
-            slideIndex = (slideIndex + 1) % totalSlides;
-            resetInterval();
-        });
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+        slideIndex = (slideIndex + 1) % totalSlides;
+        updateSlidePosition(); resetInterval();
+    });
 
-        prevBtn.addEventListener('click', () => {
-            slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
-            resetInterval();
-        });
-    }
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+        slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+        updateSlidePosition(); resetInterval();
+    });
+
     updateSlidePosition();
 }
 
-
-// --- Código do Menu Ativo Laranja ---
+// MENU ATIVO LARANJA
 document.addEventListener('DOMContentLoaded', () => {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll("header nav ul li a.nav-link");
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        const linkPage = link.getAttribute('href');
-        if (linkPage === currentPage) {
+        if (link.getAttribute('href') === currentPage) {
             link.classList.add('active');
         }
     });
 });
 
-
-// --- ANIMAÇÃO AO ROLAR ---
+// ANIMAÇÃO FADE-IN
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-        } else {
-            entry.target.classList.remove('is-visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
     });
 });
-
-const elementsToFadeIn = document.querySelectorAll('.fade-in-element');
-elementsToFadeIn.forEach((el) => observer.observe(el));
+document.querySelectorAll('.fade-in-element').forEach((el) => observer.observe(el));
