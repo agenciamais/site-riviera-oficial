@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL RESTAURADA (Aurora + Sheets + Acordeão) */
+/* style.css - Versão Final: Sticky Stacking Sheets (Empilhamento Premium) */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -10,13 +10,13 @@
     --texto-escuro: #2c3e50;
     --texto-suave: #546e7a;
     
-    /* Vidro Padrão */
-    --vidro-bg: rgba(255, 255, 255, 0.9);
+    /* Vidro */
+    --vidro-bg: rgba(255, 255, 255, 0.95); /* Mais sólido para o empilhamento funcionar bem */
     --vidro-borda: 1px solid rgba(255, 255, 255, 0.95);
-    --vidro-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0,0,0,0.05);
-    --blur: blur(12px);
+    --vidro-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05), 0 10px 30px rgba(0,0,0,0.1);
+    --blur: blur(15px);
     
-    /* Vidro Escuro (Matrículas) */
+    /* Vidro Escuro */
     --vidro-dark-bg: rgba(255, 255, 255, 0.15);
     --vidro-dark-borda: 1px solid rgba(255, 255, 255, 0.3);
 }
@@ -41,7 +41,6 @@ body {
     66% { transform: translate(-20px, 20px) scale(0.9); }
     100% { transform: translate(0, 0) scale(1); }
 }
-/* Luz Azul Superior */
 body::before {
     content: ''; position: fixed; top: -20%; left: -10%; width: 60vw; height: 60vw;
     border-radius: 50%;
@@ -49,7 +48,6 @@ body::before {
     filter: blur(80px); z-index: -2;
     animation: floatAurora 15s infinite ease-in-out;
 }
-/* Luz Amarela Inferior */
 body::after {
     content: ''; position: fixed; bottom: -20%; right: -10%; width: 50vw; height: 50vw;
     border-radius: 50%;
@@ -68,42 +66,7 @@ h2 {
 }
 p { color: var(--texto-suave); margin-bottom: 15px; }
 
-/* Regras de Alinhamento Fixas */
 #proposta p, #proposta .texto-justificado { text-align: center !important; }
-
-/* --- CARD DE VIDRO PADRÃO (Usado na Home/Proposta) --- */
-.glass-card {
-    background: var(--vidro-bg); backdrop-filter: var(--blur);
-    border: var(--vidro-borda); box-shadow: var(--vidro-shadow);
-    border-radius: 25px; padding: 50px; margin-bottom: 40px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
-
-/* --- NOVOS "SHEETS" (FOLHAS) PARA A ABA SOBRE --- */
-.sheet-card {
-    background: #fff;
-    padding: 40px;
-    border-radius: 30px;
-    box-shadow: 0 15px 40px rgba(28, 104, 211, 0.1);
-    margin-bottom: 30px;
-    position: relative;
-    border-top: 5px solid var(--azul-riviera); /* Cor padrão */
-    transition: transform 0.4s ease;
-}
-.sheet-card:hover { transform: translateY(-5px); }
-
-/* Cores específicas dos Sheets */
-.sheet-intro { border-top-color: var(--azul-riviera); }
-.sheet-missao { border-top-color: var(--amarelo); }
-.sheet-visao { border-top-color: var(--laranja); }
-
-.sheet-card h3 { 
-    text-align: center; color: var(--azul-profundo); margin-bottom: 15px; font-size: 1.5rem; 
-}
-/* Força texto justificado nos sheets */
-.sheet-card p { text-align: justify !important; margin-bottom: 0; }
-
 
 /* --- HEADER --- */
 .top-bar {
@@ -162,22 +125,61 @@ header {
 /* --- SEÇÕES & CONTEÚDO --- */
 .content-section { padding: 60px 0; }
 
-.card-container { display: flex; gap: 25px; margin-top: 20px; }
-
-/* Imagem Redonda (se for usada) */
-.image-frame-circle {
-    width: 320px; height: 320px; border-radius: 50%; overflow: hidden;
-    border: 10px solid rgba(255,255,255,0.5); 
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: inline-block; transition: transform 0.5s;
+/* Container especial para os sheets não quebrarem o layout */
+.card-container { 
+    display: flex; 
+    flex-direction: column; /* Força empilhamento vertical */
+    gap: 40px; /* Espaço inicial entre eles */
+    margin-top: 20px; 
 }
-.image-frame-circle img { width: 100%; height: 100%; object-fit: cover; }
 
-.sobre-container { display: flex; gap: 40px; align-items: center; }
-.sobre-texto { flex: 1.2; }
-.sobre-imagem { flex: 1; text-align: center; }
+/* CARD DE VIDRO PADRÃO */
+.glass-card {
+    background: var(--vidro-bg); backdrop-filter: var(--blur); border: var(--vidro-borda);
+    box-shadow: var(--vidro-shadow); border-radius: 25px; padding: 50px; margin-bottom: 40px;
+    transition: transform 0.4s ease;
+}
+
+/* --- NOVOS "SHEETS" (STICKY STACKING) --- */
+/* O efeito mágico acontece aqui */
+.sheet-card {
+    background: #fff;
+    padding: 50px;
+    border-radius: 40px 40px 0 0; /* Formato de pasta/aba */
+    box-shadow: 0 -10px 30px rgba(28, 104, 211, 0.15); /* Sombra para cima para destacar o empilhamento */
+    position: sticky; /* O segredo do empilhamento */
+    border-top: 8px solid var(--azul-riviera);
+    transition: transform 0.3s ease;
+    min-height: 300px; /* Altura mínima para garantir o efeito */
+}
+
+/* Define onde cada cartão vai "grudar" na tela */
+.sheet-intro { 
+    top: 110px; /* Gruda logo abaixo do menu */
+    z-index: 10; 
+    border-top-color: var(--azul-riviera);
+}
+.sheet-missao { 
+    top: 150px; /* Gruda um pouco mais abaixo, cobrindo o anterior */
+    z-index: 20; 
+    border-top-color: var(--amarelo);
+}
+.sheet-visao { 
+    top: 190px; /* Gruda ainda mais abaixo */
+    z-index: 30; 
+    border-top-color: var(--laranja);
+    border-radius: 40px; /* O último pode ser arredondado em baixo também */
+    margin-bottom: 50px;
+}
+
+.sheet-card h2, .sheet-card h3 { 
+    text-align: center; margin-bottom: 20px; 
+}
+.sheet-card h3 { font-size: 1.8rem; color: var(--azul-profundo); }
+.sheet-card p { text-align: justify !important; font-size: 1.05rem; }
 
 
-/* --- ACORDEÃO INTERATIVO (Níveis de Ensino) --- */
+/* --- ACORDEÃO INTERATIVO --- */
 .accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px; }
 .accordion-item {
     background: var(--vidro-bg); backdrop-filter: blur(10px);
@@ -203,7 +205,7 @@ header {
 .accordion-content p { padding-bottom: 25px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; }
 
 
-/* --- MATRÍCULAS (TAB/FOLHA AZUL) --- */
+/* --- MATRÍCULAS (TAB AZUL) --- */
 .cta-section { 
     background: linear-gradient(160deg, var(--azul-riviera) 0%, var(--azul-profundo) 100%); 
     color: white; padding: 100px 0; text-align: center; margin-top: 80px;
@@ -229,7 +231,7 @@ header {
 .cta-button.secondary { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
 .cta-button.simple { color: var(--azul-riviera); border: 2px solid var(--azul-riviera); background: transparent; padding: 12px 30px; }
 
-/* --- FOOTER & EXTRAS --- */
+/* --- FOOTER --- */
 .extras-container { display: flex; gap: 30px; }
 .extra-card { flex: 1; }
 footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; margin-top: 0; position: relative; z-index: 2; }
@@ -267,21 +269,29 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
     .cta-titulo, .proposta-titulo { margin-top: 0 !important; padding-top: 0 !important; }
     
     .sobre-container { flex-direction: column; }
-    .sobre-imagem, .nivel-item.image-block { display: none !important; } /* Esconde as imagens grandes no mobile */
+    .sobre-imagem, .nivel-item.image-block { display: none !important; } 
     
-    /* Sheets e Cards */
-    .card-container { flex-direction: column; gap: 15px; } 
-    .sheet-card { padding: 30px 20px; text-align: justify; } 
+    /* Sheets no Mobile */
+    .card-container { gap: 20px; }
     
-    .glass-card { padding: 30px 20px; border-radius: 20px; }
+    .sheet-card { 
+        padding: 30px 20px; 
+        border-radius: 30px 30px 0 0; 
+        min-height: auto; /* Altura automática no mobile */
+    }
     
+    /* Ajuste dos Sticky Points no Mobile */
+    .sheet-intro { top: 90px; }
+    .sheet-missao { top: 130px; }
+    .sheet-visao { top: 170px; margin-bottom: 40px; }
+
     .accordion-header { padding: 20px; }
     .accordion-header h3 { font-size: 1.2rem; }
     .level-detail { font-size: 0.85rem; margin-top: 2px; }
     
+    .glass-card { padding: 30px 20px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
     .cta-button { width: 100%; margin-bottom: 10px; }
     
-    /* Novo formato Matrículas no Mobile */
     .cta-section { border-radius: 40px 40px 0 0; padding: 60px 0; margin-top: 40px; }
 }
