@@ -1,4 +1,4 @@
-/* style.css - Versão Premium Mobile Fix Final + Escada de Níveis */
+/* style.css - Versão Acordeão + Ajuste Fino de Textos */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -10,7 +10,7 @@
     --texto-escuro: #2c3e50;
     --texto-suave: #546e7a;
     
-    /* Vidro Padrão */
+    /* Vidro */
     --vidro-bg: rgba(255, 255, 255, 0.85);
     --vidro-borda: 1px solid rgba(255, 255, 255, 0.95);
     --vidro-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0,0,0,0.05);
@@ -40,14 +40,25 @@ body.menu-open { overflow: hidden; }
 /* --- GERAL --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 
+/* CORREÇÃO CRÍTICA DOS TÍTULOS (LINHAS PERTINHAS) */
 h2 {
-    font-size: 2.5rem; color: var(--azul-riviera); margin-bottom: 30px;
-    text-align: center; font-weight: 700; letter-spacing: -0.5px;
+    font-size: 2.5rem; 
+    color: var(--azul-riviera); 
+    margin-bottom: 20px; /* Reduzi a margem de baixo */
+    text-align: center; 
+    font-weight: 700; 
+    letter-spacing: -1px;
+    line-height: 1.1 !important; /* AQUI ESTÁ A MÁGICA: Linhas bem próximas */
 }
-p { color: var(--texto-suave); margin-bottom: 15px; }
-.texto-justificado { text-align: justify; }
 
-/* CARD DE VIDRO PADRÃO */
+/* Texto padrão */
+p { color: var(--texto-suave); margin-bottom: 15px; }
+
+/* Ajustes Específicos de Alinhamento */
+#sobre p, #sobre .texto-justificado { text-align: justify !important; } /* Sobre = Justificado */
+#proposta p, #proposta .texto-justificado { text-align: center !important; } /* Proposta = Centralizado */
+
+/* CARD DE VIDRO */
 .glass-card {
     background: var(--vidro-bg);
     backdrop-filter: var(--blur);
@@ -123,7 +134,6 @@ header {
 /* --- SEÇÕES & CONTEÚDO --- */
 .content-section { padding: 60px 0; }
 
-/* Cards Internos (Sobre/Missão) */
 .card-container { display: flex; gap: 25px; margin-top: 30px; }
 .card { 
     background: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.8);
@@ -131,7 +141,6 @@ header {
 }
 .card h3 { color: var(--azul-profundo); font-size: 1.2rem; margin-bottom: 10px; }
 
-/* Molduras de Imagem */
 .image-frame-circle {
     width: 320px; height: 320px; border-radius: 50%; overflow: hidden;
     border: 10px solid rgba(255,255,255,0.5); 
@@ -144,55 +153,56 @@ header {
 .sobre-imagem { flex: 1; text-align: center; }
 
 
-/* --- NOVO DESIGN: ESCADA DE NÍVEIS DE ENSINO (UI/UX Premium) --- */
-.stairs-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 40px;
-    position: relative;
+/* --- NOVO DESIGN: ACORDEÃO INTERATIVO (Mobile & PC) --- */
+.accordion-container {
+    max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px;
 }
-
-/* O Degrau Base */
-.stair-step {
+.accordion-item {
     background: var(--vidro-bg);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,0.6);
-    padding: 35px;
-    border-radius: 25px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
-    position: relative;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 15px;
     overflow: hidden;
-    transition: all 0.4s ease;
-    max-width: 80%; /* No PC eles não ocupam tudo para dar o efeito escada */
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.accordion-item.active {
+    box-shadow: 0 15px 30px rgba(28, 104, 211, 0.15);
+    background: white;
+    border-left: 6px solid var(--azul-riviera); /* Borda lateral de destaque */
 }
 
-/* Efeito de "brilho" no topo do degrau */
-.stair-step::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+/* O Cabeçalho (Onde clica) */
+.accordion-header {
+    padding: 25px 30px;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.3s;
+}
+.accordion-header:hover { background: rgba(255,255,255,0.5); }
+.accordion-header h3 {
+    margin: 0; font-size: 1.3rem; color: var(--texto-escuro); display: flex; align-items: center; gap: 10px;
 }
 
-/* Posicionamento em Escada (PC) */
-.step-1 { align-self: flex-start; border-left: 5px solid var(--amarelo); }
-.step-2 { align-self: center; margin-left: 10%; border-left: 5px solid var(--laranja); }
-.step-3 { align-self: flex-end; margin-left: 20%; border-left: 5px solid var(--azul-riviera); }
-
-/* Cores e Ícones dos Degraus */
-.stair-step h3 {
-    font-size: 1.3rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+/* Ícone de seta */
+.accordion-icon {
+    font-size: 1.5rem; color: var(--azul-riviera); transition: transform 0.3s ease;
 }
-.stair-step p { margin-bottom: 0; color: var(--texto-escuro); }
-.step-1 h3 { color: #d49e13; } /* Amarelo mais escuro para leitura */
-.step-2 h3 { color: var(--laranja); }
-.step-3 h3 { color: var(--azul-riviera); }
+.accordion-item.active .accordion-icon { transform: rotate(180deg); } /* Gira a seta */
 
-/* Hover no Degrau */
-.stair-step:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(28, 104, 211, 0.15);
-    background: rgba(255,255,255,0.95);
+/* O Conteúdo (Escondido) */
+.accordion-content {
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 30px;
 }
+.accordion-content p {
+    padding-bottom: 25px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px;
+}
+
+/* Cores específicas dos ícones */
+.item-bercario .accordion-icon { color: #d49e13; }
+.item-infantil .accordion-icon { color: var(--laranja); }
+.item-fundamental .accordion-icon { color: var(--azul-riviera); }
+
 
 /* --- MATRÍCULAS & CTA --- */
 .cta-section { 
@@ -200,7 +210,13 @@ header {
     color: white; padding: 100px 0; text-align: center; margin-top: 60px;
     clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
 }
-.cta-titulo { color: var(--amarelo); margin-bottom: 40px; margin-top: 0; }
+/* Título apertadinho aqui também */
+.cta-titulo { 
+    color: var(--amarelo); 
+    margin-bottom: 40px; 
+    margin-top: 0; 
+    line-height: 1.1 !important; 
+}
 
 .metodo-suporte-container { display: flex; gap: 30px; margin: 40px 0; text-align: left; }
 .metodo-card { 
@@ -238,15 +254,12 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
     transition: opacity 0.8s, transform 0.8s;
 }
 .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
-.stair-step:nth-child(2) { transition-delay: 0.2s; }
-.stair-step:nth-child(3) { transition-delay: 0.4s; }
 
 
 /* =======================================================
-   🛠️ ÁREA DE CORREÇÃO CRÍTICA MOBILE (Até 768px) 🛠️
+   🛠️ CORREÇÕES MOBILE (Até 768px) 🛠️
    ======================================================= */
 @media(max-width: 768px) {
-    /* Header & Menu */
     .top-bar { display: none; }
     .navbar { height: 70px; }
     .logo img { height: 45px; } 
@@ -263,34 +276,25 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
     .nav-item { width: 100%; border-bottom: 1px solid rgba(0,0,0,0.05); }
     .nav-link { display: block; padding: 20px 0; font-size: 1.1rem; }
 
-    /* 1. CORREÇÃO GERAL DE ESPAÇAMENTOS (Títulos) */
-    h2 { font-size: 1.8rem; margin-bottom: 25px; margin-top: 10px !important; }
+    /* ESPAÇAMENTOS MOBILE */
+    h2 { 
+        font-size: 1.8rem; 
+        margin-bottom: 15px; 
+        margin-top: 10px !important;
+        line-height: 1.1 !important; /* Força linha apertada no mobile */
+    }
     .cta-titulo, .proposta-titulo { margin-top: 0 !important; padding-top: 0 !important; }
-    .content-section { padding: 40px 0; }
-    .cta-section { padding: 50px 0; clip-path: none; }
-
-    /* 2. CORREÇÃO ABA SOBRE (Centralizar e Remover Imagem) */
-    .sobre-container { flex-direction: column; }
-    .sobre-imagem { display: none !important; } /* Remove a menina com urso */
-    .sobre-texto, .texto-justificado, .card p { 
-        text-align: center !important; /* Centraliza tudo na marra */
-    }
-    .card-container { flex-direction: column; }
-    .card { text-align: center; }
-
-    /* 3. CORREÇÃO ABA NÍVEIS (A Nova Escada no Mobile) */
-    .nivel-item.image-block { display: none !important; } /* Remove menina com livros */
     
-    /* Ajuste da Escada para Mobile */
-    .stairs-container { align-items: center; }
-    .stair-step { 
-        max-width: 100%; /* Ocupa a largura toda no celular */
-        align-self: center !important; margin-left: 0 !important; /* Remove o efeito diagonal no mobile */
-        padding: 30px 20px; text-align: center;
-    }
-    .stair-step h3 { justify-content: center; flex-direction: column; gap: 5px; }
+    .sobre-container { flex-direction: column; }
+    .sobre-imagem, .nivel-item.image-block { display: none !important; } 
+    
+    .card-container { flex-direction: column; }
+    /* Mobile Justificado no Card também? Se quiser centralizado, troque para center */
+    .card { text-align: justify; } 
 
-    /* Ajustes Gerais de Layout Mobile */
+    .accordion-header { padding: 20px; }
+    .accordion-header h3 { font-size: 1.1rem; }
+    
     .glass-card { padding: 30px 20px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
     .cta-button { width: 100%; margin-bottom: 10px; }
