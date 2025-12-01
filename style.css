@@ -1,4 +1,4 @@
-/* style.css - Versão Acordeão + Ajuste Fino de Textos */
+/* style.css - Versão Final Premium Clean */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -8,10 +8,10 @@
     --laranja: #ff7e2c;
     --branco: #ffffff;
     --texto-escuro: #2c3e50;
-    --texto-suave: #546e7a;
+    --texto-suave: #546e7a; /* Cor elegante para subtítulos */
     
     /* Vidro */
-    --vidro-bg: rgba(255, 255, 255, 0.85);
+    --vidro-bg: rgba(255, 255, 255, 0.9); /* Um pouco mais sólido para leitura */
     --vidro-borda: 1px solid rgba(255, 255, 255, 0.95);
     --vidro-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0,0,0,0.05);
     --blur: blur(12px);
@@ -40,23 +40,22 @@ body.menu-open { overflow: hidden; }
 /* --- GERAL --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 
-/* CORREÇÃO CRÍTICA DOS TÍTULOS (LINHAS PERTINHAS) */
+/* TÍTULOS E TEXTOS */
 h2 {
     font-size: 2.5rem; 
     color: var(--azul-riviera); 
-    margin-bottom: 20px; /* Reduzi a margem de baixo */
+    margin-bottom: 20px; 
     text-align: center; 
     font-weight: 700; 
     letter-spacing: -1px;
-    line-height: 1.1 !important; /* AQUI ESTÁ A MÁGICA: Linhas bem próximas */
+    line-height: 1.1 !important; 
 }
 
-/* Texto padrão */
 p { color: var(--texto-suave); margin-bottom: 15px; }
 
-/* Ajustes Específicos de Alinhamento */
-#sobre p, #sobre .texto-justificado { text-align: justify !important; } /* Sobre = Justificado */
-#proposta p, #proposta .texto-justificado { text-align: center !important; } /* Proposta = Centralizado */
+/* REGRAS DE ALINHAMENTO FIXAS */
+#sobre p, #sobre .texto-justificado { text-align: justify !important; }
+#proposta p, #proposta .texto-justificado { text-align: center !important; }
 
 /* CARD DE VIDRO */
 .glass-card {
@@ -153,7 +152,7 @@ header {
 .sobre-imagem { flex: 1; text-align: center; }
 
 
-/* --- NOVO DESIGN: ACORDEÃO INTERATIVO (Mobile & PC) --- */
+/* --- ACORDEÃO INTERATIVO (Estilo Clean) --- */
 .accordion-container {
     max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px;
 }
@@ -169,10 +168,14 @@ header {
 .accordion-item.active {
     box-shadow: 0 15px 30px rgba(28, 104, 211, 0.15);
     background: white;
-    border-left: 6px solid var(--azul-riviera); /* Borda lateral de destaque */
 }
 
-/* O Cabeçalho (Onde clica) */
+/* Cores das Bordas Laterais (Sem emojis, só cor) */
+.item-bercario { border-left: 6px solid #d49e13; }
+.item-infantil { border-left: 6px solid var(--laranja); }
+.item-fundamental { border-left: 6px solid var(--azul-riviera); }
+
+/* O Cabeçalho (Clean) */
 .accordion-header {
     padding: 25px 30px;
     cursor: pointer;
@@ -180,28 +183,35 @@ header {
     transition: background 0.3s;
 }
 .accordion-header:hover { background: rgba(255,255,255,0.5); }
+
+/* Título e Subtítulo */
 .accordion-header h3 {
-    margin: 0; font-size: 1.3rem; color: var(--texto-escuro); display: flex; align-items: center; gap: 10px;
+    margin: 0; font-size: 1.4rem; color: var(--texto-escuro); 
+    display: flex; flex-direction: column; /* Coloca o subtítulo embaixo do título */
+    gap: 5px; text-align: left;
+}
+/* O novo estilo do texto que era parênteses */
+.level-detail {
+    font-size: 0.95rem; 
+    font-weight: 400; 
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Ícone de seta */
 .accordion-icon {
-    font-size: 1.5rem; color: var(--azul-riviera); transition: transform 0.3s ease;
+    font-size: 1.2rem; color: #aaa; transition: transform 0.3s ease;
 }
-.accordion-item.active .accordion-icon { transform: rotate(180deg); } /* Gira a seta */
+.accordion-item.active .accordion-icon { transform: rotate(180deg); color: var(--azul-riviera); }
 
-/* O Conteúdo (Escondido) */
+/* Conteúdo */
 .accordion-content {
     max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 30px;
 }
 .accordion-content p {
     padding-bottom: 25px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px;
 }
-
-/* Cores específicas dos ícones */
-.item-bercario .accordion-icon { color: #d49e13; }
-.item-infantil .accordion-icon { color: var(--laranja); }
-.item-fundamental .accordion-icon { color: var(--azul-riviera); }
 
 
 /* --- MATRÍCULAS & CTA --- */
@@ -210,7 +220,6 @@ header {
     color: white; padding: 100px 0; text-align: center; margin-top: 60px;
     clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
 }
-/* Título apertadinho aqui também */
 .cta-titulo { 
     color: var(--amarelo); 
     margin-bottom: 40px; 
@@ -265,6 +274,7 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
     .logo img { height: 45px; } 
     .hamburger { display: block; position: absolute; left: 20px; z-index: 1002; }
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
+    
     .nav-links-container {
         position: fixed; top: 0; left: 0; height: 100vh; width: 85%; 
         background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
@@ -281,7 +291,7 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
         font-size: 1.8rem; 
         margin-bottom: 15px; 
         margin-top: 10px !important;
-        line-height: 1.1 !important; /* Força linha apertada no mobile */
+        line-height: 1.1 !important; 
     }
     .cta-titulo, .proposta-titulo { margin-top: 0 !important; padding-top: 0 !important; }
     
@@ -289,11 +299,15 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
     .sobre-imagem, .nivel-item.image-block { display: none !important; } 
     
     .card-container { flex-direction: column; }
-    /* Mobile Justificado no Card também? Se quiser centralizado, troque para center */
-    .card { text-align: justify; } 
+    
+    /* --- CORREÇÃO DE ALINHAMENTO SOBRE (JUSTIFICADO) --- */
+    /* Aqui está a regra que arruma a "bagunça" do alinhamento */
+    .card p, .sobre-texto p { text-align: justify !important; }
+    .card h3 { text-align: center !important; }
 
     .accordion-header { padding: 20px; }
-    .accordion-header h3 { font-size: 1.1rem; }
+    .accordion-header h3 { font-size: 1.2rem; }
+    .level-detail { font-size: 0.85rem; margin-top: 2px; }
     
     .glass-card { padding: 30px 20px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
