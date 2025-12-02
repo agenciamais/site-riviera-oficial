@@ -12,12 +12,12 @@ window.addEventListener("load", function() {
     }
 });
 
-// MENU MOBILE (Gaveta)
+// MENU MOBILE (Gaveta com Overlay separado)
 const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
 
-// Cria o overlay se não existir
+// 1. Cria a div do overlay no HTML (para garantir que ela exista e tenha Z-index próprio)
 let menuOverlay = document.querySelector('.menu-overlay');
 if (!menuOverlay) {
     menuOverlay = document.createElement('div');
@@ -28,7 +28,7 @@ if (!menuOverlay) {
 function toggleMenu() {
     hamburger.classList.toggle("active");
     navMenuContainer.classList.toggle("active");
-    menuOverlay.classList.toggle("active");
+    menuOverlay.classList.toggle("active"); // Ativa a mancha escura atrás
     body.classList.toggle("menu-open");
 }
 
@@ -46,7 +46,7 @@ if (hamburger) {
     });
 }
 
-// Fecha ao clicar fora ou no link
+// Fecha ao clicar na mancha ou nos links
 menuOverlay.addEventListener('click', closeMenu);
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
 
