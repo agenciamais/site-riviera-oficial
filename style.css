@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: DIAMOND EDITION (Menu Imersivo UI/UX) */
+/* style.css - VERSÃO FINAL: SIDE DRAWER MENU (Gaveta Lateral de Vidro) */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -66,6 +66,7 @@ body.menu-open { overflow: hidden; }
 /* --- GERAL --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
 
+/* --- TÍTULOS --- */
 h2 {
     font-size: 2.5rem; margin-bottom: 20px; text-align: center; 
     font-weight: 800; letter-spacing: -1px; line-height: 1.1 !important;
@@ -119,21 +120,16 @@ header {
 }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-/* --- HAMBÚRGUER REFINADO (Minimalista & Premium) --- */
+/* --- HAMBÚRGUER --- */
 .hamburger { display: none; cursor: pointer; z-index: 1002; }
 .bar { 
-    display: block; 
-    width: 24px; /* Mais curto e elegante */
-    height: 2px; /* Mais fino */
-    margin: 5px auto; /* Espaçamento equilibrado */
-    background: var(--texto-escuro); /* Cor escura para contraste */
-    border-radius: 2px; 
+    display: block; width: 28px; height: 3px; margin: 6px auto; 
+    background: var(--azul-riviera); border-radius: 2px; 
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
 }
-/* Animação do X */
-.hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--azul-riviera); }
-.hamburger.active .bar:nth-child(2) { opacity: 0; transform: translateX(10px); }
-.hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--azul-riviera); }
+.hamburger.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); background: var(--laranja); }
+.hamburger.active .bar:nth-child(2) { opacity: 0; transform: translateX(20px); }
+.hamburger.active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); background: var(--laranja); }
 
 
 /* --- HERO SLIDER --- */
@@ -159,7 +155,6 @@ header {
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
-/* CARD DE VIDRO GERAL */
 .glass-card {
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
@@ -169,7 +164,6 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
 
-/* --- SHEETS (STICKY) --- */
 .sheet-card {
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
@@ -210,7 +204,7 @@ header {
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 30px; }
 .accordion-content p { padding-bottom: 25px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; }
 
-/* --- MATRÍCULAS (TAB AZUL) --- */
+/* --- MATRÍCULAS --- */
 .cta-section { 
     background: linear-gradient(160deg, var(--azul-riviera) 0%, var(--azul-profundo) 100%); 
     color: white; padding: 100px 0; text-align: center; margin-top: 80px;
@@ -273,46 +267,52 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 
 
 /* =======================================================
-   🛠️ MOBILE 🛠️
+   🛠️ MOBILE 🛠️ - AQUI ESTÁ A CORREÇÃO DO MENU LATERAL
    ======================================================= */
 @media(max-width: 768px) {
     .top-bar { display: none; }
     .navbar { height: 70px; }
     .logo img { height: 45px; } 
-    /* Hambúrguer mais clean */
-    .hamburger { display: block; position: absolute; left: 20px; z-index: 1002; width: 40px; height: 40px; display: flex; flex-direction: column; justify-content: center; }
+    .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } /* Z-index maior que o menu */
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
-    /* MENU MOBILE: FULL SCREEN BLUR (Imersão Total) */
+    /* MENU GAVETA LATERAL (SIDE DRAWER) */
     .nav-links-container {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-        /* Fundo desfocado com gradiente sutil */
-        background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,244,255,0.95));
-        backdrop-filter: blur(40px) saturate(150%);
-        transform: translateY(-100%); /* Vem de cima */
-        transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1);
-        z-index: 1001; padding: 0 30px; display: flex; align-items: center; justify-content: center;
+        position: fixed; 
+        top: 0; 
+        left: 0; /* Começa na esquerda */
+        height: 100vh; 
+        width: 85%; /* Ocupa 85% da largura */
+        max-width: 320px; /* Limite para não ficar gigante em tablets */
+        
+        /* Vidro Fosco + Sombra */
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(25px) saturate(120%);
+        box-shadow: 10px 0 30px rgba(0,0,0,0.15); /* Sombra na direita para dar profundidade */
+        
+        transform: translateX(-100%); /* Escondido na esquerda */
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação elástica */
+        z-index: 1002; 
+        padding: 100px 30px; 
+        display: flex; flex-direction: column; justify-content: flex-start;
     }
-    .nav-links-container.active { transform: translateY(0); }
+    .nav-links-container.active { transform: translateX(0); } /* Desliza para dentro */
     
-    .nav-menu { flex-direction: column; gap: 25px; text-align: center; width: 100%; }
-    .nav-item { width: 100%; border: none; }
-    /* Links Gigantes e Cinéticos */
-    .nav-link { 
-        display: inline-block; padding: 5px 0; font-size: 2.2rem; font-weight: 800; 
-        color: var(--azul-profundo); letter-spacing: -1px;
-        opacity: 0; transform: translateY(30px) skewY(5deg);
-        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    /* FUNDO ESCURO QUANDO O MENU ABRE */
+    .menu-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.4); backdrop-filter: blur(5px);
+        z-index: 1001; opacity: 0; visibility: hidden; transition: 0.3s;
     }
-    /* Animação em Cascata */
-    .nav-links-container.active .nav-link { opacity: 1; transform: translateY(0) skewY(0); }
-    .nav-links-container.active .nav-item:nth-child(1) .nav-link { transition-delay: 0.1s; }
-    .nav-links-container.active .nav-item:nth-child(2) .nav-link { transition-delay: 0.2s; }
-    .nav-links-container.active .nav-item:nth-child(3) .nav-link { transition-delay: 0.3s; }
-    .nav-links-container.active .nav-item:nth-child(4) .nav-link { transition-delay: 0.4s; }
-    .nav-links-container.active .nav-item:nth-child(5) .nav-link { transition-delay: 0.5s; }
+    .menu-overlay.active { opacity: 1; visibility: visible; }
 
-    /* Ajustes Gerais */
+    .nav-menu { flex-direction: column; gap: 20px; text-align: left; width: 100%; }
+    .nav-item { width: 100%; border: none; }
+    .nav-link { 
+        display: block; padding: 10px 0; font-size: 1.2rem; font-weight: 700; 
+        color: var(--azul-profundo); border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
     h2 { font-size: 1.8rem; margin-bottom: 15px; margin-top: 10px !important; line-height: 1.1 !important; }
     .cta-titulo, .proposta-titulo { margin-top: 0 !important; padding-top: 0 !important; }
     .sobre-container { flex-direction: column; }
@@ -327,12 +327,10 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .level-detail { font-size: 0.85rem; margin-top: 2px; }
     .glass-card { padding: 30px 20px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
-    
     footer { padding: 0 15px 30px; }
     .footer-content-wrapper { padding: 30px 20px; border-radius: 20px; }
     .footer-inner { flex-direction: column; gap: 30px; text-align: center; }
     .footer-social { justify-content: center; }
-    
     .cta-button { width: 100%; margin-bottom: 10px; }
     .cta-section { border-radius: 40px 40px 0 0; padding: 60px 0; margin-top: 40px; margin-bottom: 60px; }
 }
