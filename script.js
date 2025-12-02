@@ -1,36 +1,38 @@
 // --- script.js ---
 
+// PRELOADER
+window.addEventListener("load", function() {
+    const body = document.querySelector("body");
+    const preloader = document.getElementById("preloader");
+    if(preloader) {
+        setTimeout(() => {
+            body.classList.add("loaded");
+            setTimeout(() => { preloader.style.display = 'none'; }, 500);
+        }, 500);
+    }
+});
+
+// MENU MOBILE
 const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
 
-// Cria o fundo escuro dinamicamente
-const menuOverlay = document.createElement('div');
-menuOverlay.classList.add('menu-overlay');
-body.appendChild(menuOverlay);
-
 function toggleMenu() {
     hamburger.classList.toggle("active");
     navMenuContainer.classList.toggle("active");
-    menuOverlay.classList.toggle("active"); // Ativa o overlay
     body.classList.toggle("menu-open");
 }
-
 function closeMenu() {
     hamburger.classList.remove("active");
     navMenuContainer.classList.remove("active");
-    menuOverlay.classList.remove("active");
     body.classList.remove("menu-open");
 }
-
 if (hamburger) {
     hamburger.addEventListener("click", (e) => {
         e.stopPropagation();
         toggleMenu();
     });
 }
-
-menuOverlay.addEventListener('click', closeMenu); // Fecha ao clicar fora
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
 
 // SLIDER
@@ -88,21 +90,4 @@ accordionHeaders.forEach(header => {
             content.style.maxHeight = content.scrollHeight + "px";
         }
     });
-});
-
-
-// --- LÓGICA DO PRELOADER ---
-window.addEventListener("load", function() {
-    const body = document.querySelector("body");
-    const preloader = document.getElementById("preloader");
-    
-    if(preloader) {
-        // Espera um pouquinho (500ms) para garantir que o visual carregou
-        setTimeout(() => {
-            body.classList.add("loaded");
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
-        }, 500);
-    }
 });
