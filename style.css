@@ -1,9 +1,9 @@
-/* style.css - VERSÃO FINAL: UI NEXT-GEN (Floating Footer + Full Menu) */
+/* style.css - VERSÃO FINAL: GOLD (Gradientes Padronizados + Footer Ajustado) */
 
 /* --- VARIÁVEIS --- */
 :root {
     --azul-riviera: #1c68d3;
-    --azul-neon: #2979ff; /* Azul mais elétrico para o gradiente */
+    --azul-neon: #2979ff; 
     --azul-profundo: #0a2e7a;
     --amarelo: #febb15;
     --laranja: #ff7e2c;
@@ -44,7 +44,6 @@ body {
     background-color: #f4f7fc;
 }
 
-/* Malha de Gradiente de Fundo */
 body::before {
     content: ''; position: fixed; top: -20%; left: -10%; width: 70vw; height: 70vw;
     border-radius: 50%;
@@ -67,18 +66,26 @@ body.menu-open { overflow: hidden; }
 /* --- GERAL --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
 
-/* --- TÍTULOS COM GRADIENTE EVIDENTE --- */
+/* --- TÍTULOS H2 (Principal) --- */
 h2 {
     font-size: 2.5rem; margin-bottom: 20px; text-align: center; 
     font-weight: 800; letter-spacing: -1px; line-height: 1.1 !important;
     
-    /* Gradiente mais forte e visível */
+    background: linear-gradient(120deg, var(--azul-riviera) 0%, var(--azul-neon) 50%, var(--azul-profundo) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    filter: drop-shadow(0 2px 10px rgba(28, 104, 211, 0.15));
+}
+
+/* --- NOVO: TÍTULOS H3 (Subtítulos Padronizados) --- */
+/* Aplica o mesmo gradiente em Missão, Visão e Níveis de Ensino */
+.sheet-card h3, 
+.accordion-header h3 {
+    font-weight: 700;
     background: linear-gradient(120deg, var(--azul-riviera) 0%, var(--azul-neon) 50%, var(--azul-profundo) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    
-    filter: drop-shadow(0 2px 10px rgba(28, 104, 211, 0.15)); /* Sombra colorida no texto */
+    color: var(--azul-riviera); /* Fallback */
 }
 
 p { color: var(--texto-suave); margin-bottom: 15px; }
@@ -118,12 +125,11 @@ header {
 }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-/* --- HAMBÚRGUER MODERNO --- */
 .hamburger { display: none; cursor: pointer; z-index: 1002; }
 .bar { 
     display: block; width: 28px; height: 3px; margin: 6px auto; 
     background: var(--azul-riviera); border-radius: 2px; 
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efeito elástico */
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
 }
 .hamburger.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); background: var(--laranja); }
 .hamburger.active .bar:nth-child(2) { opacity: 0; transform: translateX(20px); }
@@ -178,7 +184,6 @@ header {
 .sheet-visao { top: 190px; z-index: 30; border-top-color: var(--laranja); border-radius: 40px; margin-bottom: 50px; }
 
 .sheet-card h2, .sheet-card h3 { text-align: center; margin-bottom: 20px; }
-.sheet-card h3 { font-size: 1.8rem; color: var(--azul-profundo); background: none; -webkit-text-fill-color: var(--azul-profundo); }
 .sheet-card p { text-align: justify !important; font-size: 1.05rem; }
 
 /* --- ACORDEÃO INTERATIVO --- */
@@ -195,8 +200,12 @@ header {
 
 .accordion-header { padding: 25px 30px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
 .accordion-header:hover { background: rgba(255,255,255,0.3); }
-.accordion-header h3 { margin: 0; font-size: 1.4rem; color: var(--texto-escuro); display: flex; flex-direction: column; gap: 5px; text-align: left; background: none; -webkit-text-fill-color: var(--texto-escuro); }
-.level-detail { font-size: 0.95rem; font-weight: 400; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 1px; }
+.accordion-header h3 { margin: 0; font-size: 1.4rem; color: var(--texto-escuro); display: flex; flex-direction: column; gap: 5px; text-align: left; }
+.level-detail { 
+    font-size: 0.95rem; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; 
+    /* Removemos o gradiente do detalhe (idade) para ficar cinza elegante */
+    background: none; -webkit-text-fill-color: var(--texto-suave); color: var(--texto-suave);
+}
 .accordion-icon { font-size: 1.2rem; color: #aaa; transition: transform 0.3s ease; }
 .accordion-item.active .accordion-icon { transform: rotate(180deg); color: var(--azul-riviera); }
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 30px; }
@@ -208,6 +217,8 @@ header {
     color: white; padding: 100px 0; text-align: center; margin-top: 80px;
     border-radius: 50px 50px 0 0; clip-path: none; 
     box-shadow: 0 -20px 50px rgba(28, 104, 211, 0.25); position: relative; z-index: 2;
+    /* AQUI ESTÁ A CORREÇÃO DO RODAPÉ COLADO: */
+    margin-bottom: 80px; /* Cria um espaço grande abaixo para o rodapé flutuar */
 }
 .cta-titulo { 
     color: var(--amarelo); margin-bottom: 40px; margin-top: 0; line-height: 1.1 !important;
@@ -219,6 +230,7 @@ header {
     background: var(--vidro-dark-bg); backdrop-filter: blur(12px); border: var(--vidro-dark-borda);
     padding: 40px; border-radius: 20px; flex: 1; transition: 0.4s;
 }
+/* Títulos dentro do card azul continuam amarelos */
 .metodo-card h3 { color: var(--amarelo); margin-bottom: 15px; font-size: 1.4rem; background: none; -webkit-text-fill-color: var(--amarelo); }
 .metodo-card p { color: rgba(255,255,255,0.9); }
 
@@ -238,9 +250,9 @@ header {
 .cta-button.secondary { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
 .cta-button.simple { color: var(--azul-riviera); border: 2px solid var(--azul-riviera); background: transparent; padding: 12px 30px; }
 
-/* --- NOVO RODAPÉ FLUTUANTE (FLOATING FOOTER) --- */
+/* --- RODAPÉ FLUTUANTE --- */
 footer { 
-    background: transparent; /* Removemos o fundo sólido */
+    background: transparent; 
     padding: 0 0 40px; 
     margin-top: 0; 
     position: relative; z-index: 2; 
@@ -249,7 +261,7 @@ footer {
 .footer-content-wrapper {
     max-width: 1100px;
     margin: 0 auto;
-    background: rgba(44, 62, 80, 0.95); /* Vidro escuro */
+    background: rgba(44, 62, 80, 0.95);
     backdrop-filter: blur(20px);
     border-radius: 30px;
     padding: 50px;
@@ -289,13 +301,11 @@ footer {
     .hamburger { display: block; position: absolute; left: 20px; z-index: 1002; }
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
-    /* MENU MOBILE: FULL SCREEN BLUR OVERLAY (Efeito App) */
     .nav-links-container {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-        background: rgba(255,255,255,0.85); /* Fundo branco translúcido */
+        position: fixed; top: 0; left: 0; height: 100vh; width: 100%; 
+        background: rgba(255,255,255,0.85); 
         backdrop-filter: blur(25px) saturate(150%);
-        transform: translateY(-100%); /* Vem de cima agora! */
-        transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         z-index: 1001; padding: 0 30px; display: flex; align-items: center; justify-content: center;
     }
     .nav-links-container.active { transform: translateY(0); }
@@ -307,7 +317,6 @@ footer {
         color: var(--azul-profundo); letter-spacing: -1px;
         opacity: 0; transform: translateY(20px); transition: 0.4s;
     }
-    /* Animação dos itens do menu */
     .nav-links-container.active .nav-link { opacity: 1; transform: translateY(0); }
     .nav-links-container.active .nav-item:nth-child(1) .nav-link { transition-delay: 0.2s; }
     .nav-links-container.active .nav-item:nth-child(2) .nav-link { transition-delay: 0.3s; }
@@ -315,7 +324,6 @@ footer {
     .nav-links-container.active .nav-item:nth-child(4) .nav-link { transition-delay: 0.5s; }
     .nav-links-container.active .nav-item:nth-child(5) .nav-link { transition-delay: 0.6s; }
 
-    /* Ajustes Gerais Mobile */
     h2 { font-size: 1.8rem; margin-bottom: 15px; margin-top: 10px !important; line-height: 1.1 !important; }
     .cta-titulo, .proposta-titulo { margin-top: 0 !important; padding-top: 0 !important; }
     
@@ -335,12 +343,18 @@ footer {
     .glass-card { padding: 30px 20px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
     
-    /* Footer Mobile Ajustado */
     footer { padding: 0 15px 30px; }
     .footer-content-wrapper { padding: 30px 20px; border-radius: 20px; }
     .footer-inner { flex-direction: column; gap: 30px; text-align: center; }
     .footer-social { justify-content: center; }
     
     .cta-button { width: 100%; margin-bottom: 10px; }
-    .cta-section { border-radius: 40px 40px 0 0; padding: 60px 0; margin-top: 40px; }
+    
+    /* MARGEM EXTRA NO MOBILE PARA O RODAPÉ FLUTUAR */
+    .cta-section { 
+        border-radius: 40px 40px 0 0; 
+        padding: 60px 0; 
+        margin-top: 40px; 
+        margin-bottom: 60px; /* Espaço para o rodapé não colar */
+    }
 }
