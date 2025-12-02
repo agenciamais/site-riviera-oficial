@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: MESH GRADIENT + NOISE TEXTURE (Premium 2.5K) */
+/* style.css - VERSÃO FINAL: ULTIMATE PREMIUM (Scrollbar + Gradient Text + Shine) */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -26,7 +26,17 @@
 
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 
-/* --- NOVO FUNDO PREMIUM (Mesh Gradient + Noise) --- */
+/* --- TÉCNICA AVANÇADA 1: BARRA DE ROLAGEM PERSONALIZADA --- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #f0f4f8; }
+::-webkit-scrollbar-thumb { 
+    background: linear-gradient(var(--amarelo), var(--laranja)); 
+    border-radius: 10px; 
+    border: 2px solid #f0f4f8; /* Cria um respiro ao redor */
+}
+::-webkit-scrollbar-thumb:hover { background: var(--azul-riviera); }
+
+/* --- FUNDO ANIMADO (Mesh Gradient + Noise) --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--texto-escuro);
@@ -35,63 +45,65 @@ body {
     overflow-x: hidden;
     position: relative;
     
-    /* Gradiente de Malha Fixo */
+    /* Gradiente de Malha Suave */
     background: 
-        radial-gradient(at 0% 0%, hsla(216,93%,84%,1) 0, transparent 50%), 
-        radial-gradient(at 50% 0%, hsla(215,98%,61%,0.2) 0, transparent 50%), 
-        radial-gradient(at 100% 0%, hsla(43,100%,85%,1) 0, transparent 50%), 
-        radial-gradient(at 0% 100%, hsla(43,100%,85%,1) 0, transparent 50%), 
-        radial-gradient(at 50% 100%, hsla(215,98%,61%,0.2) 0, transparent 50%), 
-        radial-gradient(at 100% 100%, hsla(216,93%,84%,1) 0, transparent 50%);
+        radial-gradient(at 0% 0%, hsla(216,93%,90%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(215,98%,95%,1) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(43,100%,90%,1) 0, transparent 50%), 
+        radial-gradient(at 0% 100%, hsla(43,100%,90%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 100%, hsla(215,98%,95%,1) 0, transparent 50%), 
+        radial-gradient(at 100% 100%, hsla(216,93%,90%,1) 0, transparent 50%);
     background-size: 200% 200%;
-    animation: gradientMove 20s ease infinite; /* Movimento suave do fundo */
-    background-attachment: fixed; /* O fundo fica parado enquanto rola */
+    animation: gradientMove 20s ease infinite;
+    background-attachment: fixed;
 }
 
-/* Animação do Gradiente */
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Textura de Ruído (Noise) - O Toque de Classe */
+/* Textura de Ruído (Noise) */
 body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    /* URL de dados para um ruído leve */
+    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: -1;
-    opacity: 0.4; /* Ajuste a intensidade da textura aqui */
+    pointer-events: none; z-index: -1; opacity: 0.4;
 }
-
-/* Removemos as bolhas antigas para limpar o visual */
-/* body::after { display: none; } .bg-warmth { display: none; } */
-
 
 body.menu-open { overflow: hidden; }
 
 /* --- GERAL --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
 
+/* --- TÉCNICA AVANÇADA 2: TÍTULOS COM GRADIENTE (DIAMANTE) --- */
 h2 {
-    font-size: 2.5rem; color: var(--azul-riviera); margin-bottom: 20px; 
-    text-align: center; font-weight: 700; letter-spacing: -1px; line-height: 1.1 !important; 
+    font-size: 2.5rem; 
+    margin-bottom: 20px; 
+    text-align: center; 
+    font-weight: 700; 
+    letter-spacing: -1px; 
+    line-height: 1.1 !important;
+    
+    /* O Efeito de Texto Gradiente */
+    background: linear-gradient(135deg, var(--azul-riviera) 0%, var(--azul-profundo) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* Fallback para navegadores antigos */
+    color: var(--azul-riviera); 
 }
-p { color: var(--texto-suave); margin-bottom: 15px; }
 
+p { color: var(--texto-suave); margin-bottom: 15px; }
 #proposta p, #proposta .texto-justificado { text-align: center !important; }
 
-/* --- HEADER (Aprimorado) --- */
+/* --- HEADER --- */
 header {
-    background: rgba(255, 255, 255, 0.6); /* Mais transparente para mesclar com o fundo novo */
-    backdrop-filter: blur(25px) saturate(180%); /* Blur forte e cores vibrantes por trás */
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    background: rgba(255, 255, 255, 0.6); 
+    backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%);
     position: sticky; top: 0; z-index: 1000; 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 .top-bar {
     background: linear-gradient(90deg, var(--azul-riviera), var(--azul-profundo));
@@ -127,8 +139,7 @@ header {
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { 
     position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; 
-    box-shadow: 0 20px 50px rgba(28, 104, 211, 0.15); /* Sombra mais difusa */
-    border-radius: 0 0 40px 40px; /* Curva mais acentuada */
+    box-shadow: 0 20px 50px rgba(28, 104, 211, 0.15); border-radius: 0 0 40px 40px; 
 }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 .slide { min-width: 100%; position: relative; }
@@ -146,7 +157,7 @@ header {
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
-/* CARD DE VIDRO (Home/Geral) */
+/* CARD DE VIDRO GERAL */
 .glass-card {
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
@@ -155,7 +166,6 @@ header {
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
-
 
 /* --- SHEETS (STICKY STACKING) --- */
 .sheet-card {
@@ -167,7 +177,6 @@ header {
     position: sticky; border-top: 8px solid var(--azul-riviera);
     transition: transform 0.3s ease; min-height: 300px; 
 }
-
 .sheet-intro { top: 110px; z-index: 10; border-top-color: var(--azul-riviera); }
 .sheet-missao { top: 150px; z-index: 20; border-top-color: var(--amarelo); }
 .sheet-visao { top: 190px; z-index: 30; border-top-color: var(--laranja); border-radius: 40px; margin-bottom: 50px; }
@@ -176,7 +185,6 @@ header {
 .sheet-card h3 { font-size: 1.8rem; color: var(--azul-profundo); }
 .sheet-card p { text-align: justify !important; font-size: 1.05rem; }
 
-
 /* --- ACORDEÃO INTERATIVO --- */
 .accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px; }
 .accordion-item {
@@ -184,10 +192,7 @@ header {
     border: var(--vidro-borda); border-radius: 15px; overflow: hidden;
     transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
-.accordion-item.active { 
-    box-shadow: 0 15px 40px rgba(28, 104, 211, 0.15);
-    background: rgba(255, 255, 255, 0.95);
-}
+.accordion-item.active { box-shadow: 0 15px 40px rgba(28, 104, 211, 0.15); background: rgba(255, 255, 255, 0.95); }
 .item-bercario { border-left: 6px solid #d49e13; }
 .item-infantil { border-left: 6px solid var(--laranja); }
 .item-fundamental { border-left: 6px solid var(--azul-riviera); }
@@ -198,13 +203,14 @@ header {
 .accordion-header:hover { background: rgba(255,255,255,0.3); }
 .accordion-header h3 {
     margin: 0; font-size: 1.4rem; color: var(--texto-escuro); display: flex; flex-direction: column; gap: 5px; text-align: left;
+    /* Reseta o gradiente para subtítulos, mantendo cor sólida */
+    background: none; -webkit-text-fill-color: var(--texto-escuro); 
 }
 .level-detail { font-size: 0.95rem; font-weight: 400; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 1px; }
 .accordion-icon { font-size: 1.2rem; color: #aaa; transition: transform 0.3s ease; }
 .accordion-item.active .accordion-icon { transform: rotate(180deg); color: var(--azul-riviera); }
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 30px; }
 .accordion-content p { padding-bottom: 25px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; }
-
 
 /* --- MATRÍCULAS (TAB AZUL) --- */
 .cta-section { 
@@ -213,21 +219,35 @@ header {
     border-radius: 50px 50px 0 0; clip-path: none; 
     box-shadow: 0 -20px 50px rgba(28, 104, 211, 0.25); position: relative; z-index: 2;
 }
-.cta-titulo { color: var(--amarelo); margin-bottom: 40px; margin-top: 0; line-height: 1.1 !important; }
+.cta-titulo { 
+    color: var(--amarelo); margin-bottom: 40px; margin-top: 0; line-height: 1.1 !important;
+    background: none; -webkit-text-fill-color: var(--amarelo); /* Remove gradiente do H2 aqui */
+}
 
 .metodo-suporte-container { display: flex; gap: 30px; margin: 40px 0; text-align: left; }
 .metodo-card { 
     background: var(--vidro-dark-bg); backdrop-filter: blur(12px); border: var(--vidro-dark-borda);
     padding: 40px; border-radius: 20px; flex: 1; transition: 0.4s;
 }
-.metodo-card h3 { color: var(--amarelo); margin-bottom: 15px; font-size: 1.4rem; }
+.metodo-card h3 { color: var(--amarelo); margin-bottom: 15px; font-size: 1.4rem; background: none; -webkit-text-fill-color: var(--amarelo); }
 .metodo-card p { color: rgba(255,255,255,0.9); }
 
 .cta-buttons-wrapper { display: flex; justify-content: center; gap: 20px; margin-top: 50px; }
+
+/* --- TÉCNICA AVANÇADA 3: BOTÕES COM EFEITO DE BRILHO (SHINE) --- */
 .cta-button { 
     padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
     transition: all 0.3s; display: inline-block; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    position: relative; overflow: hidden; /* Necessário para o brilho não vazar */
 }
+/* O Brilho que passa */
+.cta-button::after {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: 0.5s;
+}
+.cta-button:hover::after { left: 100%; } /* Anima o brilho ao passar o mouse */
+
 .cta-button.primary { background: var(--amarelo); color: var(--azul-profundo); border: 2px solid var(--amarelo); }
 .cta-button.secondary { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
 .cta-button.simple { color: var(--azul-riviera); border: 2px solid var(--azul-riviera); background: transparent; padding: 12px 30px; }
@@ -258,8 +278,7 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
     
     .nav-links-container {
         position: fixed; top: 0; left: 0; height: 100vh; width: 85%; 
-        background: rgba(255,255,255,0.85); 
-        backdrop-filter: blur(25px);
+        background: var(--vidro-bg); backdrop-filter: var(--blur-effect);
         transform: translateX(-100%); transition: transform 0.3s ease; z-index: 1001; padding: 100px 30px; display: block;
     }
     .nav-links-container.active { transform: translateX(0); }
