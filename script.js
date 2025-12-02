@@ -89,3 +89,20 @@ accordionHeaders.forEach(header => {
         }
     });
 });
+
+
+// --- LÓGICA DO PRELOADER ---
+window.addEventListener("load", function() {
+    const body = document.querySelector("body");
+    const preloader = document.getElementById("preloader");
+    
+    if(preloader) {
+        // Espera um pouquinho (500ms) para garantir que o visual carregou
+        setTimeout(() => {
+            body.classList.add("loaded");
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        }, 500);
+    }
+});
