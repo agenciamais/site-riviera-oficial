@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: VIDRO REAL TRANSLÚCIDO (Premium) */
+/* style.css - VERSÃO FINAL: EFEITO VIDRO JATEADO REAL (Premium) */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -6,25 +6,21 @@
     --azul-profundo: #0a2e7a;
     --amarelo: #febb15;
     --laranja: #ff7e2c;
+    --coral-suave: #ff9a76; 
     
     --branco: #ffffff;
     --texto-escuro: #2c3e50;
     --texto-suave: #546e7a;
     
-    /* --- O SEGREDO DO VIDRO PREMIUM --- */
-    /* Menos opacidade (0.75) para o fundo aparecer */
-    --vidro-bg: rgba(255, 255, 255, 0.75); 
+    /* NOVO VIDRO PADRÃO (Mais sofisticado) */
+    /* Fundo branco semi-transparente (85% opacidade) */
+    --vidro-bg: rgba(255, 255, 255, 0.85); 
+    /* Borda branca fina e translúcida para definição */
+    --vidro-borda: 1px solid rgba(255, 255, 255, 0.6);
+    /* Desfoque intenso para o efeito "jateado" */
+    --blur-effect: blur(20px) saturate(110%);
     
-    /* Borda fina e brilhante para definir o vidro */
-    --vidro-borda: 1px solid rgba(255, 255, 255, 0.8);
-    
-    /* Desfoque potente (Blur) + Saturação para cores vivas atrás */
-    --blur-effect: blur(25px) saturate(120%);
-    
-    /* Sombra suave para flutuar */
-    --vidro-shadow: 0 15px 35px rgba(28, 104, 211, 0.1), 0 5px 15px rgba(0,0,0,0.05);
-    
-    /* Vidro Escuro (Para áreas azuis) */
+    /* Vidro Escuro */
     --vidro-dark-bg: rgba(255, 255, 255, 0.15);
     --vidro-dark-borda: 1px solid rgba(255, 255, 255, 0.3);
 }
@@ -33,12 +29,12 @@
 
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 
-/* --- FUNDO ANIMADO (Aurora Vibrante) --- */
+/* --- FUNDO ANIMADO (AURORA QUENTE) --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--texto-escuro);
     line-height: 1.6;
-    background-color: #f4f7fc; /* Base clara */
+    background-color: #f9f8f6; 
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
@@ -46,35 +42,30 @@ body {
 
 @keyframes floatAurora {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -40px) scale(1.1); }
-    66% { transform: translate(-20px, 30px) scale(0.9); }
+    33% { transform: translate(30px, -40px) scale(1.05); }
+    66% { transform: translate(-20px, 30px) scale(0.95); }
 }
 
-/* Luz Azul (Topo Esquerda) */
+/* Luzes do Fundo (Mais vibrantes para aparecerem através do vidro) */
 body::before {
-    content: ''; position: fixed; top: -10%; left: -10%; width: 70vw; height: 70vw;
+    content: ''; position: fixed; top: -15%; left: -15%; width: 65vw; height: 65vw;
     border-radius: 50%;
-    /* Cor mais forte para aparecer no vidro */
-    background: radial-gradient(circle, rgba(28, 104, 211, 0.45), transparent 70%);
-    filter: blur(80px); z-index: -3;
+    background: radial-gradient(circle, rgba(28, 104, 211, 0.4), transparent 65%);
+    filter: blur(90px); z-index: -3;
     animation: floatAurora 18s infinite ease-in-out;
 }
-
-/* Luz Amarela (Meio Direita) */
 body::after {
-    content: ''; position: fixed; top: 40%; right: -15%; width: 60vw; height: 60vw;
+    content: ''; position: fixed; top: 30%; right: -20%; width: 55vw; height: 55vw;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(254, 187, 21, 0.4), transparent 70%);
+    background: radial-gradient(circle, rgba(254, 187, 21, 0.35), transparent 65%);
     filter: blur(80px); z-index: -3;
     animation: floatAurora 22s infinite ease-in-out reverse;
 }
-
-/* Luz Rosada (Baixo Esquerda) - Precisa da div no HTML */
 .bg-warmth {
-    position: fixed; bottom: -20%; left: 0%; width: 65vw; height: 65vw;
+    position: fixed; bottom: -25%; left: 10%; width: 60vw; height: 60vw;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 126, 44, 0.3), transparent 70%);
-    filter: blur(90px); z-index: -3;
+    background: radial-gradient(circle, rgba(255, 154, 118, 0.3), transparent 70%);
+    filter: blur(100px); z-index: -3;
     animation: floatAurora 25s infinite ease-in-out 5s;
     pointer-events: none;
 }
@@ -92,12 +83,15 @@ p { color: var(--texto-suave); margin-bottom: 15px; }
 
 #proposta p, #proposta .texto-justificado { text-align: center !important; }
 
-/* --- HEADER (Menu de Vidro) --- */
+/* --- HEADER --- */
+/* Menu também recebe o tratamento de vidro real */
 header {
-    background: rgba(255,255,255,0.7); /* Menu bem transparente */
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: var(--vidro-bg); 
+    backdrop-filter: var(--blur-effect);
+    -webkit-backdrop-filter: var(--blur-effect);
     position: sticky; top: 0; z-index: 1000; 
-    box-shadow: 0 4px 25px rgba(0,0,0,0.03); border-bottom: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 4px 25px rgba(0,0,0,0.03); 
+    border-bottom: var(--vidro-borda);
 }
 .top-bar {
     background: linear-gradient(90deg, var(--azul-riviera), var(--azul-profundo));
@@ -151,26 +145,32 @@ header {
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
-/* CARD DE VIDRO (Home/Geral) */
+/* CARD DE VIDRO PADRÃO (Atualizado) */
 .glass-card {
     background: var(--vidro-bg); 
-    backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
-    border: var(--vidro-borda); box-shadow: var(--vidro-shadow);
+    backdrop-filter: var(--blur-effect);
+    -webkit-backdrop-filter: var(--blur-effect);
+    border: var(--vidro-borda);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05); /* Sombra mais suave */
     border-radius: 25px; padding: 50px; margin-bottom: 40px;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
-.glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
+.glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.1); }
 
 
-/* --- SHEETS (STICKY STACKING - Transparência Ativada) --- */
+/* --- SHEETS (STICKY STACKING - EFEITO VIDRO REAL) --- */
+/* AQUI ESTÁ A MUDANÇA PRINCIPAL */
 .sheet-card {
-    background: var(--vidro-bg); /* Transparente */
-    backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
-    border: var(--vidro-borda);
+    /* Remove o branco sólido e aplica o vidro */
+    background: var(--vidro-bg); 
+    backdrop-filter: var(--blur-effect);
+    -webkit-backdrop-filter: var(--blur-effect); /* Para Safari */
+    border: var(--vidro-borda); /* Borda sutil de vidro */
     
     padding: 50px;
     border-radius: 40px 40px 0 0; 
-    box-shadow: 0 -10px 30px rgba(28, 104, 211, 0.1); 
+    /* Sombra muito suave para não pesar */
+    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.03); 
     position: sticky; 
     border-top: 8px solid var(--azul-riviera);
     transition: transform 0.3s ease;
@@ -179,6 +179,7 @@ header {
 
 .sheet-intro { top: 110px; z-index: 10; border-top-color: var(--azul-riviera); }
 .sheet-missao { top: 150px; z-index: 20; border-top-color: var(--amarelo); }
+/* O último fecha com borda arredondada embaixo */
 .sheet-visao { top: 190px; z-index: 30; border-top-color: var(--laranja); border-radius: 40px; margin-bottom: 50px; }
 
 .sheet-card h2, .sheet-card h3 { text-align: center; margin-bottom: 20px; }
@@ -186,16 +187,19 @@ header {
 .sheet-card p { text-align: justify !important; font-size: 1.05rem; }
 
 
-/* --- ACORDEÃO INTERATIVO --- */
+/* --- ACORDEÃO INTERATIVO (Também com vidro real) --- */
 .accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px; }
 .accordion-item {
-    background: var(--vidro-bg); backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
-    border: var(--vidro-borda); border-radius: 15px; overflow: hidden;
-    transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background: var(--vidro-bg);
+    backdrop-filter: var(--blur-effect);
+    -webkit-backdrop-filter: var(--blur-effect);
+    border: var(--vidro-borda);
+    border-radius: 15px; overflow: hidden;
+    transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.03);
 }
 .accordion-item.active { 
-    box-shadow: 0 15px 40px rgba(28, 104, 211, 0.15);
-    background: rgba(255, 255, 255, 0.95); /* Mais sólido quando aberto */
+    box-shadow: 0 15px 30px rgba(28, 104, 211, 0.1);
+    background: rgba(255, 255, 255, 0.95); /* Fica quase branco sólido quando ativo para leitura */
 }
 .item-bercario { border-left: 6px solid #d49e13; }
 .item-infantil { border-left: 6px solid var(--laranja); }
@@ -256,7 +260,7 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
 
 
 /* =======================================================
-   🛠️ MOBILE 🛠️
+   🛠️ CORREÇÕES MOBILE 🛠️
    ======================================================= */
 @media(max-width: 768px) {
     .top-bar { display: none; }
@@ -265,10 +269,10 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
     .hamburger { display: block; position: absolute; left: 20px; z-index: 1002; }
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
+    /* Menu Mobile com Vidro */
     .nav-links-container {
         position: fixed; top: 0; left: 0; height: 100vh; width: 85%; 
-        background: rgba(255,255,255,0.85); /* Menu transparente também */
-        backdrop-filter: blur(25px);
+        background: var(--vidro-bg); backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
         transform: translateX(-100%); transition: transform 0.3s ease; z-index: 1001; padding: 100px 30px; display: block;
     }
     .nav-links-container.active { transform: translateX(0); }
