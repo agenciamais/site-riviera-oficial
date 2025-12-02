@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: SIDE DRAWER MENU (Gaveta Lateral de Vidro) */
+/* style.css - VERSÃO FINAL: ISLAND MENU (Menu Flutuante Arredondado) */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -155,6 +155,7 @@ header {
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
+/* CARD DE VIDRO GERAL */
 .glass-card {
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
@@ -164,6 +165,7 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
 
+/* --- SHEETS (STICKY) --- */
 .sheet-card {
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
@@ -204,7 +206,7 @@ header {
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 30px; }
 .accordion-content p { padding-bottom: 25px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; }
 
-/* --- MATRÍCULAS --- */
+/* --- MATRÍCULAS (TAB AZUL) --- */
 .cta-section { 
     background: linear-gradient(160deg, var(--azul-riviera) 0%, var(--azul-profundo) 100%); 
     color: white; padding: 100px 0; text-align: center; margin-top: 80px;
@@ -267,30 +269,33 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 
 
 /* =======================================================
-   🛠️ MOBILE 🛠️ - AQUI ESTÁ A CORREÇÃO DO MENU LATERAL
+   🛠️ MOBILE 🛠️ - MENU ILHA FLUTUANTE
    ======================================================= */
 @media(max-width: 768px) {
     .top-bar { display: none; }
     .navbar { height: 70px; }
     .logo img { height: 45px; } 
-    .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } /* Z-index maior que o menu */
+    .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } /* Z-index alto para ficar acima do overlay */
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
-    /* MENU GAVETA LATERAL (SIDE DRAWER) */
+    /* MENU GAVETA/ILHA LATERAL */
     .nav-links-container {
         position: fixed; 
-        top: 0; 
-        left: 0; /* Começa na esquerda */
-        height: 100vh; 
-        width: 85%; /* Ocupa 85% da largura */
-        max-width: 320px; /* Limite para não ficar gigante em tablets */
+        top: 15px; 
+        left: 15px; 
+        bottom: 15px;
+        height: auto; /* Altura automática baseada no top/bottom */
+        width: 280px; /* Largura fixa de "gaveta" */
+        max-width: 80%;
         
-        /* Vidro Fosco + Sombra */
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(25px) saturate(120%);
-        box-shadow: 10px 0 30px rgba(0,0,0,0.15); /* Sombra na direita para dar profundidade */
+        /* Vidro Fosco + Sombra Forte */
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(30px) saturate(120%);
+        box-shadow: 10px 0 40px rgba(0,0,0,0.2);
+        border-radius: 25px; /* Cantos arredondados */
+        border: 1px solid rgba(255,255,255,0.5);
         
-        transform: translateX(-100%); /* Escondido na esquerda */
+        transform: translateX(-120%); /* Escondido totalmente na esquerda */
         transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação elástica */
         z-index: 1002; 
         padding: 100px 30px; 
@@ -298,11 +303,13 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     }
     .nav-links-container.active { transform: translateX(0); } /* Desliza para dentro */
     
-    /* FUNDO ESCURO QUANDO O MENU ABRE */
+    /* ESCURECER O FUNDO QUANDO O MENU ABRE */
     .menu-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.4); backdrop-filter: blur(5px);
-        z-index: 1001; opacity: 0; visibility: hidden; transition: 0.3s;
+        background: rgba(44, 62, 80, 0.6); /* Escuro azulado */
+        backdrop-filter: blur(5px);
+        z-index: 1001; 
+        opacity: 0; visibility: hidden; transition: 0.3s;
     }
     .menu-overlay.active { opacity: 1; visibility: visible; }
 
