@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: ISLAND MENU (Menu Flutuante Arredondado) */
+/* style.css - VERSÃO FINAL: SIDE DRAWER ARREDONDADO (Gaveta Lateral Moderna) */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -13,7 +13,7 @@
     --texto-suave: #546e7a;
     
     /* Vidro Premium */
-    --vidro-bg: rgba(255, 255, 255, 0.75); 
+    --vidro-bg: rgba(255, 255, 255, 0.85); 
     --vidro-borda: 1px solid rgba(255, 255, 255, 0.6);
     --blur-effect: blur(25px) saturate(120%);
     --vidro-shadow: 0 15px 35px rgba(28, 104, 211, 0.1), 0 5px 15px rgba(0,0,0,0.05);
@@ -165,7 +165,7 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
 
-/* --- SHEETS (STICKY) --- */
+/* --- SHEETS (PC - STICKY ATIVADO) --- */
 .sheet-card {
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
@@ -206,7 +206,7 @@ header {
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 30px; }
 .accordion-content p { padding-bottom: 25px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; }
 
-/* --- MATRÍCULAS (TAB AZUL) --- */
+/* --- MATRÍCULAS --- */
 .cta-section { 
     background: linear-gradient(160deg, var(--azul-riviera) 0%, var(--azul-profundo) 100%); 
     color: white; padding: 100px 0; text-align: center; margin-top: 80px;
@@ -269,69 +269,76 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 
 
 /* =======================================================
-   🛠️ MOBILE 🛠️ - MENU ILHA FLUTUANTE
+   🛠️ MOBILE 🛠️ - AQUI ESTÁ A CORREÇÃO
    ======================================================= */
 @media(max-width: 768px) {
     .top-bar { display: none; }
     .navbar { height: 70px; }
     .logo img { height: 45px; } 
-    .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } /* Z-index alto para ficar acima do overlay */
+    .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } 
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
-    /* MENU GAVETA/ILHA LATERAL */
+    /* MENU GAVETA LATERAL (Altura Total & Arredondado na Direita) */
     .nav-links-container {
         position: fixed; 
-        top: 15px; 
-        left: 15px; 
-        bottom: 15px;
-        height: auto; /* Altura automática baseada no top/bottom */
-        width: 280px; /* Largura fixa de "gaveta" */
-        max-width: 80%;
+        top: 0; 
+        left: 0; 
+        height: 100dvh; /* Garante altura total da tela */
+        width: 85%; 
+        max-width: 340px;
         
-        /* Vidro Fosco + Sombra Forte */
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(30px) saturate(120%);
-        box-shadow: 10px 0 40px rgba(0,0,0,0.2);
-        border-radius: 25px; /* Cantos arredondados */
-        border: 1px solid rgba(255,255,255,0.5);
+        /* Fundo Branco + Vidro + Sombra */
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        box-shadow: 5px 0 30px rgba(0,0,0,0.2);
+        /* ARREDONDADO APENAS NA DIREITA */
+        border-radius: 0 30px 30px 0;
+        border-right: 1px solid rgba(255,255,255,0.5);
         
-        transform: translateX(-120%); /* Escondido totalmente na esquerda */
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animação elástica */
+        transform: translateX(-100%); /* Escondido na esquerda */
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Animação suave */
         z-index: 1002; 
-        padding: 100px 30px; 
+        padding: 90px 30px 40px; /* Espaço no topo para não bater no X */
         display: flex; flex-direction: column; justify-content: flex-start;
+        overflow-y: auto; /* Permite rolar se o menu for maior que a tela */
     }
     .nav-links-container.active { transform: translateX(0); } /* Desliza para dentro */
     
-    /* ESCURECER O FUNDO QUANDO O MENU ABRE */
-    .menu-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(44, 62, 80, 0.6); /* Escuro azulado */
-        backdrop-filter: blur(5px);
-        z-index: 1001; 
-        opacity: 0; visibility: hidden; transition: 0.3s;
+    /* FUNDO ESCURO QUANDO O MENU ABRE */
+    body.menu-open::before {
+        content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
+        z-index: 1001; pointer-events: none;
     }
-    .menu-overlay.active { opacity: 1; visibility: visible; }
 
-    .nav-menu { flex-direction: column; gap: 20px; text-align: left; width: 100%; }
+    .nav-menu { flex-direction: column; gap: 25px; text-align: left; width: 100%; }
     .nav-item { width: 100%; border: none; }
     .nav-link { 
-        display: block; padding: 10px 0; font-size: 1.2rem; font-weight: 700; 
+        display: block; padding: 10px 0; font-size: 1.5rem; font-weight: 700; 
         color: var(--azul-profundo); border-bottom: 1px solid rgba(0,0,0,0.05);
     }
+    .nav-link:last-child { border-bottom: none; }
 
+    /* CORREÇÃO DOS SHEETS (Missão/Visão) NO MOBILE */
+    .sheet-card { 
+        position: relative !important; top: auto !important; 
+        padding: 30px 20px; border-radius: 30px 30px 0 0; min-height: auto; 
+        box-shadow: none; border-top: 5px solid var(--azul-riviera);
+        margin-bottom: 20px;
+    }
+    .sheet-intro { border-top-color: var(--azul-riviera); }
+    .sheet-missao { border-top-color: var(--amarelo); }
+    .sheet-visao { border-top-color: var(--laranja); margin-bottom: 0; }
+
+    /* Ajustes Gerais */
     h2 { font-size: 1.8rem; margin-bottom: 15px; margin-top: 10px !important; line-height: 1.1 !important; }
     .cta-titulo, .proposta-titulo { margin-top: 0 !important; padding-top: 0 !important; }
     .sobre-container { flex-direction: column; }
     .sobre-imagem, .nivel-item.image-block { display: none !important; } 
-    .card-container { gap: 20px; }
-    .sheet-card { padding: 30px 20px; border-radius: 30px 30px 0 0; min-height: auto; }
-    .sheet-intro { top: 90px; }
-    .sheet-missao { top: 130px; }
-    .sheet-visao { top: 170px; margin-bottom: 40px; }
+    .card-container { gap: 0px; }
+    
     .accordion-header { padding: 20px; }
     .accordion-header h3 { font-size: 1.2rem; }
-    .level-detail { font-size: 0.85rem; margin-top: 2px; }
     .glass-card { padding: 30px 20px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
     footer { padding: 0 15px 30px; }
