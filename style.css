@@ -1,57 +1,67 @@
-/* style.css - VERSÃO: TEXTURED GLASS & WARMTH (2025 UI) */
+/* style.css - VERSÃO: TEXTURED GLASS (CORREÇÃO ESTRUTURAL) */
 
-/* --- VARIÁVEIS & CONFIGURAÇÕES --- */
+/* --- 1. VARIÁVEIS & CONFIGURAÇÕES --- */
 :root {
-    /* Identidade Riviera (Mantida, mas harmonizada) */
+    /* Identidade Riviera */
     --azul-riviera: #1c68d3;
     --azul-profundo: #0a2e7a;
-    --amarelo-sol: #ffc400; /* Mais quente que o anterior */
+    --amarelo-sol: #ffc400; 
     --laranja-vibrante: #ff6b35;
     
-    /* A Mágica do "Não-Clínico" (Tons Quentes de Fundo) */
-    --bg-body: #fdfbf7; /* Creme muito suave, tira o branco hospitalar */
+    /* Base Visual (Quente e Não-Clínica) */
+    --bg-body: #fdfbf7; 
     --texto-escuro: #1e293b;
     --texto-suave: #475569;
 
-    /* EFEITO NOISE (RUÍDO) - Base64 super leve para textura */
+    /* Textura Noise (Ruído) */
     --noise-pattern: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
 
-    /* Glassmorphism Premium (Com Ruído) */
+    /* Vidro */
     --vidro-bg: rgba(255, 255, 255, 0.75); 
     --vidro-borda: 1px solid rgba(255, 255, 255, 0.6);
     --vidro-shadow: 0 20px 40px -10px rgba(28, 104, 211, 0.1), 0 0 0 1px rgba(255,255,255,0.5) inset;
-    --blur-effect: blur(20px) saturate(160%); /* Saturação aumenta a vida das cores */
+    --blur-effect: blur(20px) saturate(160%);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 120px; }
 
-/* Scrollbar Moderna */
+/* Scrollbar */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: #f0f0f0; }
-::-webkit-scrollbar-thumb { 
-    background: linear-gradient(to bottom, var(--azul-riviera), var(--azul-profundo)); 
-    border-radius: 5px; 
-    border: 2px solid #f0f0f0; 
-}
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--azul-riviera), var(--azul-profundo)); border-radius: 5px; border: 2px solid #f0f0f0; }
 
-/* --- BACKGROUND DINÂMICO --- */
+/* --- 2. PRELOADER (Mantido do original para não quebrar o JS) --- */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--bg-body); z-index: 99999;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.spinner {
+    width: 50px; height: 50px; border: 5px solid rgba(28, 104, 211, 0.2);
+    border-top: 5px solid var(--amarelo-sol); border-radius: 50%; animation: spin 1s linear infinite;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+body.loaded #preloader { opacity: 0; visibility: hidden; }
+
+/* --- 3. BACKGROUND & CORPO --- */
 body {
     font-family: 'Poppins', sans-serif; 
     color: var(--texto-escuro); 
     line-height: 1.6;
     background-color: var(--bg-body);
-    /* AQUI ESTÁ A TEXTURA QUE TIRA O ASPECTO CLÍNICO */
-    background-image: var(--noise-pattern);
+    background-image: var(--noise-pattern); /* Textura */
     min-height: 100vh; 
     overflow-x: hidden; 
     position: relative;
 }
+body.menu-open { overflow: hidden; }
 
-/* Orbes de cor (Aurora) mais suaves e quentes */
+/* Orbes de fundo (Suavizados) */
 body::before, body::after {
-    content: ''; position: fixed; border-radius: 50%; z-index: -1; filter: blur(100px); opacity: 0.6;
+    content: ''; position: fixed; border-radius: 50%; z-index: -1; filter: blur(100px); opacity: 0.6; pointer-events: none;
 }
 body::before {
     top: -10%; left: -10%; width: 60vw; height: 60vw;
@@ -60,22 +70,13 @@ body::before {
 }
 body::after {
     bottom: -10%; right: -10%; width: 50vw; height: 50vw;
-    background: radial-gradient(circle, rgba(255, 227, 169, 0.6), transparent 70%); /* Amarelo quente */
+    background: radial-gradient(circle, rgba(255, 227, 169, 0.6), transparent 70%);
     animation: float2 25s infinite alternate;
 }
 @keyframes float1 { 0% { transform: translate(0,0); } 100% { transform: translate(40px, 40px); } }
 @keyframes float2 { 0% { transform: translate(0,0); } 100% { transform: translate(-40px, -40px); } }
 
-/* --- TIPOGRAFIA DEGRADÊ (Consistent) --- */
-h2, h3, .logo-text {
-    font-weight: 800; letter-spacing: -0.5px;
-    background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-riviera) 50%, var(--laranja-vibrante) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    position: relative; display: inline-block;
-}
-h2 { font-size: 2.8rem; margin-bottom: 30px; text-align: center; width: 100%; }
-
-/* --- HEADER FLUTUANTE (Floating Island) --- */
+/* --- 4. HEADER (ESTRUTURA CORRIGIDA) --- */
 header {
     position: sticky; top: 20px; z-index: 1000;
     width: 90%; max-width: 1200px; margin: 0 auto;
@@ -86,12 +87,12 @@ header {
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
 }
-header:hover { box-shadow: 0 15px 40px rgba(28, 104, 211, 0.15); transform: translateY(-2px); }
+header:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(28, 104, 211, 0.15); }
 
-.top-bar { display: none; } /* Removido para visual mais limpo, info vai pro footer ou menu */
+.top-bar { display: none; } /* Ocultar barra superior antiga */
 
-.navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; height: auto; }
-.logo img { height: 50px; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 30px; min-height: 80px; }
+.logo img { height: 50px; width: auto; transition: 0.3s; }
 .logo:hover img { transform: scale(1.1) rotate(-3deg); }
 
 .nav-menu { display: flex; list-style: none; gap: 5px; background: rgba(0,0,0,0.03); padding: 5px; border-radius: 50px; }
@@ -100,181 +101,223 @@ header:hover { box-shadow: 0 15px 40px rgba(28, 104, 211, 0.15); transform: tran
     padding: 10px 20px; border-radius: 25px; transition: all 0.3s ease;
 }
 .nav-link:hover { color: var(--azul-riviera); background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-.nav-link.active { 
-    background: var(--azul-riviera); color: white; 
-    box-shadow: 0 4px 15px rgba(28, 104, 211, 0.3);
-}
-.nav-link::after { display: none; } /* Removemos a linha antiga */
+.nav-link.active { background: var(--azul-riviera); color: white; box-shadow: 0 4px 15px rgba(28, 104, 211, 0.3); }
+.nav-link::after { display: none; }
 
-/* Hamburger Moderno */
-.hamburger { display: none; cursor: pointer; padding: 10px; }
-.bar { width: 24px; height: 3px; background: var(--azul-profundo); margin: 5px 0; border-radius: 10px; transition: 0.4s; }
+.hamburger { display: none; cursor: pointer; padding: 10px; z-index: 1005; }
+.bar { display: block; width: 24px; height: 3px; background: var(--azul-profundo); margin: 5px 0; border-radius: 10px; transition: 0.4s; }
 
-/* --- HERO SLIDER --- */
-.hero-wrapper { margin-top: 20px; padding: 0 20px; }
+/* --- 5. HERO SLIDER (AQUI ESTAVA O PROBLEMA - CORRIGIDO) --- */
+.hero-wrapper { width: 100%; margin-top: 20px; padding: 0 20px; margin-bottom: 60px; }
 .hero-slider { 
-    border-radius: 40px; overflow: hidden; 
+    position: relative; overflow: hidden; max-width: 1200px; margin: 0 auto;
+    border-radius: 40px; 
     box-shadow: 0 20px 50px rgba(0,0,0,0.08);
-    position: relative;
     border: 4px solid rgba(255,255,255,0.5);
 }
-.prev, .next { background: rgba(255,255,255,0.3); backdrop-filter: blur(5px); border: none; width: 60px; height: 60px; font-size: 1.5rem; transition: 0.3s; }
-.prev:hover, .next:hover { background: white; color: var(--azul-riviera); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-/* --- CARDS TEXTURIZADOS (O Efeito "Folha" Novo) --- */
-.content-section { padding: 80px 0; }
-.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-
-.glass-card, .sheet-card {
-    /* A chave do moderno: Brancos quentes + Noise + Blur */
-    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,1);
-    box-shadow: 
-        0 20px 50px -12px rgba(0,0,0,0.08), 
-        0 0 0 1px rgba(255,255,255,0.5) inset; /* Borda interna brilhante */
-    border-radius: 35px;
-    padding: 60px;
-    position: relative;
-    overflow: hidden;
+/* O MOTOR DO SLIDER (IMPORTANTE!) */
+.slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
+.slide { 
+    min-width: 100%; /* Isso impede que a imagem fique gigante */
+    position: relative; 
+    display: flex; /* Garante alinhamento */
+}
+.slide img { 
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    object-fit: cover; /* Garante que preencha sem distorcer */
 }
 
-/* Adiciona ruído sutil APENAS no card para textura de papel */
+/* Setas do Slider */
+.prev, .next { 
+    position: absolute; top: 50%; transform: translateY(-50%); 
+    background: rgba(255,255,255,0.3); backdrop-filter: blur(5px); 
+    border: none; width: 50px; height: 50px; border-radius: 50%; 
+    font-size: 1.5rem; cursor: pointer; z-index: 10; color: white; transition: 0.3s;
+}
+.prev { left: 20px; } .next { right: 20px; }
+.prev:hover, .next:hover { background: white; color: var(--azul-riviera); }
+
+
+/* --- 6. CONTEÚDO & CARDS --- */
+.content-section { padding: 60px 0; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; }
+
+/* Títulos */
+h2 {
+    font-size: 2.5rem; margin-bottom: 30px; text-align: center; font-weight: 800; letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-riviera) 50%, var(--laranja-vibrante) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* Cards com Vidro e Textura */
+.glass-card, .sheet-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.7));
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,1);
+    box-shadow: 0 20px 50px -12px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    border-radius: 35px; padding: 50px; position: relative; overflow: hidden; margin-bottom: 40px;
+}
+/* Ruído no Card */
 .glass-card::before, .sheet-card::before {
     content: ''; position: absolute; inset: 0; opacity: 0.4; pointer-events: none;
     background-image: var(--noise-pattern); z-index: 0;
 }
 .glass-card > *, .sheet-card > * { position: relative; z-index: 1; }
 
-.sheet-card { border-top: none; margin-bottom: 30px; transition: transform 0.3s; }
-.sheet-card:hover { transform: translateY(-5px) scale(1.01); }
-
-/* Detalhe colorido no topo do card (substituto moderno da borda) */
+.sheet-card { border-top: none; transition: transform 0.3s; }
+.sheet-card:hover { transform: translateY(-5px); }
+/* Detalhe colorido topo */
 .sheet-card::after {
     content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: 60px; height: 6px; border-radius: 0 0 10px 10px;
-    background: var(--azul-riviera);
+    width: 60px; height: 6px; border-radius: 0 0 10px 10px; background: var(--azul-riviera);
 }
 .sheet-missao::after { background: var(--amarelo-sol); }
 .sheet-visao::after { background: var(--laranja-vibrante); }
 
 .card-container { display: flex; gap: 30px; flex-wrap: wrap; }
+.card-container > div { flex: 1; min-width: 300px; }
 
-/* --- ACCORDION NEXT-GEN --- */
-.accordion-container { gap: 20px; }
+p { color: var(--texto-suave); margin-bottom: 15px; text-align: justify; }
+
+/* --- 7. ACORDEÃO (NÍVEIS) --- */
+.accordion-container { gap: 20px; display: flex; flex-direction: column; }
 .accordion-item {
     background: white; border-radius: 20px; border: 1px solid #f0f0f0;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s;
 }
-.accordion-item.active {
-    box-shadow: 0 20px 40px rgba(28, 104, 211, 0.1); border-color: rgba(28,104,211,0.2);
-    transform: scale(1.02);
-}
-.accordion-header { padding: 30px; }
+.accordion-item.active { box-shadow: 0 20px 40px rgba(28, 104, 211, 0.1); border-color: rgba(28,104,211,0.2); transform: scale(1.01); }
+.accordion-header { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.accordion-header h3 { font-size: 1.3rem; margin: 0; display: flex; flex-direction: column; text-align: left; }
 .level-detail { 
-    background: rgba(28, 104, 211, 0.08); padding: 5px 12px; border-radius: 50px; 
-    font-size: 0.75rem; font-weight: 700; color: var(--azul-riviera); letter-spacing: 0.5px;
-    margin-top: 5px; display: inline-block;
+    background: rgba(28, 104, 211, 0.08); padding: 4px 10px; border-radius: 50px; 
+    font-size: 0.75rem; font-weight: 700; color: var(--azul-riviera); margin-top: 5px; width: fit-content;
 }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 25px; }
+.accordion-content p { padding-bottom: 25px; margin-top: 10px; border-top: 1px solid #f0f0f0; padding-top: 15px; }
 
-/* --- CTA SECTION (Matrículas) --- */
+/* --- 8. CTA & MATRÍCULAS --- */
 .cta-section {
-    position: relative; margin: 100px 20px 60px; border-radius: 50px;
+    position: relative; margin: 80px 20px 60px; border-radius: 50px;
     background: radial-gradient(circle at top right, var(--azul-riviera), var(--azul-profundo));
     padding: 80px 40px; color: white; overflow: hidden;
     box-shadow: 0 30px 80px -20px rgba(28, 104, 211, 0.5);
 }
-/* Ruído no CTA também */
 .cta-section::before { content: ''; position: absolute; inset: 0; background-image: var(--noise-pattern); opacity: 0.1; }
-
-.cta-titulo { 
-    color: white !important; -webkit-text-fill-color: white !important; background: none; 
-    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-.metodo-suporte-container { display: flex; gap: 30px; margin: 50px 0; }
+.cta-titulo { color: white !important; -webkit-text-fill-color: white !important; background: none; text-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.metodo-suporte-container { display: flex; gap: 30px; margin: 40px 0; }
 .metodo-card {
     background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 25px; padding: 40px; transition: 0.3s;
+    border-radius: 25px; padding: 30px; flex: 1; transition: 0.3s;
 }
 .metodo-card:hover { background: rgba(255,255,255,0.15); transform: translateY(-5px); }
-.metodo-card h3 { color: var(--amarelo-sol) !important; -webkit-text-fill-color: var(--amarelo-sol) !important; }
+.metodo-card h3 { color: var(--amarelo-sol) !important; -webkit-text-fill-color: var(--amarelo-sol) !important; margin-bottom: 10px; }
+.metodo-card p { color: rgba(255,255,255,0.9); text-align: left; }
 
-/* Botões Modernos */
-.cta-buttons-wrapper { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.cta-buttons-wrapper { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 40px; }
 .cta-button {
-    padding: 20px 45px; border-radius: 100px; font-weight: 700; text-decoration: none; 
-    transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;
+    padding: 18px 40px; border-radius: 100px; font-weight: 700; text-decoration: none; 
+    transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; display: inline-block; text-align: center;
 }
 .cta-button.primary {
-    background: var(--amarelo-sol); color: var(--azul-profundo); box-shadow: 0 10px 30px rgba(255, 196, 0, 0.4);
-    border: 2px solid var(--amarelo-sol);
+    background: var(--amarelo-sol); color: var(--azul-profundo); box-shadow: 0 10px 30px rgba(255, 196, 0, 0.4); border: 2px solid var(--amarelo-sol);
 }
 .cta-button.primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255, 196, 0, 0.6); }
-
 .cta-button.secondary {
-    background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px);
+    background: rgba(255,255,255,0.1); color: white; border: 2px solid rgba(255,255,255,0.3);
 }
 .cta-button.secondary:hover { background: white; color: var(--azul-riviera); border-color: white; }
-
 .cta-button.simple {
-    background: white; color: var(--azul-riviera); border: 1px solid #eee; padding: 15px 35px; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    background: white; color: var(--azul-riviera); border: 1px solid #eee; padding: 12px 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-/* --- FOOTER FLUTUANTE PREMIUM --- */
+/* --- 9. EXTRAS (Mapa/Instagram) --- */
+.extras-container { display: flex; gap: 30px; }
+.extra-card { flex: 1; text-align: center; }
+.map-container { border-radius: 20px; overflow: hidden; height: 350px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.map-link img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.map-link:hover img { transform: scale(1.05); }
+
+
+/* --- 10. FOOTER --- */
 footer { margin-top: -50px; padding-bottom: 30px; position: relative; z-index: 10; padding: 0 20px 40px; }
 .footer-content-wrapper {
-    background: #101624; /* Quase preto, azulado */
-    border-radius: 40px; padding: 60px; 
-    color: #94a3b8;
-    position: relative; overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    background: #101624; border-radius: 40px; padding: 50px; color: #94a3b8;
+    position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.2);
 }
-.footer-info h4 { color: white; font-size: 2rem; margin-bottom: 20px; background: none; -webkit-text-fill-color: white; }
-.footer-social { gap: 15px; display: flex; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; }
+.footer-info h4 { color: white; font-size: 1.8rem; margin-bottom: 10px; background: none; -webkit-text-fill-color: white; }
+.footer-social { gap: 10px; display: flex; }
 .social-btn {
-    width: 50px; height: 50px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); font-size: 0; /* esconde texto */
+    width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); font-size: 0; transition: 0.3s;
 }
-.social-btn::before {
-    font-size: 1rem; color: white; font-weight: bold;
-}
+.social-btn::before { font-size: 0.9rem; color: white; font-weight: bold; }
 .social-btn[href*="instagram"]::before { content: 'IG'; }
 .social-btn[href*="wa"]::before { content: 'WA'; }
-.social-btn:hover { background: var(--azul-riviera); border-color: var(--azul-riviera); transform: scale(1.1) rotate(10deg); }
+.social-btn:hover { background: var(--azul-riviera); border-color: var(--azul-riviera); transform: scale(1.1); }
+.footer-copy { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.8rem; opacity: 0.6; }
 
 
-/* --- MOBILE & RESPONSIVIDADE --- */
+/* =======================================================
+   🛠️ MOBILE & TABLET (CORRIGIDO) 🛠️ 
+   ======================================================= */
 @media(max-width: 900px) {
-    header { width: 95%; padding: 10px 20px; }
-    .nav-menu { display: none; }
-    .hamburger { display: block; z-index: 1005; }
+    /* Header volta ao normal para não ficar estranho */
+    header { width: 95%; padding: 10px 15px; top: 10px; }
     
+    .nav-menu { display: none; } /* Esconde menu PC */
+    .hamburger { display: block; } /* Mostra Hamburger */
+    .logo { position: absolute; left: 50%; transform: translateX(-50%); }
+
+    /* MENU GAVETA (Trazido de volta do código original) */
     .nav-links-container {
-        position: fixed; top: 0; right: 0; width: 85%; height: 100vh;
-        background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
-        transform: translateX(100%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-        z-index: 1001; padding: 100px 40px; display: flex; flex-direction: column;
-        box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        position: fixed; top: 0; left: 0; width: 80%; max-width: 320px; height: 100vh;
+        background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+        transform: translateX(-100%); transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 1002; padding: 100px 30px; display: flex; flex-direction: column;
+        box-shadow: 10px 0 40px rgba(0,0,0,0.1); visibility: hidden;
+        border-right: 1px solid rgba(0,0,0,0.05);
     }
-    .nav-links-container.active { transform: translateX(0); }
+    .nav-links-container.active { transform: translateX(0); visibility: visible; }
     
-    .nav-menu { display: flex; flex-direction: column; background: none; gap: 20px; }
-    .nav-link { font-size: 1.5rem; color: var(--texto-escuro); padding: 0; background: none !important; box-shadow: none !important; }
-    .nav-link.active { color: var(--azul-riviera); }
-    
-    .hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+    /* Overlay Escuro */
+    .menu-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; visibility: hidden; transition: 0.3s;
+    }
+    .menu-overlay.active { opacity: 1; visibility: visible; }
+
+    /* Estilo dos Links no Mobile */
+    .nav-menu { display: flex; flex-direction: column; background: none; gap: 0; width: 100%; padding: 0; }
+    .nav-item { width: 100%; }
+    .nav-link { 
+        font-size: 1.2rem; color: var(--texto-escuro); padding: 15px 0; 
+        background: none !important; box-shadow: none !important; border-radius: 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05); width: 100%; display: block;
+    }
+    .nav-link.active { color: var(--azul-riviera); background: none; }
+
+    /* Animação do Hamburger */
+    .hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); background: var(--laranja-vibrante); }
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
-    .hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+    .hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); background: var(--laranja-vibrante); }
     
-    .metodo-suporte-container { flex-direction: column; }
-    .card-container { flex-direction: column; }
+    /* Ajustes de Layout */
+    .metodo-suporte-container, .card-container, .extras-container, .footer-inner { flex-direction: column; }
     .hero-wrapper { padding: 0 10px; }
-    .hero-slider { border-radius: 20px; }
-    .glass-card { padding: 30px 20px; border-radius: 25px; }
-    h2 { font-size: 2rem; }
+    .hero-slider { border-radius: 20px; border-width: 2px; }
+    .glass-card, .sheet-card { padding: 30px 20px; border-radius: 25px; }
+    h2 { font-size: 2rem; line-height: 1.2; }
     
-    .footer-inner { flex-direction: column; text-align: center; gap: 30px; }
+    /* CTA Mobile */
+    .cta-section { padding: 60px 20px; margin: 60px 10px; border-radius: 30px; }
+    .cta-button { width: 100%; margin-bottom: 10px; padding: 15px; }
+    
+    /* Footer Mobile */
+    .footer-inner { text-align: center; }
     .footer-social { justify-content: center; }
 }
 
