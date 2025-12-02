@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: VIDRO REAL TRANSLÚCIDO (Premium) */
+/* style.css - VERSÃO FINAL: MESH GRADIENT + NOISE TEXTURE (Premium 2.5K) */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -11,20 +11,13 @@
     --texto-escuro: #2c3e50;
     --texto-suave: #546e7a;
     
-    /* --- O SEGREDO DO VIDRO PREMIUM --- */
-    /* Menos opacidade (0.75) para o fundo aparecer */
+    /* Vidro Premium */
     --vidro-bg: rgba(255, 255, 255, 0.75); 
-    
-    /* Borda fina e brilhante para definir o vidro */
-    --vidro-borda: 1px solid rgba(255, 255, 255, 0.8);
-    
-    /* Desfoque potente (Blur) + Saturação para cores vivas atrás */
+    --vidro-borda: 1px solid rgba(255, 255, 255, 0.6);
     --blur-effect: blur(25px) saturate(120%);
-    
-    /* Sombra suave para flutuar */
     --vidro-shadow: 0 15px 35px rgba(28, 104, 211, 0.1), 0 5px 15px rgba(0,0,0,0.05);
     
-    /* Vidro Escuro (Para áreas azuis) */
+    /* Vidro Escuro */
     --vidro-dark-bg: rgba(255, 255, 255, 0.15);
     --vidro-dark-borda: 1px solid rgba(255, 255, 255, 0.3);
 }
@@ -33,51 +26,50 @@
 
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 
-/* --- FUNDO ANIMADO (Aurora Vibrante) --- */
+/* --- NOVO FUNDO PREMIUM (Mesh Gradient + Noise) --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--texto-escuro);
     line-height: 1.6;
-    background-color: #f4f7fc; /* Base clara */
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    
+    /* Gradiente de Malha Fixo */
+    background: 
+        radial-gradient(at 0% 0%, hsla(216,93%,84%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(215,98%,61%,0.2) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(43,100%,85%,1) 0, transparent 50%), 
+        radial-gradient(at 0% 100%, hsla(43,100%,85%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 100%, hsla(215,98%,61%,0.2) 0, transparent 50%), 
+        radial-gradient(at 100% 100%, hsla(216,93%,84%,1) 0, transparent 50%);
+    background-size: 200% 200%;
+    animation: gradientMove 20s ease infinite; /* Movimento suave do fundo */
+    background-attachment: fixed; /* O fundo fica parado enquanto rola */
 }
 
-@keyframes floatAurora {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -40px) scale(1.1); }
-    66% { transform: translate(-20px, 30px) scale(0.9); }
+/* Animação do Gradiente */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* Luz Azul (Topo Esquerda) */
+/* Textura de Ruído (Noise) - O Toque de Classe */
 body::before {
-    content: ''; position: fixed; top: -10%; left: -10%; width: 70vw; height: 70vw;
-    border-radius: 50%;
-    /* Cor mais forte para aparecer no vidro */
-    background: radial-gradient(circle, rgba(28, 104, 211, 0.45), transparent 70%);
-    filter: blur(80px); z-index: -3;
-    animation: floatAurora 18s infinite ease-in-out;
-}
-
-/* Luz Amarela (Meio Direita) */
-body::after {
-    content: ''; position: fixed; top: 40%; right: -15%; width: 60vw; height: 60vw;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(254, 187, 21, 0.4), transparent 70%);
-    filter: blur(80px); z-index: -3;
-    animation: floatAurora 22s infinite ease-in-out reverse;
-}
-
-/* Luz Rosada (Baixo Esquerda) - Precisa da div no HTML */
-.bg-warmth {
-    position: fixed; bottom: -20%; left: 0%; width: 65vw; height: 65vw;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 126, 44, 0.3), transparent 70%);
-    filter: blur(90px); z-index: -3;
-    animation: floatAurora 25s infinite ease-in-out 5s;
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* URL de dados para um ruído leve */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
     pointer-events: none;
+    z-index: -1;
+    opacity: 0.4; /* Ajuste a intensidade da textura aqui */
 }
+
+/* Removemos as bolhas antigas para limpar o visual */
+/* body::after { display: none; } .bg-warmth { display: none; } */
+
 
 body.menu-open { overflow: hidden; }
 
@@ -92,12 +84,14 @@ p { color: var(--texto-suave); margin-bottom: 15px; }
 
 #proposta p, #proposta .texto-justificado { text-align: center !important; }
 
-/* --- HEADER (Menu de Vidro) --- */
+/* --- HEADER (Aprimorado) --- */
 header {
-    background: rgba(255,255,255,0.7); /* Menu bem transparente */
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.6); /* Mais transparente para mesclar com o fundo novo */
+    backdrop-filter: blur(25px) saturate(180%); /* Blur forte e cores vibrantes por trás */
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
     position: sticky; top: 0; z-index: 1000; 
-    box-shadow: 0 4px 25px rgba(0,0,0,0.03); border-bottom: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 .top-bar {
     background: linear-gradient(90deg, var(--azul-riviera), var(--azul-profundo));
@@ -133,7 +127,8 @@ header {
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { 
     position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; 
-    box-shadow: 0 15px 40px rgba(28, 104, 211, 0.1); border-radius: 0 0 30px 30px; 
+    box-shadow: 0 20px 50px rgba(28, 104, 211, 0.15); /* Sombra mais difusa */
+    border-radius: 0 0 40px 40px; /* Curva mais acentuada */
 }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 .slide { min-width: 100%; position: relative; }
@@ -156,25 +151,21 @@ header {
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
     border: var(--vidro-borda); box-shadow: var(--vidro-shadow);
-    border-radius: 25px; padding: 50px; margin-bottom: 40px;
+    border-radius: 30px; padding: 50px; margin-bottom: 40px;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
 
 
-/* --- SHEETS (STICKY STACKING - Transparência Ativada) --- */
+/* --- SHEETS (STICKY STACKING) --- */
 .sheet-card {
-    background: var(--vidro-bg); /* Transparente */
+    background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect);
     border: var(--vidro-borda);
-    
-    padding: 50px;
-    border-radius: 40px 40px 0 0; 
+    padding: 50px; border-radius: 40px 40px 0 0; 
     box-shadow: 0 -10px 30px rgba(28, 104, 211, 0.1); 
-    position: sticky; 
-    border-top: 8px solid var(--azul-riviera);
-    transition: transform 0.3s ease;
-    min-height: 300px; 
+    position: sticky; border-top: 8px solid var(--azul-riviera);
+    transition: transform 0.3s ease; min-height: 300px; 
 }
 
 .sheet-intro { top: 110px; z-index: 10; border-top-color: var(--azul-riviera); }
@@ -195,7 +186,7 @@ header {
 }
 .accordion-item.active { 
     box-shadow: 0 15px 40px rgba(28, 104, 211, 0.15);
-    background: rgba(255, 255, 255, 0.95); /* Mais sólido quando aberto */
+    background: rgba(255, 255, 255, 0.95);
 }
 .item-bercario { border-left: 6px solid #d49e13; }
 .item-infantil { border-left: 6px solid var(--laranja); }
@@ -267,7 +258,7 @@ footer { background: var(--texto-escuro); color: #b0bec5; padding: 80px 0 30px; 
     
     .nav-links-container {
         position: fixed; top: 0; left: 0; height: 100vh; width: 85%; 
-        background: rgba(255,255,255,0.85); /* Menu transparente também */
+        background: rgba(255,255,255,0.85); 
         backdrop-filter: blur(25px);
         transform: translateX(-100%); transition: transform 0.3s ease; z-index: 1001; padding: 100px 30px; display: block;
     }
