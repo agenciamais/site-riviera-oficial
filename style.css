@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL BLINDADA: MENU GAVETA + PRELOADER */
+/* style.css - VERSÃO FINAL: MENU CLICÁVEL (Z-INDEX CORRIGIDO) */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -15,7 +15,6 @@
     --vidro-borda: 1px solid rgba(255, 255, 255, 0.6);
     --blur-effect: blur(25px) saturate(120%);
     --vidro-shadow: 0 15px 35px rgba(28, 104, 211, 0.1), 0 5px 15px rgba(0,0,0,0.05);
-    
     --vidro-dark-bg: rgba(255, 255, 255, 0.15);
     --vidro-dark-borda: 1px solid rgba(255, 255, 255, 0.3);
 }
@@ -32,7 +31,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 /* --- PRELOADER --- */
 #preloader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: #f4f7fc; z-index: 9999;
+    background-color: #f4f7fc; z-index: 99999; /* Acima de tudo */
     display: flex; justify-content: center; align-items: center;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
@@ -88,7 +87,6 @@ header {
 .top-bar-content { display: flex; justify-content: flex-end; gap: 25px; }
 .top-link { color: white; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: 0.3s; }
 .top-link img { width: 14px; filter: brightness(0) invert(1); }
-
 .navbar { display: flex; justify-content: space-between; align-items: center; height: 85px; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 .logo img { height: 55px; width: auto; transition: transform 0.3s; }
 .logo:hover img { transform: scale(1.08); }
@@ -99,7 +97,7 @@ header {
 .nav-link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0%; height: 3px; background: var(--amarelo); transition: width 0.3s ease; border-radius: 2px; }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
-.hamburger { display: none; cursor: pointer; z-index: 5003; }
+.hamburger { display: none; cursor: pointer; z-index: 10000; /* Sempre acima de tudo */ }
 .bar { display: block; width: 28px; height: 3px; margin: 6px auto; background: var(--azul-riviera); border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
 .hamburger.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); background: var(--laranja); }
 .hamburger.active .bar:nth-child(2) { opacity: 0; transform: translateX(20px); }
@@ -118,10 +116,8 @@ header {
 /* --- SEÇÕES & CONTEÚDO --- */
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
-
 .glass-card { background: var(--vidro-bg); backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); border: var(--vidro-borda); box-shadow: var(--vidro-shadow); border-radius: 30px; padding: 50px; margin-bottom: 40px; transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
-
 .sheet-card { background: var(--vidro-bg); backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); border: var(--vidro-borda); padding: 50px; border-radius: 40px 40px 0 0; box-shadow: 0 -10px 30px rgba(28, 104, 211, 0.1); position: sticky; border-top: 8px solid var(--azul-riviera); transition: transform 0.3s ease; min-height: 300px; }
 .sheet-intro { top: 110px; z-index: 10; border-top-color: var(--azul-riviera); }
 .sheet-missao { top: 150px; z-index: 20; border-top-color: var(--amarelo); }
@@ -175,76 +171,60 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
 
 /* =======================================================
-   🛠️ MOBILE 🛠️ - MENU GAVETA ESQUERDA
+   🛠️ MOBILE 🛠️ - CORREÇÃO CAMADAS (Z-INDEX)
    ======================================================= */
 @media(max-width: 768px) {
     .top-bar { display: none; }
     .navbar { height: 70px; }
     .logo img { height: 45px; } 
-    /* Z-Index SUPER alto para o botão ficar na frente */
-    .hamburger { display: block; position: absolute; left: 20px; z-index: 5003; } 
+    .hamburger { display: block; position: absolute; left: 20px; z-index: 10000; } /* Botão acima de tudo */
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
-    /* MENU GAVETA LATERAL */
+    /* MENU LATERAL (CAMADA SUPERIOR) */
     .nav-links-container {
-        position: fixed; top: 0; left: 0; 
-        height: 100vh; /* Altura total */
-        width: 80%; max-width: 320px;
-        
+        position: fixed; top: 0; left: 0; height: 100vh; width: 80%; max-width: 320px;
         background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(20px);
         box-shadow: 5px 0 30px rgba(0,0,0,0.2);
-        border-radius: 0 30px 30px 0; /* Borda redonda só na direita */
-        border-right: 1px solid rgba(255,255,255,0.5);
-        
-        /* ESCONDIDO */
+        border-radius: 0 30px 30px 0; border-right: 1px solid rgba(255,255,255,0.5);
         transform: translateX(-100%); 
-        visibility: hidden; /* ISSO MATA O BLUR FANTASMA */
         
+        /* CORREÇÃO: Z-INDEX 9999 (ACIMA DO BLUR) */
+        z-index: 9999; 
+        
+        visibility: hidden; /* Mata o blur fantasma quando fechado */
         transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0.4s;
-        z-index: 5002; 
-        padding: 90px 30px 40px; 
-        display: flex; flex-direction: column; justify-content: flex-start;
-        overflow-y: auto; 
+        padding: 90px 30px 40px; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; 
     }
-    /* ABERTO */
-    .nav-links-container.active { 
-        transform: translateX(0); 
-        visibility: visible;
-        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0s;
-    }
+    .nav-links-container.active { transform: translateX(0); visibility: visible; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0s; }
     
-    /* OVERLAY ESCURO */
+    /* PELÍCULA DE BLUR (CAMADA INFERIOR AO MENU) */
     .menu-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.5); backdrop-filter: blur(3px);
-        z-index: 5001; opacity: 0; visibility: hidden; transition: 0.3s;
+        background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+        
+        /* CORREÇÃO: Z-INDEX 9998 (ABAIXO DO MENU, ACIMA DO SITE) */
+        z-index: 9998; 
+        
+        opacity: 0; visibility: hidden; transition: 0.3s;
     }
     .menu-overlay.active { opacity: 1; visibility: visible; }
 
     .nav-menu { flex-direction: column; gap: 20px; text-align: left; width: 100%; }
     .nav-item { width: 100%; border: none; }
-    .nav-link { display: block; padding: 10px 0; font-size: 1.3rem; font-weight: 700; color: var(--azul-profundo); border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .nav-link { display: block; padding: 12px 0; font-size: 1.3rem; font-weight: 700; color: var(--azul-profundo); border-bottom: 1px solid rgba(0,0,0,0.05); }
     .nav-link:last-child { border-bottom: none; }
 
-    /* CORREÇÃO SHEETS MOBILE */
-    .sheet-card { 
-        position: relative !important; top: auto !important; 
-        padding: 30px 20px; border-radius: 30px 30px 0 0; min-height: auto; 
-        box-shadow: none; border-top: 5px solid var(--azul-riviera);
-        margin-bottom: 20px;
-    }
+    /* SHEETS MOBILE */
+    .sheet-card { position: relative !important; top: auto !important; padding: 30px 20px; border-radius: 30px 30px 0 0; min-height: auto; box-shadow: none; border-top: 5px solid var(--azul-riviera); margin-bottom: 20px; }
     .sheet-intro { border-top-color: var(--azul-riviera); }
     .sheet-missao { border-top-color: var(--amarelo); }
     .sheet-visao { border-top-color: var(--laranja); margin-bottom: 0; }
 
-    /* Ajustes Gerais */
     h2 { font-size: 1.8rem; margin-bottom: 15px; margin-top: 10px !important; line-height: 1.1 !important; }
     .cta-titulo, .proposta-titulo { margin-top: 0 !important; padding-top: 0 !important; }
     .sobre-container { flex-direction: column; }
     .sobre-imagem, .nivel-item.image-block { display: none !important; } 
     .card-container { gap: 0px; }
-    
     .accordion-header { padding: 20px; }
     .accordion-header h3 { font-size: 1.2rem; }
     .glass-card { padding: 30px 20px; border-radius: 20px; }
