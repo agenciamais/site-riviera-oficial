@@ -1,6 +1,6 @@
-// --- script.js - Menu e Interações ---
+// --- script.js ---
 
-// 1. MENU MOBILE
+// MENU MOBILE
 const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
@@ -26,7 +26,7 @@ if (hamburger) {
 
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
 
-// 2. SLIDER
+// SLIDER
 const slideContainer = document.querySelector(".slider-container");
 if (slideContainer) {
     let slideIndex = 0;
@@ -57,7 +57,7 @@ if (slideContainer) {
     updateSlidePosition();
 }
 
-// 3. MENU ATIVO
+// MENU ATIVO
 document.addEventListener('DOMContentLoaded', () => {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll("header nav ul li a.nav-link");
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 4. ANIMAÇÃO SCROLL
+// ANIMAÇÃO SCROLL
 const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -76,7 +76,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
 
-// 5. ACORDEÃO
+// ACORDEÃO
 const accordionHeaders = document.querySelectorAll('.accordion-header');
 accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
