@@ -1,19 +1,25 @@
 // --- script.js ---
 
-// MENU MOBILE
 const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
 
+// Cria o fundo escuro dinamicamente
+const menuOverlay = document.createElement('div');
+menuOverlay.classList.add('menu-overlay');
+body.appendChild(menuOverlay);
+
 function toggleMenu() {
     hamburger.classList.toggle("active");
     navMenuContainer.classList.toggle("active");
+    menuOverlay.classList.toggle("active"); // Ativa o overlay
     body.classList.toggle("menu-open");
 }
 
 function closeMenu() {
     hamburger.classList.remove("active");
     navMenuContainer.classList.remove("active");
+    menuOverlay.classList.remove("active");
     body.classList.remove("menu-open");
 }
 
@@ -24,6 +30,7 @@ if (hamburger) {
     });
 }
 
+menuOverlay.addEventListener('click', closeMenu); // Fecha ao clicar fora
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
 
 // SLIDER
@@ -34,24 +41,13 @@ if (slideContainer) {
     const totalSlides = slides.length;
     const slideIntervalTime = 5000;
     let slideInterval;
-
-    function updateSlidePosition() {
-        slideContainer.style.transform = `translateX(${-slideIndex * 100}%)`;
-    }
-    function nextSlide() {
-        slideIndex = (slideIndex + 1) % totalSlides;
-        updateSlidePosition();
-    }
-    function prevSlide() {
-        slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
-        updateSlidePosition();
-    }
-
+    function updateSlidePosition() { slideContainer.style.transform = `translateX(${-slideIndex * 100}%)`; }
+    function nextSlide() { slideIndex = (slideIndex + 1) % totalSlides; updateSlidePosition(); }
+    function prevSlide() { slideIndex = (slideIndex - 1 + totalSlides) % totalSlides; updateSlidePosition(); }
     slideInterval = setInterval(nextSlide, slideIntervalTime);
     const nextBtn = document.querySelector('.next');
     const prevBtn = document.querySelector('.prev');
     const resetInterval = () => { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, slideIntervalTime); }
-
     if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
     if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
     updateSlidePosition();
@@ -67,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// ANIMAÇÃO SCROLL
+// SCROLL REVEAL
 const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
