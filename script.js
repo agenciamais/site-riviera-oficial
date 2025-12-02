@@ -12,28 +12,44 @@ window.addEventListener("load", function() {
     }
 });
 
-// MENU MOBILE
+// MENU MOBILE (Gaveta)
 const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
 
+// Cria o overlay se não existir
+let menuOverlay = document.querySelector('.menu-overlay');
+if (!menuOverlay) {
+    menuOverlay = document.createElement('div');
+    menuOverlay.classList.add('menu-overlay');
+    body.appendChild(menuOverlay);
+}
+
 function toggleMenu() {
     hamburger.classList.toggle("active");
     navMenuContainer.classList.toggle("active");
+    menuOverlay.classList.toggle("active");
     body.classList.toggle("menu-open");
 }
+
 function closeMenu() {
     hamburger.classList.remove("active");
     navMenuContainer.classList.remove("active");
+    menuOverlay.classList.remove("active");
     body.classList.remove("menu-open");
 }
+
 if (hamburger) {
     hamburger.addEventListener("click", (e) => {
         e.stopPropagation();
         toggleMenu();
     });
 }
+
+// Fecha ao clicar fora ou no link
+menuOverlay.addEventListener('click', closeMenu);
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
+
 
 // SLIDER
 const slideContainer = document.querySelector(".slider-container");
