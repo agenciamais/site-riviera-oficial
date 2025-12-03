@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL (CARTÕES SOBRE COMPACTOS + CLEAN BG + BOTÃO SOLAR) */
+/* style.css - VERSÃO FINAL (BOTÃO HOME PADRONIZADO + FIX GERAL) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -56,7 +56,7 @@ body {
     overflow-x: hidden; 
     position: relative;
     
-    /* Fundo Limpo (Sem formas, como pedido anteriormente) */
+    /* Fundo Limpo (Sem formas) */
     background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
@@ -130,7 +130,7 @@ header {
 .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 
-/* --- 6. HERO SECTION (BOTÃO SOLAR) --- */
+/* --- 6. HERO SECTION (BOTÃO HOME PADRONIZADO) --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; box-shadow: 0 20px 60px -20px rgba(0, 122, 255, 0.2); border-radius: 0 0 40px 40px; }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -139,21 +139,23 @@ header {
 .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 .prev { left: 24px; } .next { right: 24px; }
 
-/* Botão Solar Impactante (Home) */
+/* Botão da Home agora igual ao "Matricule-se" (Secundário) */
 #historia-previa .cta-button.primary {
-    background: linear-gradient(135deg, #FFD60A 0%, #FF9500 100%);
-    color: var(--azul-profundo); 
-    border: none;
-    font-weight: 800; 
-    letter-spacing: 0.5px;
-    padding: 18px 40px; 
-    box-shadow: 0 10px 30px -5px rgba(255, 149, 0, 0.5);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Copiando estilo do .cta-button.simple/secondary para harmonia */
+    color: var(--azul-riviera); 
+    background: rgba(0, 122, 255, 0.1); /* Fundo azul clarinho transparente */
+    border: none; 
+    padding: 14px 30px; 
+    box-shadow: none;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 #historia-previa .cta-button.primary:hover {
-    transform: translateY(-4px) scale(1.03); 
-    box-shadow: 0 20px 40px -5px rgba(255, 149, 0, 0.7); 
-    filter: brightness(1.05); 
+    background: rgba(0, 122, 255, 0.2); /* Escurece um pouco no hover */
+    transform: scale(1.02);
 }
 
 
@@ -181,11 +183,8 @@ header {
 .sheet-card { 
     position: sticky; 
     border-radius: 32px 32px 0 0; 
-    
-    /* --- CORREÇÃO: Altura Automática e Padding Menor --- */
-    min-height: auto; /* Remove altura fixa gigante */
-    padding: 40px 40px 80px 40px; /* Padding ajustado */
-    
+    min-height: auto; /* Altura automática */
+    padding: 40px 40px 80px 40px; 
     border-top: none; 
     margin-bottom: 0; 
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08); 
@@ -228,7 +227,7 @@ header {
 .sheet-card h2, .sheet-card h3 { text-align: center; }
 
 
-/* --- 8. NÍVEIS DE ENSINO (SETA GLOW) --- */
+/* --- 8. NÍVEIS DE ENSINO --- */
 #niveis {
     background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
     border-radius: 40px; margin-top: 30px; margin-bottom: 30px;
@@ -264,7 +263,7 @@ header {
     color: #ffffff; background: rgba(0, 0, 0, 0.2); padding: 6px 12px; border-radius: 20px; display: inline-block; width: fit-content; border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* SETA GLOW (CSS Puro) */
+/* SETA GLOW */
 .accordion-icon { 
     width: 14px; height: 14px; 
     border-right: 3px solid rgba(255,255,255,0.9);
@@ -366,7 +365,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Ajuste Stack Mobile (COMPACTO) */
+    /* Ajuste Stack Mobile */
     .sheet-card { 
         border-radius: 24px 24px 0 0; 
         min-height: auto; /* Remove altura fixa no mobile */
