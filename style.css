@@ -1,4 +1,4 @@
-/* style.css - VERSÃO MASTER: ESTRUTURA ORIGINAL + VISUAL IOS 2025 */
+/* style.css - VERSÃO FINAL PREMIUM: ESTRUTURA BLINDADA + VISUAL IOS */
 
 /* --- 1. VARIÁVEIS & TEXTURAS --- */
 :root {
@@ -16,7 +16,7 @@
     /* Textura Noise (Ruído) */
     --noise-pattern: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
 
-    /* Vidro */
+    /* Vidro Base */
     --vidro-bg: rgba(255, 255, 255, 0.85); 
     --vidro-borda: 1px solid rgba(255, 255, 255, 0.6);
     --vidro-shadow: 0 15px 35px rgba(28, 104, 211, 0.1), 0 5px 15px rgba(0,0,0,0.05);
@@ -80,7 +80,7 @@ body::after {
 /* --- 4. GERAL & TIPOGRAFIA PREMIUM --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
 
-/* Títulos com Degradê (O que você gostou) */
+/* Títulos com Degradê */
 h2 {
     font-size: 2.5rem; margin-bottom: 20px; text-align: center; font-weight: 800; letter-spacing: -1px; line-height: 1.1 !important;
     background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-riviera) 50%, var(--laranja-vibrante) 100%);
@@ -89,7 +89,7 @@ h2 {
 }
 
 /* Subtítulos também com degradê */
-.sheet-card h3, .accordion-header h3, .logo-text {
+.accordion-header h3, .logo-text, .metodo-card h3 {
     font-weight: 700;
     background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-riviera) 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
@@ -97,11 +97,11 @@ h2 {
 }
 
 p { color: var(--texto-suave); margin-bottom: 15px; }
-/* Centralização específica que você pediu na Home */
+/* Centralização específica */
 #historia-previa p { text-align: center; } 
 #proposta p, #proposta .texto-justificado { text-align: center !important; }
 
-/* --- 5. HEADER (Fixo no topo, estilo Vidro) --- */
+/* --- 5. HEADER (Fixo no topo) --- */
 header {
     background: rgba(255, 255, 255, 0.75); 
     backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%);
@@ -143,43 +143,88 @@ header {
 .prev { left: 30px; } .next { right: 30px; }
 .prev:hover, .next:hover { background: var(--azul-riviera); border-color: var(--azul-riviera); }
 
-/* --- 7. CARDS & SHEETS (STICKY ATIVADO) --- */
+/* --- 7. CARDS GERAIS (Efeito Glass Moderno) --- */
 .content-section { padding: 80px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
-/* Estilo Glass + Noise */
-.glass-card, .sheet-card { 
-    background: var(--vidro-bg); 
-    backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); 
-    border: var(--vidro-borda); 
-    box-shadow: var(--vidro-shadow); 
-    border-radius: 30px; padding: 50px; margin-bottom: 40px; 
+.glass-card { 
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); 
+    border: 1px solid rgba(255, 255, 255, 0.8); 
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05); 
+    border-radius: 35px; padding: 50px; margin-bottom: 40px; 
     position: relative; overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease; 
 }
-.glass-card::before, .sheet-card::before {
+.glass-card::before {
     content: ''; position: absolute; inset: 0; opacity: 0.4; pointer-events: none;
     background-image: var(--noise-pattern); z-index: 0;
 }
-.glass-card > *, .sheet-card > * { position: relative; z-index: 1; }
-.glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
+.glass-card > * { position: relative; z-index: 1; }
+.glass-card:hover { transform: translateY(-5px); box-shadow: 0 25px 50px rgba(28, 104, 211, 0.15); }
 
-/* SHEETS com Sticky do Original */
+/* --- 8. SHEETS "SOBRE" (ESTILO APP IOS PREMIUM) --- */
+/* Esta é a parte que muda o visual da aba sobre para o estilo Handle/Pílula */
 .sheet-card { 
-    position: sticky; /* A Mágica */
-    border-radius: 40px 40px 0 0; 
-    min-height: 300px; 
-    box-shadow: 0 -10px 30px rgba(28, 104, 211, 0.1); 
-    border-top: 8px solid var(--azul-riviera); 
+    position: sticky; /* Mantém o efeito de empilhar */
+    
+    /* Fundo Vidro "Frost" mais intenso e iluminado */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+    backdrop-filter: blur(30px) saturate(120%); -webkit-backdrop-filter: blur(30px) saturate(120%);
+    
+    /* Bordas e Sombras Suaves */
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-bottom: none; /* Remove borda inferior para fundir visualmente */
+    box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.03); /* Sombra suave para cima */
+    
+    border-radius: 40px 40px 0 0; /* Arredondado topo */
+    padding: 70px 40px 50px; /* Mais padding no topo para a "Pílula" caber */
+    min-height: 320px; 
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); 
+    
+    /* Importante: Removemos a borda colorida antiga para usar a Pílula */
+    border-top: none; 
 }
-.sheet-intro { top: 110px; z-index: 10; border-top-color: var(--azul-riviera); }
-.sheet-missao { top: 150px; z-index: 20; border-top-color: var(--amarelo-sol); }
-.sheet-visao { top: 190px; z-index: 30; border-top-color: var(--laranja-vibrante); border-radius: 40px; margin-bottom: 50px; }
 
-.sheet-card h2, .sheet-card h3 { text-align: center; margin-bottom: 20px; }
-.sheet-card p { text-align: justify !important; font-size: 1.05rem; }
+/* A "PÍLULA" (HANDLE) - O CHARME DO IOS */
+/* Cria aquela barrinha arredondada no topo do card */
+.sheet-card::after {
+    content: ''; 
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 6px; border-radius: 10px;
+    background: var(--azul-riviera); /* Cor Padrão */
+    opacity: 0.8;
+}
 
-/* --- 8. ACORDEÃO COM "PÍLULAS" --- */
+/* Configurações de Cores das Pílulas */
+.sheet-intro { top: 110px; z-index: 10; }
+.sheet-intro::after { background: var(--azul-riviera); box-shadow: 0 0 15px rgba(28, 104, 211, 0.4); } 
+
+.sheet-missao { top: 150px; z-index: 20; }
+.sheet-missao::after { background: var(--amarelo-sol); box-shadow: 0 0 15px rgba(255, 196, 0, 0.4); }
+
+.sheet-visao { 
+    top: 190px; z-index: 30; 
+    border-radius: 40px; /* O último card arredonda tudo */
+    margin-bottom: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.8);
+}
+.sheet-visao::after { background: var(--laranja-vibrante); box-shadow: 0 0 15px rgba(255, 107, 53, 0.4); }
+
+/* Tipografia Interna Premium */
+.sheet-card h2, .sheet-card h3 { text-align: center; margin-bottom: 30px; }
+
+.sheet-card p { 
+    text-align: justify !important; 
+    font-size: 1.1rem; /* Texto um pouco maior */
+    line-height: 1.8; /* Mais espaço entre linhas (Leitura fácil) */
+    color: var(--texto-escuro);
+    font-weight: 500;
+    opacity: 0.9;
+    max-width: 900px; margin: 0 auto; 
+}
+
+/* --- 9. ACORDEÃO COM "PÍLULAS" --- */
 .accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px; }
 .accordion-item { 
     background: white; border: 1px solid rgba(255,255,255,0.6); 
@@ -210,7 +255,7 @@ header {
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 30px; }
 .accordion-content p { padding-bottom: 25px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; }
 
-/* --- 9. MATRÍCULAS (Fontes Especiais) --- */
+/* --- 10. MATRÍCULAS (Fontes Especiais) --- */
 .cta-section { 
     background: linear-gradient(160deg, var(--azul-riviera) 0%, var(--azul-profundo) 100%); 
     color: white; padding: 100px 0; text-align: center; margin-top: 80px; 
@@ -220,7 +265,7 @@ header {
 }
 .cta-section::before { content: ''; position: absolute; inset: 0; background-image: var(--noise-pattern); opacity: 0.1; }
 
-/* A FONTE ESPECIAL QUE VOCÊ GOSTOU */
+/* A FONTE ESPECIAL */
 .cta-titulo { 
     color: var(--amarelo-sol) !important; margin-bottom: 40px; margin-top: 0; 
     font-weight: 800; letter-spacing: -1px; line-height: 1.1 !important;
@@ -251,8 +296,8 @@ header {
 .cta-button.secondary { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
 .cta-button.simple { color: var(--azul-riviera); border: 2px solid var(--azul-riviera); background: transparent; padding: 12px 30px; }
 
-/* --- 10. EXTRAS & RODAPÉ AZUL (Texto Branco) --- */
-.extras-container { display: flex; gap: 30px; margin-bottom: 60px; /* Espaço extra para não colar */ }
+/* --- 11. EXTRAS & RODAPÉ AZUL (Texto Branco) --- */
+.extras-container { display: flex; gap: 30px; margin-bottom: 60px; }
 .extra-card { flex: 1; text-align: center; }
 .map-container { border-radius: 20px; overflow: hidden; height: 300px; width: 100%; box-shadow: var(--vidro-shadow); }
 
@@ -260,12 +305,10 @@ header {
 footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: relative; z-index: 2; }
 .footer-content-wrapper { 
     max-width: 1100px; margin: 0 auto; 
-    /* O Azul que você amou */
     background: linear-gradient(135deg, #1c68d3 0%, #0a2e7a 100%);
     backdrop-filter: blur(20px); border-radius: 30px; padding: 50px; 
     box-shadow: 0 20px 50px rgba(28, 104, 211, 0.3); border: 1px solid rgba(255,255,255,0.2); 
-    /* TEXTO BRANCO FORÇADO */
-    color: #ffffff; 
+    color: #ffffff; /* Texto Branco Forçado */
     position: relative; overflow: hidden;
 }
 .footer-content-wrapper::before { content: ''; position: absolute; inset: 0; background-image: var(--noise-pattern); opacity: 0.1; }
@@ -275,7 +318,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     color: white !important; font-size: 1.8rem; margin-bottom: 10px; font-weight: 700; 
     background: none; -webkit-text-fill-color: white !important; 
 }
-.footer-info p { margin-bottom: 5px; font-size: 0.95rem; color: rgba(255,255,255,0.9); } /* Texto bem claro */
+.footer-info p { margin-bottom: 5px; font-size: 0.95rem; color: rgba(255,255,255,0.9); } 
 
 .footer-social { display: flex; gap: 15px; }
 .social-btn { 
@@ -321,26 +364,34 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     }
     .menu-overlay.active { opacity: 1; visibility: visible; }
 
-    /* AJUSTE DO ESPAÇAMENTO DO MENU (Era muito longo) */
+    /* AJUSTE DO ESPAÇAMENTO DO MENU */
     .nav-menu { flex-direction: column; gap: 0; width: 100%; }
     .nav-item { width: 100%; border: none; }
     .nav-link { 
-        display: block; padding: 15px 0; /* Espaçamento reduzido */
+        display: block; padding: 15px 0; 
         font-size: 1.2rem; font-weight: 700; color: var(--azul-profundo); 
         border-bottom: 1px solid rgba(0,0,0,0.05); 
     }
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Correções de Layout Mobile */
+    /* Correções de Layout Mobile para o Estilo iOS */
     .sheet-card { 
         position: relative !important; top: auto !important; 
-        padding: 30px 20px; border-radius: 30px 30px 0 0; 
-        min-height: auto; box-shadow: none; border-top: 5px solid var(--azul-riviera); margin-bottom: 20px; 
+        /* Ajuste fino para o visual iOS no celular */
+        padding: 60px 25px 40px; 
+        border-radius: 35px; 
+        min-height: auto; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+        margin-bottom: 20px; 
+        border: 1px solid rgba(255,255,255,0.8); /* Borda sutil */
     }
-    .sheet-intro { border-top-color: var(--azul-riviera); }
-    .sheet-missao { border-top-color: var(--amarelo-sol); }
-    .sheet-visao { border-top-color: var(--laranja-vibrante); margin-bottom: 0; }
+    /* Pílula no Mobile */
+    .sheet-card::after { top: 20px; width: 50px; height: 5px; }
+    
+    .sheet-intro { border-top-color: transparent; }
+    .sheet-missao { border-top-color: transparent; }
+    .sheet-visao { border-top-color: transparent; margin-bottom: 0; }
 
     h2 { font-size: 1.8rem; margin-bottom: 15px; margin-top: 10px !important; line-height: 1.1 !important; }
     .card-container { gap: 0px; }
