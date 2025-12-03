@@ -1,10 +1,10 @@
-/* style.css - VERSÃO FINAL (STICKY STACK): EFEITO EMPILHAMENTO + MENU X */
+/* style.css - VERSÃO FINAL (BLUE METAL & STACK FIX) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
     /* Cores Tech / Vibrantes */
-    --tech-blue-start: #007AFF; /* Azul iOS Brilhante */
-    --tech-blue-end: #00C6FF;   /* Azul Cyan Neon */
+    --tech-blue-start: #007AFF; 
+    --tech-blue-end: #00C6FF;   
     
     /* Cores da Marca */
     --azul-riviera: #007AFF;
@@ -51,7 +51,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 body.loaded #preloader { opacity: 0; visibility: hidden; }
 
 
-/* --- 3. BACKGROUND & TIPOGRAFIA SYSTEM --- */
+/* --- 3. BACKGROUND & TIPOGRAFIA --- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--texto-corpo); 
@@ -59,8 +59,6 @@ body {
     min-height: 100vh; 
     overflow-x: hidden; 
     position: relative;
-    
-    /* Fundo Gradiente "Breathing" Suave */
     background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
@@ -71,7 +69,7 @@ body {
 body.menu-open { overflow: hidden; }
 
 
-/* --- 4. TÍTULOS TECH --- */
+/* --- 4. TÍTULOS GERAIS (TECH BLUE) --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
 
 h2 {
@@ -81,15 +79,12 @@ h2 {
     font-weight: 800; 
     letter-spacing: -0.03em;
     line-height: 1.1;
-    
-    /* O Degradê Azul Tech Saturação Alta */
     background: linear-gradient(135deg, #0040DD 0%, var(--azul-riviera) 40%, #00C6FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 2px 15px rgba(0, 122, 255, 0.2));
 }
 
-/* Subtítulos Tech */
 .sheet-card h3, .accordion-header h3, .metodo-card h3 {
     font-weight: 700;
     margin-bottom: 10px;
@@ -101,7 +96,7 @@ h2 {
 p { color: var(--texto-corpo); margin-bottom: 15px; font-size: 1.05rem; }
 
 
-/* --- 5. HEADER (Frost + Animação X) --- */
+/* --- 5. HEADER --- */
 header {
     background: rgba(255, 255, 255, 0.75); 
     backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -110,20 +105,14 @@ header {
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
 }
-
 .top-bar { display: none; } 
-
 .navbar { display: flex; justify-content: space-between; align-items: center; height: 80px; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 .logo img { height: 50px; width: auto; transition: transform 0.3s; }
 .logo:hover img { transform: scale(1.05); }
 
 .nav-menu { display: flex; list-style: none; gap: 30px; }
-
-/* Links do Menu (Desktop) */
 .nav-link { 
-    text-decoration: none; 
-    color: var(--azul-profundo); 
-    font-weight: 600; 
+    text-decoration: none; color: var(--azul-profundo); font-weight: 600; 
     position: relative; transition: color 0.3s; font-size: 0.95rem; 
 }
 .nav-link:hover, .nav-link.active { color: var(--azul-riviera); }
@@ -134,15 +123,9 @@ header {
 }
 .nav-link:hover::after, .nav-link.active::after { opacity: 1; transform: translateX(-50%) scale(1); }
 
-/* HAMBURGER COM ANIMAÇÃO DE 'X' */
+/* HAMBURGER */
 .hamburger { display: none; cursor: pointer; z-index: 1005; }
-.bar { 
-    display: block; width: 26px; height: 3px; margin: 5px auto; 
-    background: var(--azul-riviera); border-radius: 3px; 
-    transition: all 0.3s ease-in-out; 
-}
-
-/* Lógica da Animação do X */
+.bar { display: block; width: 26px; height: 3px; margin: 5px auto; background: var(--azul-riviera); border-radius: 3px; transition: all 0.3s ease-in-out; }
 .hamburger.active .bar:nth-child(2) { opacity: 0; }
 .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
@@ -150,29 +133,19 @@ header {
 
 /* --- 6. HERO SLIDER --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
-.hero-slider { 
-    position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; 
-    box-shadow: 0 20px 60px -20px rgba(0, 122, 255, 0.2);
-    border-radius: 0 0 40px 40px; 
-}
+.hero-slider { position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; box-shadow: 0 20px 60px -20px rgba(0, 122, 255, 0.2); border-radius: 0 0 40px 40px; }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 .slide { min-width: 100%; position: relative; } 
 .slide img { width: 100%; height: auto; display: block; object-fit: cover; }
-.prev, .next { 
-    position: absolute; top: 50%; transform: translateY(-50%); 
-    background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); 
-    color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; 
-    cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; 
-}
+.prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 .prev { left: 24px; } .next { right: 24px; }
 
 
-/* --- 7. CARDS & SHEETS (AGORA COM LÓGICA DE EMPILHAMENTO) --- */
+/* --- 7. CARDS & SHEETS (STICKY FIX CORRIGIDO) --- */
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
-/* Estilo Base para Glass e Sheet */
-.glass-card, .sheet-card { 
+.glass-card { 
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); 
     border: var(--vidro-borda); 
@@ -184,67 +157,102 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* --- LÓGICA ESPECÍFICA DO EMPILHAMENTO (STICKY) --- */
+/* --- AQUI ESTÁ A CORREÇÃO DO EMPILHAMENTO --- */
 .sheet-card { 
-    position: sticky; /* O pulo do gato: faz grudar */
+    position: sticky; 
     border-radius: 32px 32px 0 0; 
-    min-height: 400px; /* Garante altura para o scroll */
+    /* Altura mínima maior para garantir o efeito de pilha */
+    min-height: 450px; 
     border-top: none; 
-    margin-bottom: 0; /* Remove margem para colarem visualmente */
+    margin-bottom: 0; 
     padding-bottom: 80px;
-    box-shadow: 0 -10px 40px rgba(0,0,0,0.08); /* Sombra invertida para destacar */
-    background: rgba(255, 255, 255, 0.9); /* Um pouco mais sólido para cobrir */
+    box-shadow: 0 -15px 40px rgba(0,0,0,0.1); 
+    background: rgba(255, 255, 255, 0.95); /* Fundo quase sólido para cobrir o de trás */
+    
+    /* Importante para o sticky funcionar bem no HTML */
+    display: flex; flex-direction: column; 
 }
-
-/* Detalhe da "alça" no topo */
 .sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 10px; }
 
-/* Posições de travamento para cada cartão */
-.sheet-intro { 
-    top: 100px; /* Trava no topo */
-    z-index: 10; 
-}
-
-.sheet-missao { 
-    top: 140px; /* Trava 40px abaixo do anterior */
-    z-index: 20; 
-}
-
+/* Distâncias ajustadas para empilhar mais perto um do outro */
+.sheet-intro { top: 90px; z-index: 10; }
+.sheet-missao { top: 140px; z-index: 20; }
 .sheet-visao { 
-    top: 180px; /* Trava 40px abaixo do segundo */
-    z-index: 30; 
-    border-radius: 32px; /* O último fecha redondinho */
+    top: 190px; z-index: 30; 
+    border-radius: 32px; 
     margin-bottom: 50px; 
+    min-height: auto; /* O último não precisa ser tão alto */
 }
 
 .sheet-card h2, .sheet-card h3 { text-align: center; }
 .sheet-card p { text-align: justify !important; }
 
 
-/* --- 8. ACORDEÃO (NÍVEIS) --- */
-.accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 16px; }
+/* --- 8. NÍVEIS DE ENSINO (BLUE PREMIUM METAL) --- */
+/* Esta seção agora é exclusiva para a página Níveis */
+#niveis {
+    /* Fundo Azul Profundo */
+    background: radial-gradient(circle at 50% 0%, #0040DD 0%, #001f54 100%);
+    border-radius: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 20px 50px rgba(0, 20, 80, 0.4);
+    padding: 80px 0;
+}
+
+/* O Título Metalizado Prateado */
+#niveis h2 {
+    background: linear-gradient(to bottom, #FFFFFF 0%, #B0B0B0 50%, #FFFFFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); /* Sombra para destacar o metal */
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+/* Container do Acordeão no fundo azul */
+.accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 20px; }
+
 .accordion-item { 
-    background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.8); 
+    /* Vidro Branco Translúcido sobre o Azul */
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.2); 
     border-radius: var(--radius-m); overflow: hidden; transition: 0.3s; 
 }
-.accordion-item.active { background: #fff; box-shadow: 0 10px 30px rgba(0, 122, 255, 0.1); transform: scale(1.01); }
+.accordion-item.active { 
+    background: rgba(255, 255, 255, 0.15); 
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3); 
+    border-color: rgba(255,255,255,0.4);
+}
 
 .item-bercario { border-left: 4px solid #FFcc00; }
 .item-infantil { border-left: 4px solid #FF9500; }
-.item-fundamental { border-left: 4px solid #007AFF; }
+.item-fundamental { border-left: 4px solid #00C6FF; }
 
-.accordion-header { padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-.accordion-header h3 { margin: 0; font-size: 1.25rem; display: flex; flex-direction: column; gap: 6px; text-align: left; }
-.level-detail { 
-    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;
-    color: var(--azul-profundo); background: rgba(0, 122, 255, 0.1); 
-    padding: 6px 12px; border-radius: 20px; display: inline-block; width: fit-content;
+/* Textos dentro do Níveis (Brancos) */
+.accordion-header h3 { 
+    color: white !important; /* Força branco */
+    background: none !important; 
+    -webkit-text-fill-color: white !important; 
+    font-size: 1.3rem; 
 }
-.accordion-icon { font-size: 1.1rem; color: #C7C7CC; transition: transform 0.3s; }
-.accordion-item.active .accordion-icon { transform: rotate(180deg); color: var(--azul-riviera); }
-.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 24px; }
-.accordion-content p { padding-bottom: 24px; margin-top: 0px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px; }
+
+.accordion-content p { 
+    color: rgba(255, 255, 255, 0.9); /* Branco suave */
+    border-top: 1px solid rgba(255,255,255,0.1); 
+}
+
+/* Ícone do acordeão branco */
+.accordion-icon { color: rgba(255,255,255,0.6); }
+.accordion-item.active .accordion-icon { color: white; }
+
+/* Tag de nível */
+.level-detail { 
+    color: white; 
+    background: rgba(255, 255, 255, 0.2); 
+    border: 1px solid rgba(255,255,255,0.2);
+}
 
 
 /* --- 9. MATRÍCULAS --- */
@@ -254,172 +262,99 @@ header {
     border-radius: 40px 40px 0 0; 
     position: relative; z-index: 2; margin-bottom: 80px; 
 }
-.cta-titulo { 
-    background: none !important; 
-    -webkit-text-fill-color: var(--amarelo-sol) !important;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-
+.cta-titulo { background: none !important; -webkit-text-fill-color: var(--amarelo-sol) !important; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
 .metodo-suporte-container { display: flex; gap: 24px; margin: 40px 0; text-align: left; }
-.metodo-card { 
-    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); 
-    border: 1px solid rgba(255, 255, 255, 0.2); padding: 32px; border-radius: var(--radius-l); flex: 1; 
-}
+.metodo-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 32px; border-radius: var(--radius-l); flex: 1; }
 .metodo-card h3 { background: none; -webkit-text-fill-color: #FFD60A; }
 .metodo-card p { color: rgba(255,255,255,0.95); }
 
 /* BOTÕES */
 .cta-buttons-wrapper { display: flex; justify-content: center; gap: 16px; margin-top: 50px; }
-.cta-button { 
-    padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 700; 
-    font-size: 0.95rem; transition: all 0.2s; display: inline-block; text-align: center; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
-}
-
-/* Botão Branco com Letra Azul */
-.cta-button.primary { 
-    background: white; 
-    color: var(--azul-riviera); 
-    border: none; 
-}
+.cta-button { padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; display: inline-block; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+.cta-button.primary { background: white; color: var(--azul-riviera); border: none; }
 .cta-button.primary:hover { transform: scale(1.05); background: #f0f8ff; }
-
-.cta-button.secondary { 
-    background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); 
-}
+.cta-button.secondary { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
 .cta-button.secondary:hover { background: rgba(255,255,255,0.3); }
-
-.cta-button.simple { 
-    color: var(--azul-riviera); background: rgba(0, 122, 255, 0.1); 
-    border: none; padding: 14px 28px; box-shadow: none;
-}
+.cta-button.simple { color: var(--azul-riviera); background: rgba(0, 122, 255, 0.1); border: none; padding: 14px 28px; box-shadow: none; }
 
 
-/* --- 10. RODAPÉ (AZUL + TEXTO BRANCO) --- */
+/* --- 10. RODAPÉ --- */
 .extras-container { display: flex; gap: 30px; margin-bottom: 60px; }
 .map-container { border-radius: var(--radius-l); overflow: hidden; height: 300px; width: 100%; box-shadow: var(--vidro-shadow); }
 
 footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: relative; z-index: 2; }
 .footer-content-wrapper { 
     max-width: 1100px; margin: 0 auto; 
-    /* Azul Gradiente */
     background: linear-gradient(135deg, #1c68d3 0%, #0a2e7a 100%);
     backdrop-filter: blur(20px); border-radius: 30px; padding: 50px; 
     box-shadow: 0 20px 50px rgba(28, 104, 211, 0.3); border: 1px solid rgba(255,255,255,0.2); 
-    color: #ffffff; 
-    position: relative; overflow: hidden;
+    color: #ffffff; position: relative; overflow: hidden;
 }
 .footer-content-wrapper::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); opacity: 0.1; }
 
 .footer-inner { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
-.footer-info h4 { 
-    color: white !important; font-size: 1.8rem; margin-bottom: 10px; font-weight: 700; 
-    background: none; -webkit-text-fill-color: white !important; 
-}
+.footer-info h4 { color: white !important; font-size: 1.8rem; margin-bottom: 10px; font-weight: 700; background: none; -webkit-text-fill-color: white !important; }
 .footer-info p { margin-bottom: 5px; font-size: 0.95rem; color: rgba(255,255,255,0.9); } 
-
 .footer-social { display: flex; gap: 15px; }
-.social-btn { 
-    width: 50px; height: 50px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; 
-    background: rgba(255,255,255,0.15); color: white; text-decoration: none; font-weight: 800; transition: 0.3s; 
-    border: 1px solid rgba(255,255,255,0.3); font-size: 0; 
-}
+.social-btn { width: 50px; height: 50px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); color: white; text-decoration: none; font-weight: 800; transition: 0.3s; border: 1px solid rgba(255,255,255,0.3); font-size: 0; }
 .social-btn::before { font-size: 1rem; color: white; font-weight: bold; }
 .social-btn[href*="instagram"]::before { content: 'IG'; }
 .social-btn[href*="wa"]::before { content: 'WA'; }
 .social-btn:hover { background: var(--amarelo-sol); border-color: var(--amarelo-sol); transform: scale(1.1) rotate(10deg); }
 .social-btn:hover::before { color: var(--azul-profundo); }
-
 .footer-copy { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; font-size: 0.85rem; opacity: 0.8; color: white; position: relative; z-index: 2; }
 
 
-/* =======================================================
-   🛠️ MOBILE 🛠️ - DESIGN FINAL CORRIGIDO
-   ======================================================= */
+/* --- MOBILE --- */
 @media(max-width: 768px) {
     .top-bar { display: none; }
     header { width: 100%; top: 0; }
     .navbar { height: 60px; padding: 0 20px; }
     .logo img { height: 40px; } 
-    
     .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } 
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
-    /* MENU FLUTUANTE ESTILO IOS WIDGET */
     .nav-links-container {
-        position: fixed; 
-        top: 20px; 
-        left: 20px; 
-        width: calc(100% - 40px);
-        max-width: 320px; 
-        height: auto; 
-        
-        background: rgba(255, 255, 255, 0.98); 
-        backdrop-filter: blur(30px) saturate(180%);
-        box-shadow: 0 25px 60px rgba(0, 40, 120, 0.3); 
-        border: 1px solid rgba(255,255,255,0.6);
-        
-        border-radius: 28px;
-        
-        transform: scale(0.9) translateY(-20px); 
-        opacity: 0; 
-        visibility: hidden;
-        
-        z-index: 1002; 
-        padding: 40px 30px; 
-        display: flex; flex-direction: column; justify-content: flex-start;
+        position: fixed; top: 20px; left: 20px; width: calc(100% - 40px); max-width: 320px; height: auto; 
+        background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(30px) saturate(180%);
+        box-shadow: 0 25px 60px rgba(0, 40, 120, 0.3); border: 1px solid rgba(255,255,255,0.6);
+        border-radius: 28px; transform: scale(0.9) translateY(-20px); opacity: 0; visibility: hidden;
+        z-index: 1002; padding: 40px 30px; display: flex; flex-direction: column; justify-content: flex-start;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    .nav-links-container.active { transform: scale(1) translateY(0); opacity: 1; visibility: visible; }
     
-    .nav-links-container.active { 
-        transform: scale(1) translateY(0); 
-        opacity: 1; 
-        visibility: visible; 
-    }
-    
-    /* Fundo Escuro */
     .menu-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 40, 100, 0.4); 
-        backdrop-filter: blur(6px); 
-        z-index: 998; 
-        opacity: 0; visibility: hidden; transition: 0.3s;
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 40, 100, 0.4); backdrop-filter: blur(6px); 
+        z-index: 998; opacity: 0; visibility: hidden; transition: 0.3s;
     }
     .menu-overlay.active { opacity: 1; visibility: visible; }
 
     .nav-menu { flex-direction: column; gap: 10px; width: 100%; text-align: left; }
     .nav-item { width: 100%; border: none; }
-    
-    /* LINKS MOBILE (AZUL E MAIORES) */
-    .nav-link { 
-        display: block; padding: 14px 0; 
-        font-size: 1.25rem; 
-        font-weight: 700; 
-        color: var(--azul-profundo); 
-        border-bottom: 1px solid rgba(0,0,0,0.04); 
-    }
+    .nav-link { display: block; padding: 14px 0; font-size: 1.25rem; font-weight: 700; color: var(--azul-profundo); border-bottom: 1px solid rgba(0,0,0,0.04); }
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Ajustes Mobile para Sticky Sheets */
+    /* Ajuste Stack Mobile */
     .sheet-card { 
         position: relative !important; top: auto !important; 
         padding: 30px 24px; border-radius: 24px 24px 0 0; 
-        min-height: auto; box-shadow: none; 
-        border-top: none; margin-bottom: 20px; 
-        background: white; 
-        /* Reset para mobile não bugar o sticky */
-        padding-bottom: 30px;
+        min-height: auto; box-shadow: none; border-top: none; margin-bottom: 20px; 
+        background: white; padding-bottom: 30px;
     }
     .sheet-card::before { content: none; } 
 
+    /* Ajuste Níveis Mobile */
+    #niveis { border-radius: 24px; padding: 40px 20px; width: 100%; margin: 20px 0; }
+    #niveis h2 { font-size: 1.8rem; }
+    
     h2 { font-size: 1.8rem; margin-bottom: 20px; margin-top: 10px !important; }
     .card-container { gap: 0px; }
     .accordion-header { padding: 20px; }
     .accordion-header h3 { font-size: 1.1rem; }
     .glass-card { padding: 30px 24px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
-    
     footer { padding: 0 15px 30px; }
     .footer-content-wrapper { padding: 40px 24px; border-radius: 24px; }
     .footer-inner { flex-direction: column; gap: 30px; text-align: center; }
@@ -428,6 +363,5 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .cta-section { border-radius: 32px 32px 0 0; padding: 60px 20px; margin-top: 40px; margin-bottom: 60px; }
 }
 
-/* Animações */
 .fade-in-up { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
 .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
