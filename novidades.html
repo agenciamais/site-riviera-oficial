@@ -3,13 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escola Riviera - Educação com Afeto</title>
+    <title>Novidades - Escola Riviera</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* ESTILOS EXCLUSIVOS DA TIMELINE */
+        .timeline-year {
+            text-align: center;
+            margin: 60px 0 40px;
+            position: relative;
+        }
+        .timeline-year h2 {
+            font-size: 4rem;
+            opacity: 0.1; 
+            margin: 0;
+            line-height: 1;
+            color: var(--azul-riviera);
+            background: none;
+            -webkit-text-fill-color: initial; 
+        }
+        .timeline-badge {
+            background: var(--amarelo-sol);
+            color: var(--azul-profundo);
+            font-weight: 800;
+            padding: 8px 20px;
+            border-radius: 50px;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 5px 15px rgba(255, 196, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .event-card {
+            display: flex;
+            flex-direction: column; 
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        .event-card:hover { transform: translateY(-5px); }
+
+        .event-img-wrapper {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        .event-img-wrapper img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .event-card:hover .event-img-wrapper img { transform: scale(1.05); }
+        
+        .event-date {
+            position: absolute;
+            top: 20px; left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            color: var(--azul-riviera);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-size: 0.85rem;
+        }
+
+        .event-content { padding: 30px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .event-content h3 { 
+            font-size: 1.5rem; margin-bottom: 10px; color: var(--azul-profundo); 
+            background: none; -webkit-text-fill-color: initial;
+        }
+        .event-content p { font-size: 0.95rem; margin-bottom: 25px; }
+
+        @media(min-width: 768px) {
+            .event-card { flex-direction: row; height: 350px; }
+            .event-img-wrapper { flex: 1.3; height: 100%; }
+            .event-content { flex: 1; padding: 40px; }
+        }
+    </style>
 </head>
 <body>
     <div id="preloader"><div class="spinner"></div></div>
-    
+
     <div class="top-bar">
         <div class="container top-bar-content">
             <a href="tel:+5571996752805" class="top-link"><img src="assets/icon-phone.png" alt="Telefone"> (71) 99675-2805</a>
@@ -22,10 +101,10 @@
             <a href="index.html" class="logo"><img src="assets/logo-principal.png" alt="Logo Escola Riviera"></a>
             <div class="nav-links-container">
                 <ul class="nav-menu">
-                    <li class="nav-item"><a href="index.html" class="nav-link active">Início</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link">Início</a></li>
                     <li class="nav-item"><a href="sobre.html" class="nav-link">Sobre</a></li>
                     <li class="nav-item"><a href="niveis.html" class="nav-link">Níveis de Ensino</a></li>
-                    <li class="nav-item"><a href="novidades.html" class="nav-link">Novidades</a></li>
+                    <li class="nav-item"><a href="novidades.html" class="nav-link active">Novidades</a></li>
                     <li class="nav-item"><a href="matriculas.html" class="nav-link">Matrículas</a></li>
                     <li class="nav-item"><a href="contato.html" class="nav-link">Contato</a></li>
                 </ul>
@@ -33,80 +112,50 @@
         </nav>
     </header>
     <main>
-        <div class="hero-wrapper">
-            <section id="inicio" class="hero-slider">
-                <div class="slider-container">
-                    <div class="slide">
-                        <picture>
-                            <source media="(max-width: 768px)" srcset="assets/banner-01.png">
-                            <img src="assets/pc1.png" alt="Banner Matrículas Abertas">
-                        </picture>
-                    </div>
-                    <div class="slide">
-                        <picture>
-                            <source media="(max-width: 768px)" srcset="assets/banner-02.png">
-                            <img src="assets/pc2.png" alt="Banner Educação Infantil">
-                        </picture>
-                    </div>
-                    <div class="slide">
-                        <picture>
-                            <source media="(max-width: 768px)" srcset="assets/banner-03.png">
-                            <img src="assets/pc3.png" alt="Banner Ensino com Apoio">
-                        </picture>
-                    </div>
-                </div>
-                <button class="prev">❮</button>
-                <button class="next">❯</button>
-            </section>
-        </div>
-
-        <section id="historia-previa" class="content-section">
+        <section class="content-section" style="padding-bottom: 0;">
             <div class="container">
-                <div class="glass-card fade-in-up">
-                    <h2>Nossa História</h2>
-                    <p class="texto-justificado" style="max-width: 800px; margin: 0 auto 35px;">Localizada em Lauro de Freitas, a Escola Riviera acredita na formação integral da criança. Com base em Vygotsky, entendemos que o conhecimento nasce da interação. Por isso, valorizamos os vínculos afetivos, a autonomia e a construção coletiva do saber.</p>
-                    <div style="text-align: center;">
-                        <a href="sobre.html" class="cta-button primary">Conheça nossa Proposta</a>
-                    </div>
+                <div class="glass-card fade-in-up" style="text-align: center;">
+                    <h2>Mural Riviera</h2>
+                    <p>Acompanhe nossos melhores momentos e celebre nossas conquistas!</p>
                 </div>
             </div>
         </section>
 
-        <section id="matriculas" class="cta-section">
+        <section class="content-section" style="padding-top: 0;">
             <div class="container">
-                <h2 class="cta-titulo fade-in-up">Aprender com método, crescer com suporte.</h2>
-                <div class="metodo-suporte-container">
-                    <div class="metodo-card fade-in-up">
-                        <h3>Aprender com Método</h3>
-                        <p>Nossas aulas são planejadas para ir além da memorização. Através de projetos em grupo e recursos visuais, o aprendizado se torna uma construção ativa e envolvente.</p>
+
+                <div class="timeline-year fade-in-up">
+                    <h2>2025</h2>
+                    <span class="timeline-badge">Destaques</span>
+                </div>
+
+                <div class="event-card fade-in-up">
+                    <div class="event-img-wrapper">
+                        <img src="assets/capa-formatura.jpg" alt="Formatura ABC Escola Riviera">
+                        <span class="event-date">Dezembro</span>
                     </div>
-                    <div class="metodo-card fade-in-up">
-                        <h3>Crescer com Suporte</h3>
-                        <p>Oferecemos um ambiente afetivo e seguro, com acompanhamento psicológico e atividades que fortalecem a autoestima e a segurança emocional.</p>
+                    <div class="event-content">
+                        <h3>Formatura do ABC</h3>
+                        <p>Um momento mágico marcando o encerramento de um ciclo lindo! Confira todas as fotos oficiais da nossa cerimônia no álbum completo.</p>
+                        
+                        <a href="#" class="cta-button primary" target="_blank">Ver Fotos (Google Fotos)</a>
                     </div>
                 </div>
-                <div class="cta-buttons-wrapper fade-in-up">
-                    <a href="https://wa.me/message/NGKT6WIQPD3YA1" class="cta-button primary" target="_blank">FALE CONOSCO (WhatsApp)</a>
-                    <a href="https://www.sistemayes.com.br/portal/matriculas/online/ESCOLA%20RIVIERA-c6461c865caef0c" class="cta-button secondary" target="_blank">MATRICULE-SE ONLINE</a>
+
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <div class="glass-card fade-in-up" style="text-align: center;">
+                    <h3 style="margin-bottom: 20px;">Acompanhe também no Instagram</h3>
+                    <a href="https://www.instagram.com/escolariviera.fr" class="cta-button simple" target="_blank">@escolariviera.fr</a>
                 </div>
             </div>
         </section>
 
-        <section id="extras" class="content-section">
-            <div class="container">
-                <div class="glass-card fade-in-up" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-                     <div style="padding: 40px; text-align: center;">
-                        <h2 style="margin-bottom: 10px;">Onde Estamos</h2>
-                        <p>Venha nos fazer uma visita!</p>
-                     </div>
-                     <a href="https://www.google.com/maps/place/R.+Floresta+Azul,+289+-+Vida+Nova,+Lauro+de+Freitas+-+BA,+42708-250" target="_blank" style="display: block; width: 100%; height: 350px;">
-                        <img src="assets/mapa.png" style="width: 100%; height: 100%; object-fit: cover;" alt="Mapa Escola Riviera">
-                     </a>
-                </div>
-            </div>
-        </section>
     </main>
-
+    
     <footer id="contato-footer">
         <div class="footer-content-wrapper">
             <div class="footer-inner">
