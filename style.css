@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL (PLATINUM): IOS TECH + MENU X + CORREÇÕES */
+/* style.css - VERSÃO FINAL (STICKY STACK): EFEITO EMPILHAMENTO + MENU X */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -8,7 +8,7 @@
     
     /* Cores da Marca */
     --azul-riviera: #007AFF;
-    --azul-profundo: #0a2e7a; /* Ajustado para um tom mais elegante */
+    --azul-profundo: #0a2e7a; 
     --amarelo-sol: #FFcc00; 
     --laranja-vibrante: #FF9500;
     
@@ -122,7 +122,7 @@ header {
 /* Links do Menu (Desktop) */
 .nav-link { 
     text-decoration: none; 
-    color: var(--azul-profundo); /* Cor Azul Profundo */
+    color: var(--azul-profundo); 
     font-weight: 600; 
     position: relative; transition: color 0.3s; font-size: 0.95rem; 
 }
@@ -167,10 +167,11 @@ header {
 .prev { left: 24px; } .next { right: 24px; }
 
 
-/* --- 7. CARDS & SHEETS --- */
+/* --- 7. CARDS & SHEETS (AGORA COM LÓGICA DE EMPILHAMENTO) --- */
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
+/* Estilo Base para Glass e Sheet */
 .glass-card, .sheet-card { 
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); 
@@ -183,13 +184,38 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* Sheets Empilhados */
-.sheet-card { position: sticky; border-radius: 32px 32px 0 0; min-height: 300px; border-top: none; }
+/* --- LÓGICA ESPECÍFICA DO EMPILHAMENTO (STICKY) --- */
+.sheet-card { 
+    position: sticky; /* O pulo do gato: faz grudar */
+    border-radius: 32px 32px 0 0; 
+    min-height: 400px; /* Garante altura para o scroll */
+    border-top: none; 
+    margin-bottom: 0; /* Remove margem para colarem visualmente */
+    padding-bottom: 80px;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.08); /* Sombra invertida para destacar */
+    background: rgba(255, 255, 255, 0.9); /* Um pouco mais sólido para cobrir */
+}
+
+/* Detalhe da "alça" no topo */
 .sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 10px; }
 
-.sheet-intro { top: 110px; z-index: 10; }
-.sheet-missao { top: 150px; z-index: 20; }
-.sheet-visao { top: 190px; z-index: 30; border-radius: 32px; margin-bottom: 50px; }
+/* Posições de travamento para cada cartão */
+.sheet-intro { 
+    top: 100px; /* Trava no topo */
+    z-index: 10; 
+}
+
+.sheet-missao { 
+    top: 140px; /* Trava 40px abaixo do anterior */
+    z-index: 20; 
+}
+
+.sheet-visao { 
+    top: 180px; /* Trava 40px abaixo do segundo */
+    z-index: 30; 
+    border-radius: 32px; /* O último fecha redondinho */
+    margin-bottom: 50px; 
+}
 
 .sheet-card h2, .sheet-card h3 { text-align: center; }
 .sheet-card p { text-align: justify !important; }
@@ -280,7 +306,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     background: linear-gradient(135deg, #1c68d3 0%, #0a2e7a 100%);
     backdrop-filter: blur(20px); border-radius: 30px; padding: 50px; 
     box-shadow: 0 20px 50px rgba(28, 104, 211, 0.3); border: 1px solid rgba(255,255,255,0.2); 
-    color: #ffffff; /* Texto Branco */
+    color: #ffffff; 
     position: relative; overflow: hidden;
 }
 .footer-content-wrapper::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); opacity: 0.1; }
@@ -328,9 +354,9 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
         max-width: 320px; 
         height: auto; 
         
-        background: rgba(255, 255, 255, 0.98); /* Fundo sólido para leitura */
+        background: rgba(255, 255, 255, 0.98); 
         backdrop-filter: blur(30px) saturate(180%);
-        box-shadow: 0 25px 60px rgba(0, 40, 120, 0.3); /* Sombra azulada */
+        box-shadow: 0 25px 60px rgba(0, 40, 120, 0.3); 
         border: 1px solid rgba(255,255,255,0.6);
         
         border-radius: 28px;
@@ -340,7 +366,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
         visibility: hidden;
         
         z-index: 1002; 
-        padding: 40px 30px; /* Espaçamento Interno Aumentado */
+        padding: 40px 30px; 
         display: flex; flex-direction: column; justify-content: flex-start;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -351,7 +377,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
         visibility: visible; 
     }
     
-    /* Fundo Escuro com toque Azulado */
+    /* Fundo Escuro */
     .menu-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background: rgba(0, 40, 100, 0.4); 
@@ -364,24 +390,26 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .nav-menu { flex-direction: column; gap: 10px; width: 100%; text-align: left; }
     .nav-item { width: 100%; border: none; }
     
-    /* LINKS MOBILE (AGORA EM AZUL E MAIORES) */
+    /* LINKS MOBILE (AZUL E MAIORES) */
     .nav-link { 
         display: block; padding: 14px 0; 
-        font-size: 1.25rem; /* Letra maior */
+        font-size: 1.25rem; 
         font-weight: 700; 
-        color: var(--azul-profundo); /* Azul elegante */
+        color: var(--azul-profundo); 
         border-bottom: 1px solid rgba(0,0,0,0.04); 
     }
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Ajustes Gerais Mobile */
+    /* Ajustes Mobile para Sticky Sheets */
     .sheet-card { 
         position: relative !important; top: auto !important; 
         padding: 30px 24px; border-radius: 24px 24px 0 0; 
         min-height: auto; box-shadow: none; 
         border-top: none; margin-bottom: 20px; 
         background: white; 
+        /* Reset para mobile não bugar o sticky */
+        padding-bottom: 30px;
     }
     .sheet-card::before { content: none; } 
 
