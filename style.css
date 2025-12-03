@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL DIAMANTE (WATERMARK GLOW + SETA IOS + ROUND FIX) */
+/* style.css - VERSÃO FINAL (BACKGROUND SHAPES + STACK FIX) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -55,6 +55,7 @@ body {
     min-height: 100vh; 
     overflow-x: hidden; 
     position: relative;
+    /* O Fundo precisa ter cor para o branco aparecer por cima */
     background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
@@ -142,6 +143,7 @@ header {
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
+/* ESTILO BASE DO CARTÃO DE VIDRO */
 .glass-card { 
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); 
@@ -154,29 +156,52 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* == MÁGICA DO ELEMENTO BRANCO: SHADOW GLOW == */
-#historia-previa { position: relative; }
+/* == CONFIGURAÇÃO DO BACKGROUND COM FORMAS (Aba Início) == */
+#historia-previa { 
+    position: relative; 
+    overflow: hidden; /* Corta o que passar da seção lateralmente */
+}
+
+/* FORMA 1 (Superior Esquerda) */
 #historia-previa::before {
     content: '';
     position: absolute;
-    /* Centralizado */
-    top: 50%; left: 50%; 
-    transform: translate(-50%, -50%) rotate(-5deg);
-    
-    width: 100%; height: 120%; 
-    
+    top: -50px; /* Sobe um pouco para cortar */
+    left: -80px; /* Sai para a esquerda */
+    width: 350px; 
+    height: 350px;
     background-image: url('assets/forma-branca.png');
     background-repeat: no-repeat;
-    background-position: center;
     background-size: contain;
-    z-index: 0;
+    opacity: 0.3; /* Translucidez */
+    transform: rotate(-15deg);
+    z-index: 0; /* Atrás de tudo */
     pointer-events: none;
-    
-    /* AQUI: Sombra azulada forte para revelar a forma branca */
-    filter: drop-shadow(0 0 40px rgba(0, 85, 255, 0.15));
-    opacity: 0.9; 
 }
-#historia-previa .container { position: relative; z-index: 2; }
+
+/* FORMA 2 (Inferior Direita) */
+#historia-previa::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; 
+    right: -80px;
+    width: 400px; /* Um pouco maior */
+    height: 400px;
+    background-image: url('assets/forma-branca.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.3; /* Translucidez */
+    transform: rotate(20deg);
+    z-index: 0; /* Atrás de tudo */
+    pointer-events: none;
+}
+
+/* Garante que o cartão de texto fique NA FRENTE das formas */
+#historia-previa .glass-card { 
+    position: relative; 
+    z-index: 2; /* Fica acima do z-index 0 das formas */
+    background: rgba(255, 255, 255, 0.9); /* Um pouco mais sólido para cobrir as formas atrás dele */
+}
 
 
 /* --- LÓGICA DO EMPILHAMENTO (STICKY) --- */
@@ -193,7 +218,7 @@ header {
 }
 .sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; border-radius: 10px; background: rgba(0,0,0,0.1); }
 
-/* Alinhamento */
+/* ALINHAMENTO JUSTIFICADO GLOBAL */
 .sheet-card p { text-align: justify !important; }
 
 /* 1. SOBRE (AZUL) */
@@ -209,11 +234,11 @@ header {
 .sheet-missao { top: 140px; z-index: 20; }
 .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-/* 3. VISÃO (BRANCO + FIX TOTAL ARREDONDAMENTO) */
+/* 3. VISÃO (BRANCO + FIX ARREDONDAMENTO BLINDADO) */
 .sheet-visao { 
     top: 190px; z-index: 30; 
     
-    /* SEGURANÇA TOTAL DE BORDA */
+    /* BLOQUEIO DE BORDAS QUADRADAS */
     border-radius: 32px !important;
     border-bottom-left-radius: 32px !important;
     border-bottom-right-radius: 32px !important;
@@ -221,14 +246,14 @@ header {
     margin-bottom: 50px; 
     min-height: auto; 
     padding-bottom: 50px;
-    background: #fff; /* Fundo sólido para garantir */
+    background-color: #ffffff !important;
 }
 .sheet-visao::before { background: var(--laranja-vibrante) !important; }
 
 .sheet-card h2, .sheet-card h3 { text-align: center; }
 
 
-/* --- 8. NÍVEIS DE ENSINO (SETINHA GLOW) --- */
+/* --- 8. NÍVEIS DE ENSINO (SETA GLOW) --- */
 #niveis {
     background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
     border-radius: 40px; margin-top: 30px; margin-bottom: 30px;
@@ -264,26 +289,22 @@ header {
     color: #ffffff; background: rgba(0, 0, 0, 0.2); padding: 6px 12px; border-radius: 20px; display: inline-block; width: fit-content; border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* --- NOVA SETA GLOW ARREDONDADA (CSS PURO) --- */
+/* SETA GLOW (CSS Puro) */
 .accordion-icon { 
-    width: 14px; 
-    height: 14px; 
-    border-right: 3px solid rgba(255,255,255,0.9); /* Branco forte */
+    width: 14px; height: 14px; 
+    border-right: 3px solid rgba(255,255,255,0.9);
     border-bottom: 3px solid rgba(255,255,255,0.9);
-    transform: rotate(45deg); /* Vira seta pra baixo */
-    margin-left: 20px; 
-    flex-shrink: 0;
-    border-radius: 2px; /* Pontas arredondadas */
-    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8)); /* Glow Branco */
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Pulo elástico */
+    transform: rotate(45deg);
+    margin-left: 20px; flex-shrink: 0;
+    border-radius: 2px;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8));
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
-/* Quando ativo, gira pra cima */
 .accordion-item.active .accordion-icon { 
     transform: rotate(-135deg); 
     border-color: #ffffff;
-    filter: drop-shadow(0 0 8px rgba(255,255,255,1)); /* Glow mais forte */
+    filter: drop-shadow(0 0 8px rgba(255,255,255,1));
 }
-
 
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
 .accordion-content p { 
