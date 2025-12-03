@@ -1,19 +1,19 @@
-/* style.css - VERSÃO FINAL (BOTÃO HOME PADRONIZADO + FIX GERAL) */
+/* style.css - VERSÃO FINAL (PÁGINA SOBRE AZUL + RODAPÉ AZUL) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
     /* Cores da Marca */
-    --azul-riviera: #007AFF; 
-    --azul-profundo: #0a2e7a; 
-    --amarelo-sol: #FFcc00; 
+    --azul-riviera: #007AFF;
+    --azul-profundo: #0a2e7a;
+    --amarelo-sol: #FFcc00;
     --laranja-vibrante: #FF9500;
     
     /* Textos */
-    --texto-corpo: #424245; 
+    --texto-corpo: #424245;
     --texto-suave: #86868B;
 
     /* Vidro Premium */
-    --vidro-bg: rgba(255, 255, 255, 0.85); 
+    --vidro-bg: rgba(255, 255, 255, 0.85);
     --vidro-borda: 1px solid rgba(255, 255, 255, 0.8);
     --vidro-shadow: 0 15px 40px -10px rgba(0, 122, 255, 0.15);
     --blur-effect: blur(30px) saturate(140%);
@@ -130,7 +130,7 @@ header {
 .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 
-/* --- 6. HERO SECTION (BOTÃO HOME PADRONIZADO) --- */
+/* --- 6. HERO SECTION (BOTÃO SOLAR) --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; box-shadow: 0 20px 60px -20px rgba(0, 122, 255, 0.2); border-radius: 0 0 40px 40px; }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -139,23 +139,21 @@ header {
 .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 .prev { left: 24px; } .next { right: 24px; }
 
-/* Botão da Home agora igual ao "Matricule-se" (Secundário) */
+/* Botão Solar Impactante (Home) */
 #historia-previa .cta-button.primary {
-    /* Copiando estilo do .cta-button.simple/secondary para harmonia */
-    color: var(--azul-riviera); 
-    background: rgba(0, 122, 255, 0.1); /* Fundo azul clarinho transparente */
-    border: none; 
-    padding: 14px 30px; 
-    box-shadow: none;
-    font-weight: 700;
-    text-decoration: none;
-    border-radius: 50px;
-    display: inline-block;
-    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #FFD60A 0%, #FF9500 100%);
+    color: var(--azul-profundo); 
+    border: none;
+    font-weight: 800; 
+    letter-spacing: 0.5px;
+    padding: 18px 40px; 
+    box-shadow: 0 10px 30px -5px rgba(255, 149, 0, 0.5);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 #historia-previa .cta-button.primary:hover {
-    background: rgba(0, 122, 255, 0.2); /* Escurece um pouco no hover */
-    transform: scale(1.02);
+    transform: translateY(-4px) scale(1.03); 
+    box-shadow: 0 20px 40px -5px rgba(255, 149, 0, 0.7); 
+    filter: brightness(1.05); 
 }
 
 
@@ -183,8 +181,11 @@ header {
 .sheet-card { 
     position: sticky; 
     border-radius: 32px 32px 0 0; 
-    min-height: auto; /* Altura automática */
-    padding: 40px 40px 80px 40px; 
+    
+    /* --- CORREÇÃO: Altura Automática e Padding Menor --- */
+    min-height: auto; /* Remove altura fixa gigante */
+    padding: 40px 40px 80px 40px; /* Padding ajustado */
+    
     border-top: none; 
     margin-bottom: 0; 
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08); 
@@ -226,8 +227,29 @@ header {
 
 .sheet-card h2, .sheet-card h3 { text-align: center; }
 
+/* ESTILO ESPECÍFICO PARA A PÁGINA SOBRE (TUDO AZUL) */
+#sobre {
+    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
+    border-radius: 40px; margin-top: 30px; margin-bottom: 30px;
+    box-shadow: 0 20px 50px rgba(0, 85, 212, 0.3);
+    padding: 60px 0; position: relative; overflow: hidden;
+    /* Garante que o texto dentro seja branco */
+    color: white;
+}
+#sobre h2, #sobre h3 {
+    color: white !important; background: none !important;
+    -webkit-text-fill-color: white !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 25px;
+}
+#sobre p { color: rgba(255, 255, 255, 0.95); }
+#sobre .glass-card {
+    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    margin-bottom: 30px;
+}
 
-/* --- 8. NÍVEIS DE ENSINO --- */
+
+/* --- 8. NÍVEIS DE ENSINO (SETA GLOW) --- */
 #niveis {
     background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
     border-radius: 40px; margin-top: 30px; margin-bottom: 30px;
@@ -263,7 +285,7 @@ header {
     color: #ffffff; background: rgba(0, 0, 0, 0.2); padding: 6px 12px; border-radius: 20px; display: inline-block; width: fit-content; border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* SETA GLOW */
+/* SETA GLOW (CSS Puro) */
 .accordion-icon { 
     width: 14px; height: 14px; 
     border-right: 3px solid rgba(255,255,255,0.9);
@@ -365,7 +387,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Ajuste Stack Mobile */
+    /* Ajuste Stack Mobile (COMPACTO) */
     .sheet-card { 
         border-radius: 24px 24px 0 0; 
         min-height: auto; /* Remove altura fixa no mobile */
@@ -411,6 +433,13 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .footer-social { justify-content: center; }
     .cta-button { width: 100%; margin-bottom: 12px; }
     .cta-section { border-radius: 32px 32px 0 0; padding: 60px 20px; margin-top: 40px; margin-bottom: 60px; }
+    
+    /* AJUSTE MOBILE PARA A PÁGINA SOBRE AZUL */
+    #sobre {
+        border-radius: 24px; padding: 40px 0; width: 100%; margin: 20px 0;
+    }
+    #sobre h2, #sobre h3 { font-size: 1.8rem; }
+    #sobre .glass-card { padding: 30px 24px; border-radius: 20px; }
 }
 
 .fade-in-up { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
