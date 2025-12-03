@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL (BOTÃO HERO IMPACTANTE + FIX SOMBRAS STACK) */
+/* style.css - VERSÃO FINAL (CLEAN BACKGROUND + BOTÃO IMPACTO + FIX SOMBRAS) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -56,16 +56,12 @@ body {
     overflow-x: hidden; 
     position: relative;
     
-    /* Background Global com Laços e Degradê */
-    background: 
-        url('assets/forma-branca.png') -150px -100px / 600px no-repeat,
-        url('assets/forma-branca.png') right -150px bottom -100px / 700px no-repeat,
-        radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
-        radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
-        radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
-        #FAFAFA;
+    /* Background Limpo (Sem a forma branca) */
+    background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
+                radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
+                #FAFAFA;
     background-attachment: fixed;
-    background-blend-mode: overlay; 
     -webkit-font-smoothing: antialiased;
 }
 body.menu-open { overflow: hidden; }
@@ -134,7 +130,7 @@ header {
 .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 
-/* --- 6. HERO SECTION (O BOTÃO IMPACTANTE) --- */
+/* --- 6. HERO SLIDER --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; box-shadow: 0 20px 60px -20px rgba(0, 122, 255, 0.2); border-radius: 0 0 40px 40px; }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -143,32 +139,11 @@ header {
 .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 .prev { left: 24px; } .next { right: 24px; }
 
-/* ESTILO ESPECÍFICO PARA O BOTÃO DA HOME */
-#historia-previa .cta-button.primary {
-    /* Gradiente Ensolarado Impactante */
-    background: linear-gradient(135deg, #FFD60A 0%, #FF9500 100%);
-    color: var(--azul-profundo); /* Texto azul escuro para contraste máximo */
-    border: none;
-    font-weight: 800; /* Mais grosso */
-    letter-spacing: 0.5px;
-    padding: 18px 40px; /* Um pouco maior */
-    /* Sombra dourada brilhante */
-    box-shadow: 0 10px 30px -5px rgba(255, 149, 0, 0.5);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-#historia-previa .cta-button.primary:hover {
-    transform: translateY(-4px) scale(1.03); /* Levanta mais */
-    box-shadow: 0 20px 40px -5px rgba(255, 149, 0, 0.7); /* Sombra aumenta */
-    filter: brightness(1.05); /* Brilha mais */
-}
-
 
 /* --- 7. CARDS & SHEETS --- */
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
-/* ESTILO BASE DO CARTÃO DE VIDRO */
 .glass-card { 
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); 
@@ -181,7 +156,25 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
+/* == BOTÃO IMPACTANTE DA HOME (AMARELO) == */
 #historia-previa { position: relative; z-index: 1; }
+
+#historia-previa .cta-button.primary {
+    /* Gradiente Ensolarado */
+    background: linear-gradient(135deg, #FFD60A 0%, #FF9500 100%);
+    color: var(--azul-profundo); 
+    border: none;
+    font-weight: 800; 
+    letter-spacing: 0.5px;
+    padding: 18px 40px; 
+    box-shadow: 0 10px 30px -5px rgba(255, 149, 0, 0.5);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+#historia-previa .cta-button.primary:hover {
+    transform: translateY(-4px) scale(1.03); 
+    box-shadow: 0 20px 40px -5px rgba(255, 149, 0, 0.7); 
+    filter: brightness(1.05); 
+}
 
 
 /* --- LÓGICA DO EMPILHAMENTO (STICKY) --- */
@@ -192,10 +185,12 @@ header {
     border-top: none; 
     margin-bottom: 0; 
     padding: 50px 50px 80px 50px; 
-    /* CORREÇÃO DA SOMBRA: Mais suave e focada para cima, evitando "quadrados" nas pontas */
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08); 
+    /* Sombra ajustada para não criar "quadrados" laterais */
+    box-shadow: 0 -10px 25px rgba(0,0,0,0.06); 
     background: rgba(255, 255, 255, 0.98); 
     display: flex; flex-direction: column; 
+    /* Isso ajuda a limpar renderizações fantasmas */
+    transform: translateZ(0); 
 }
 .sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; border-radius: 10px; background: rgba(0,0,0,0.1); }
 
@@ -215,16 +210,17 @@ header {
 .sheet-missao { top: 140px; z-index: 20; }
 .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-/* 3. VISÃO (BRANCO + FIX TOTAL ARREDONDAMENTO) */
+/* 3. VISÃO (BRANCO + FIX "QUADRADOS INVISÍVEIS") */
 .sheet-visao { 
     top: 190px; z-index: 30; 
+    /* Arredondamento forçado em todos os cantos */
     border-radius: 32px !important;
-    border-bottom-left-radius: 32px !important;
-    border-bottom-right-radius: 32px !important;
     margin-bottom: 50px; 
     min-height: auto; 
     padding-bottom: 50px;
     background-color: #ffffff !important;
+    /* Remove sombra do último para limpar o visual final */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; 
 }
 .sheet-visao::before { background: var(--laranja-vibrante) !important; }
 
@@ -306,7 +302,6 @@ header {
 /* BOTÕES GERAIS */
 .cta-buttons-wrapper { display: flex; justify-content: center; gap: 16px; margin-top: 50px; }
 .cta-button { padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; display: inline-block; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
-/* O estilo .primary padrão foi movido para ser específico da home acima, ou pode ser um estilo genérico azul/branco aqui se houver outros botões primários */
 .cta-button.primary { background: white; color: var(--azul-riviera); border: none; }
 .cta-button.primary:hover { transform: scale(1.05); background: #f0f8ff; }
 .cta-button.secondary { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
@@ -373,8 +368,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     /* Ajuste Stack Mobile */
     .sheet-card { 
         border-radius: 24px 24px 0 0; min-height: 400px; 
-        /* Sombra ajustada para mobile também */
-        box-shadow: 0 -8px 20px rgba(0,0,0,0.08);
+        box-shadow: 0 -8px 25px rgba(0,0,0,0.06); /* Sombra mais leve para evitar quadrado */
         margin-bottom: 0; background: white; padding: 30px 24px 80px 24px;
     }
     .sheet-card::before { top: 10px; width: 30px; height: 3px; }
