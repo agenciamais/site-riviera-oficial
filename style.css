@@ -1,19 +1,19 @@
-/* style.css - VERSÃO FINAL (PÁGINA SOBRE AZUL + RODAPÉ AZUL) */
+/* style.css - VERSÃO FINAL: CORREÇÃO SOBRE (STACK + AZUL) & BOTÃO HOME */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
     /* Cores da Marca */
-    --azul-riviera: #007AFF;
-    --azul-profundo: #0a2e7a;
-    --amarelo-sol: #FFcc00;
+    --azul-riviera: #007AFF; 
+    --azul-profundo: #0a2e7a; 
+    --amarelo-sol: #FFcc00; 
     --laranja-vibrante: #FF9500;
     
     /* Textos */
-    --texto-corpo: #424245;
+    --texto-corpo: #424245; 
     --texto-suave: #86868B;
 
     /* Vidro Premium */
-    --vidro-bg: rgba(255, 255, 255, 0.85);
+    --vidro-bg: rgba(255, 255, 255, 0.85); 
     --vidro-borda: 1px solid rgba(255, 255, 255, 0.8);
     --vidro-shadow: 0 15px 40px -10px rgba(0, 122, 255, 0.15);
     --blur-effect: blur(30px) saturate(140%);
@@ -56,7 +56,7 @@ body {
     overflow-x: hidden; 
     position: relative;
     
-    /* Fundo Limpo (Sem formas) */
+    /* Fundo Limpo */
     background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
@@ -130,7 +130,7 @@ header {
 .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 
-/* --- 6. HERO SECTION (BOTÃO SOLAR) --- */
+/* --- 6. HERO SECTION (CORREÇÃO DO BOTÃO HOME) --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; box-shadow: 0 20px 60px -20px rgba(0, 122, 255, 0.2); border-radius: 0 0 40px 40px; }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -139,21 +139,22 @@ header {
 .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 .prev { left: 24px; } .next { right: 24px; }
 
-/* Botão Solar Impactante (Home) */
+/* CORREÇÃO: Botão da Home agora usa estilo AZUL/TRANSPARENTE (Igual Matricule-se) */
 #historia-previa .cta-button.primary {
-    background: linear-gradient(135deg, #FFD60A 0%, #FF9500 100%);
-    color: var(--azul-profundo); 
-    border: none;
-    font-weight: 800; 
+    background: rgba(28, 104, 211, 0.1); /* Azul bem claro */
+    color: var(--azul-riviera); 
+    border: 1px solid rgba(28, 104, 211, 0.2);
+    font-weight: 700; 
     letter-spacing: 0.5px;
-    padding: 18px 40px; 
-    box-shadow: 0 10px 30px -5px rgba(255, 149, 0, 0.5);
+    padding: 16px 32px; 
+    box-shadow: none; /* Remove sombra amarela */
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 #historia-previa .cta-button.primary:hover {
-    transform: translateY(-4px) scale(1.03); 
-    box-shadow: 0 20px 40px -5px rgba(255, 149, 0, 0.7); 
-    filter: brightness(1.05); 
+    background: var(--azul-riviera);
+    color: white;
+    transform: translateY(-2px); 
+    box-shadow: 0 10px 20px rgba(0, 122, 255, 0.3);
 }
 
 
@@ -177,79 +178,75 @@ header {
 #historia-previa { position: relative; z-index: 1; }
 
 
-/* --- LÓGICA DO EMPILHAMENTO (STICKY) --- */
-.sheet-card { 
+/* --- 8. PÁGINA SOBRE (CORREÇÃO COMPLETA: AZUL + STACK) --- */
+
+/* O Fundo Azul da Seção */
+#sobre {
+    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
+    border-radius: 40px; 
+    margin-top: 30px; margin-bottom: 30px;
+    box-shadow: 0 20px 50px rgba(0, 85, 212, 0.3);
+    /* IMPORTANTE: Padding apenas em cima para os cartões colarem no fundo se precisar */
+    padding: 60px 0 0 0; 
+    position: relative; 
+    overflow: visible; /* HABILITA O STICKY NOVAMENTE */
+}
+
+/* Títulos Brancos dentro do Sobre */
+#sobre h2, #sobre h3 {
+    color: white !important; 
+    background: none !important;
+    -webkit-text-fill-color: white !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2); 
+    text-align: center;
+}
+
+/* Cartões Empilhados dentro do Sobre (MODO VIDRO) */
+#sobre .sheet-card { 
     position: sticky; 
+    top: 100px; /* Ajuste fino do topo */
     border-radius: 32px 32px 0 0; 
-    
-    /* --- CORREÇÃO: Altura Automática e Padding Menor --- */
-    min-height: auto; /* Remove altura fixa gigante */
-    padding: 40px 40px 80px 40px; /* Padding ajustado */
-    
+    min-height: auto;
+    padding: 50px 50px 80px 50px; 
     border-top: none; 
     margin-bottom: 0; 
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08); 
-    background: rgba(255, 255, 255, 0.98); 
+    /* Sombra escura suave para destacar no fundo azul */
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2); 
+    /* FUNDO VIDRO TRANSLÚCIDO (Não branco sólido) */
+    background: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3);
     display: flex; flex-direction: column; 
     transform: translateZ(0); 
 }
-.sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; border-radius: 10px; background: rgba(0,0,0,0.1); }
 
-/* ALINHAMENTO JUSTIFICADO GLOBAL */
-.sheet-card p { text-align: justify !important; }
-
-/* 1. SOBRE (AZUL) */
-.sheet-intro { 
-    top: 90px; z-index: 10; 
-    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%); color: white; 
+/* Texto branco dentro dos cartões de vidro */
+#sobre .sheet-card p { 
+    color: white !important; 
+    text-align: justify !important; 
 }
-.sheet-intro h2 { color: white !important; background: none !important; -webkit-text-fill-color: white !important; }
-.sheet-intro p { color: rgba(255, 255, 255, 0.95) !important; }
-.sheet-intro::before { background: rgba(255, 255, 255, 0.5) !important; }
 
-/* 2. MISSÃO (BRANCO) */
-.sheet-missao { top: 140px; z-index: 20; }
-.sheet-missao::before { background: var(--amarelo-sol) !important; }
+/* Ajuste dos "tracinhos" para serem brancos semi-transparentes */
+#sobre .sheet-card::before { 
+    content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); 
+    width: 40px; height: 4px; border-radius: 10px; 
+    background: rgba(255,255,255,0.5); 
+}
 
-/* 3. VISÃO (BRANCO + FIX ARREDONDAMENTO) */
-.sheet-visao { 
-    top: 190px; z-index: 30; 
-    border-radius: 32px !important;
-    border-bottom-left-radius: 32px !important;
-    border-bottom-right-radius: 32px !important;
-    margin-bottom: 50px; 
-    min-height: auto; 
+/* Posições de Empilhamento */
+#sobre .sheet-intro { top: 80px; z-index: 10; }
+#sobre .sheet-missao { top: 130px; z-index: 20; background: rgba(255, 255, 255, 0.2) !important; } /* Um pouco mais claro */
+#sobre .sheet-visao { 
+    top: 180px; z-index: 30; 
+    /* Fecha o arredondamento em baixo */
+    border-radius: 32px !important; 
+    margin-bottom: 50px; /* Margem para afastar do rodapé */
     padding-bottom: 50px;
-    background-color: #ffffff !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; 
-}
-.sheet-visao::before { background: var(--laranja-vibrante) !important; }
-
-.sheet-card h2, .sheet-card h3 { text-align: center; }
-
-/* ESTILO ESPECÍFICO PARA A PÁGINA SOBRE (TUDO AZUL) */
-#sobre {
-    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
-    border-radius: 40px; margin-top: 30px; margin-bottom: 30px;
-    box-shadow: 0 20px 50px rgba(0, 85, 212, 0.3);
-    padding: 60px 0; position: relative; overflow: hidden;
-    /* Garante que o texto dentro seja branco */
-    color: white;
-}
-#sobre h2, #sobre h3 {
-    color: white !important; background: none !important;
-    -webkit-text-fill-color: white !important;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 25px;
-}
-#sobre p { color: rgba(255, 255, 255, 0.95); }
-#sobre .glass-card {
-    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.25) !important; /* O mais claro */
 }
 
 
-/* --- 8. NÍVEIS DE ENSINO (SETA GLOW) --- */
+/* --- 9. NÍVEIS DE ENSINO --- */
 #niveis {
     background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
     border-radius: 40px; margin-top: 30px; margin-bottom: 30px;
@@ -284,31 +281,17 @@ header {
     font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;
     color: #ffffff; background: rgba(0, 0, 0, 0.2); padding: 6px 12px; border-radius: 20px; display: inline-block; width: fit-content; border: 1px solid rgba(255,255,255,0.2);
 }
-
-/* SETA GLOW (CSS Puro) */
 .accordion-icon { 
-    width: 14px; height: 14px; 
-    border-right: 3px solid rgba(255,255,255,0.9);
-    border-bottom: 3px solid rgba(255,255,255,0.9);
-    transform: rotate(45deg);
-    margin-left: 20px; flex-shrink: 0;
-    border-radius: 2px;
-    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8));
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    width: 14px; height: 14px; border-right: 3px solid rgba(255,255,255,0.9); border-bottom: 3px solid rgba(255,255,255,0.9);
+    transform: rotate(45deg); margin-left: 20px; flex-shrink: 0; border-radius: 2px;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8)); transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
-.accordion-item.active .accordion-icon { 
-    transform: rotate(-135deg); 
-    border-color: #ffffff;
-    filter: drop-shadow(0 0 8px rgba(255,255,255,1));
-}
-
+.accordion-item.active .accordion-icon { transform: rotate(-135deg); border-color: #ffffff; filter: drop-shadow(0 0 8px rgba(255,255,255,1)); }
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-.accordion-content p { 
-    padding: 20px 30px 30px 30px; margin: 0; color: rgba(255, 255, 255, 0.95); font-size: 1rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.15); 
-}
+.accordion-content p { padding: 20px 30px 30px 30px; margin: 0; color: rgba(255, 255, 255, 0.95); font-size: 1rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.15); }
 
 
-/* --- 9. MATRÍCULAS --- */
+/* --- 10. MATRÍCULAS --- */
 .cta-section { 
     background: linear-gradient(135deg, #007AFF 0%, #0055D4 100%); 
     color: white; padding: 100px 0; text-align: center; margin-top: 80px; 
@@ -331,7 +314,7 @@ header {
 .cta-button.simple { color: var(--azul-riviera); background: rgba(0, 122, 255, 0.1); border: none; padding: 14px 28px; box-shadow: none; }
 
 
-/* --- 10. RODAPÉ --- */
+/* --- 11. RODAPÉ --- */
 .extras-container { display: flex; gap: 30px; margin-bottom: 60px; }
 .map-container { border-radius: var(--radius-l); overflow: hidden; height: 300px; width: 100%; box-shadow: var(--vidro-shadow); }
 footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: relative; z-index: 2; }
@@ -387,34 +370,24 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Ajuste Stack Mobile (COMPACTO) */
+    /* Ajuste Stack Mobile (COMPACTO + CORREÇÃO SOBRE) */
     .sheet-card { 
         border-radius: 24px 24px 0 0; 
-        min-height: auto; /* Remove altura fixa no mobile */
+        min-height: auto; 
         box-shadow: 0 -8px 25px rgba(0,0,0,0.06); 
-        margin-bottom: 0; background: white; 
-        padding: 30px 24px 60px 24px; /* Padding Reduzido */
+        margin-bottom: 0; padding: 30px 24px 60px 24px; 
     }
     .sheet-card::before { top: 10px; width: 30px; height: 3px; }
-    
-    .sheet-intro { 
-        top: 70px; z-index: 10; 
-        background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
-    }
-    .sheet-intro::before { background: rgba(255,255,255,0.5) !important; }
 
-    .sheet-missao { top: 110px; z-index: 20; }
-    .sheet-missao::before { background: var(--amarelo-sol) !important; }
-
-    /* VISÃO MOBILE FIX ARREDONDAMENTO */
-    .sheet-visao { 
-        top: 150px; z-index: 30; 
-        border-radius: 24px !important; 
-        border-bottom-left-radius: 24px !important;
-        border-bottom-right-radius: 24px !important;
-        margin-bottom: 30px; min-height: auto; 
+    /* SOBRE: Mobile Fixes para o fundo azul */
+    #sobre { border-radius: 24px; padding: 40px 0 0 0; width: 100%; margin: 20px 0; }
+    #sobre h2 { font-size: 1.8rem; }
+    #sobre .sheet-card { padding: 30px 20px 60px 20px; }
+    #sobre .sheet-intro { top: 70px; }
+    #sobre .sheet-missao { top: 120px; }
+    #sobre .sheet-visao { 
+        top: 170px; border-radius: 24px !important; margin-bottom: 30px; 
     }
-    .sheet-visao::before { background: var(--laranja-vibrante) !important; }
 
     /* Ajuste Níveis Mobile */
     #niveis { border-radius: 24px; padding: 40px 0; width: 100%; margin: 20px 0; }
@@ -433,13 +406,6 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .footer-social { justify-content: center; }
     .cta-button { width: 100%; margin-bottom: 12px; }
     .cta-section { border-radius: 32px 32px 0 0; padding: 60px 20px; margin-top: 40px; margin-bottom: 60px; }
-    
-    /* AJUSTE MOBILE PARA A PÁGINA SOBRE AZUL */
-    #sobre {
-        border-radius: 24px; padding: 40px 0; width: 100%; margin: 20px 0;
-    }
-    #sobre h2, #sobre h3 { font-size: 1.8rem; }
-    #sobre .glass-card { padding: 30px 24px; border-radius: 20px; }
 }
 
 .fade-in-up { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
