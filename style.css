@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL GOLD MASTER: IOS TECH + FLOATING MENU */
+/* style.css - VERSÃO FINAL (PLATINUM): IOS TECH + MENU X + CORREÇÕES */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -6,9 +6,9 @@
     --tech-blue-start: #007AFF; /* Azul iOS Brilhante */
     --tech-blue-end: #00C6FF;   /* Azul Cyan Neon */
     
-    /* Cores da Marca (Mantidas para detalhes) */
+    /* Cores da Marca */
     --azul-riviera: #007AFF;
-    --azul-profundo: #0040DD;
+    --azul-profundo: #0a2e7a; /* Ajustado para um tom mais elegante */
     --amarelo-sol: #FFcc00; 
     --laranja-vibrante: #FF9500;
     
@@ -68,10 +68,10 @@ body {
     background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
 }
-body.menu-open { overflow: hidden; } /* Bloqueia scroll quando menu abre */
+body.menu-open { overflow: hidden; }
 
 
-/* --- 4. TÍTULOS TECH (O PEDIDO ESPECIAL) --- */
+/* --- 4. TÍTULOS TECH --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
 
 h2 {
@@ -83,10 +83,10 @@ h2 {
     line-height: 1.1;
     
     /* O Degradê Azul Tech Saturação Alta */
-    background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-riviera) 40%, #00C6FF 100%);
+    background: linear-gradient(135deg, #0040DD 0%, var(--azul-riviera) 40%, #00C6FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 15px rgba(0, 122, 255, 0.2)); /* Glow Tech */
+    filter: drop-shadow(0 2px 15px rgba(0, 122, 255, 0.2));
 }
 
 /* Subtítulos Tech */
@@ -101,7 +101,7 @@ h2 {
 p { color: var(--texto-corpo); margin-bottom: 15px; font-size: 1.05rem; }
 
 
-/* --- 5. HEADER (Frost) --- */
+/* --- 5. HEADER (Frost + Animação X) --- */
 header {
     background: rgba(255, 255, 255, 0.75); 
     backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -118,8 +118,12 @@ header {
 .logo:hover img { transform: scale(1.05); }
 
 .nav-menu { display: flex; list-style: none; gap: 30px; }
+
+/* Links do Menu (Desktop) */
 .nav-link { 
-    text-decoration: none; color: #1D1D1F; font-weight: 600; 
+    text-decoration: none; 
+    color: var(--azul-profundo); /* Cor Azul Profundo */
+    font-weight: 600; 
     position: relative; transition: color 0.3s; font-size: 0.95rem; 
 }
 .nav-link:hover, .nav-link.active { color: var(--azul-riviera); }
@@ -130,8 +134,18 @@ header {
 }
 .nav-link:hover::after, .nav-link.active::after { opacity: 1; transform: translateX(-50%) scale(1); }
 
-.hamburger { display: none; cursor: pointer; z-index: 1002; }
-.bar { display: block; width: 26px; height: 2px; margin: 6px auto; background: var(--azul-riviera); border-radius: 2px; transition: 0.3s; }
+/* HAMBURGER COM ANIMAÇÃO DE 'X' */
+.hamburger { display: none; cursor: pointer; z-index: 1005; }
+.bar { 
+    display: block; width: 26px; height: 3px; margin: 5px auto; 
+    background: var(--azul-riviera); border-radius: 3px; 
+    transition: all 0.3s ease-in-out; 
+}
+
+/* Lógica da Animação do X */
+.hamburger.active .bar:nth-child(2) { opacity: 0; }
+.hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 
 /* --- 6. HERO SLIDER --- */
@@ -177,7 +191,6 @@ header {
 .sheet-missao { top: 150px; z-index: 20; }
 .sheet-visao { top: 190px; z-index: 30; border-radius: 32px; margin-bottom: 50px; }
 
-/* Correção de alinhamento de texto solicitada */
 .sheet-card h2, .sheet-card h3 { text-align: center; }
 .sheet-card p { text-align: justify !important; }
 
@@ -208,14 +221,13 @@ header {
 .accordion-content p { padding-bottom: 24px; margin-top: 0px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px; }
 
 
-/* --- 9. MATRÍCULAS (Com Botão Azul) --- */
+/* --- 9. MATRÍCULAS --- */
 .cta-section { 
     background: linear-gradient(135deg, #007AFF 0%, #0055D4 100%); 
     color: white; padding: 100px 0; text-align: center; margin-top: 80px; 
     border-radius: 40px 40px 0 0; 
     position: relative; z-index: 2; margin-bottom: 80px; 
 }
-/* Título aqui deve ser branco/amarelo para contraste no fundo azul */
 .cta-titulo { 
     background: none !important; 
     -webkit-text-fill-color: var(--amarelo-sol) !important;
@@ -227,10 +239,7 @@ header {
     background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); 
     border: 1px solid rgba(255, 255, 255, 0.2); padding: 32px; border-radius: var(--radius-l); flex: 1; 
 }
-/* Subtítulos dentro do card de matrícula em amarelo para contraste */
-.metodo-card h3 { 
-    background: none; -webkit-text-fill-color: #FFD60A; 
-}
+.metodo-card h3 { background: none; -webkit-text-fill-color: #FFD60A; }
 .metodo-card p { color: rgba(255,255,255,0.95); }
 
 /* BOTÕES */
@@ -241,10 +250,10 @@ header {
     box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
 }
 
-/* O PEDIDO: Botão Branco com Letra Azul */
+/* Botão Branco com Letra Azul */
 .cta-button.primary { 
     background: white; 
-    color: var(--azul-riviera); /* Letra Azul */
+    color: var(--azul-riviera); 
     border: none; 
 }
 .cta-button.primary:hover { transform: scale(1.05); background: #f0f8ff; }
@@ -254,26 +263,24 @@ header {
 }
 .cta-button.secondary:hover { background: rgba(255,255,255,0.3); }
 
-/* Botão simples da página Sobre */
 .cta-button.simple { 
     color: var(--azul-riviera); background: rgba(0, 122, 255, 0.1); 
     border: none; padding: 14px 28px; box-shadow: none;
 }
 
 
-/* --- 10. RODAPÉ (RESTAURADO: AZUL + TEXTO BRANCO) --- */
+/* --- 10. RODAPÉ (AZUL + TEXTO BRANCO) --- */
 .extras-container { display: flex; gap: 30px; margin-bottom: 60px; }
 .map-container { border-radius: var(--radius-l); overflow: hidden; height: 300px; width: 100%; box-shadow: var(--vidro-shadow); }
 
 footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: relative; z-index: 2; }
 .footer-content-wrapper { 
     max-width: 1100px; margin: 0 auto; 
-    /* Azul Gradiente no lugar do preto */
+    /* Azul Gradiente */
     background: linear-gradient(135deg, #1c68d3 0%, #0a2e7a 100%);
     backdrop-filter: blur(20px); border-radius: 30px; padding: 50px; 
     box-shadow: 0 20px 50px rgba(28, 104, 211, 0.3); border: 1px solid rgba(255,255,255,0.2); 
-    /* CORREÇÃO: TEXTO BRANCO */
-    color: #ffffff; 
+    color: #ffffff; /* Texto Branco */
     position: relative; overflow: hidden;
 }
 .footer-content-wrapper::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); opacity: 0.1; }
@@ -301,7 +308,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 
 
 /* =======================================================
-   🛠️ MOBILE 🛠️ - DESIGN FINAL (FLOATING MENU)
+   🛠️ MOBILE 🛠️ - DESIGN FINAL CORRIGIDO
    ======================================================= */
 @media(max-width: 768px) {
     .top-bar { display: none; }
@@ -312,56 +319,58 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } 
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
-    /* MENU FLUTUANTE ESTILO IOS WIDGET (A CORREÇÃO DO BUG) */
+    /* MENU FLUTUANTE ESTILO IOS WIDGET */
     .nav-links-container {
         position: fixed; 
         top: 20px; 
         left: 20px; 
-        width: calc(100% - 40px); /* Margem de 20px dos lados */
-        max-width: 320px; /* Não deixa ficar gigante em tablets */
+        width: calc(100% - 40px);
+        max-width: 320px; 
         height: auto; 
-        max-height: calc(100vh - 40px);
         
-        background: rgba(255, 255, 255, 0.95); 
+        background: rgba(255, 255, 255, 0.98); /* Fundo sólido para leitura */
         backdrop-filter: blur(30px) saturate(180%);
-        box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-        border: 1px solid rgba(255,255,255,0.5);
+        box-shadow: 0 25px 60px rgba(0, 40, 120, 0.3); /* Sombra azulada */
+        border: 1px solid rgba(255,255,255,0.6);
         
-        border-radius: 24px; /* Bem arredondado */
+        border-radius: 28px;
         
-        /* Começa invisível e menor */
         transform: scale(0.9) translateY(-20px); 
         opacity: 0; 
         visibility: hidden;
         
         z-index: 1002; 
-        padding: 30px 24px; 
+        padding: 40px 30px; /* Espaçamento Interno Aumentado */
         display: flex; flex-direction: column; justify-content: flex-start;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    /* Estado Ativo: Pop In */
     .nav-links-container.active { 
         transform: scale(1) translateY(0); 
         opacity: 1; 
         visibility: visible; 
     }
     
+    /* Fundo Escuro com toque Azulado */
     .menu-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); z-index: 998; 
+        background: rgba(0, 40, 100, 0.4); 
+        backdrop-filter: blur(6px); 
+        z-index: 998; 
         opacity: 0; visibility: hidden; transition: 0.3s;
     }
     .menu-overlay.active { opacity: 1; visibility: visible; }
 
-    .nav-menu { flex-direction: column; gap: 0; width: 100%; }
+    .nav-menu { flex-direction: column; gap: 10px; width: 100%; text-align: left; }
     .nav-item { width: 100%; border: none; }
     
-    /* Links mais compactos (Pedido atendido) */
+    /* LINKS MOBILE (AGORA EM AZUL E MAIORES) */
     .nav-link { 
-        display: block; padding: 12px 0; 
-        font-size: 1.15rem; font-weight: 600; color: #1D1D1F; 
-        border-bottom: 1px solid rgba(0,0,0,0.05); 
+        display: block; padding: 14px 0; 
+        font-size: 1.25rem; /* Letra maior */
+        font-weight: 700; 
+        color: var(--azul-profundo); /* Azul elegante */
+        border-bottom: 1px solid rgba(0,0,0,0.04); 
     }
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
