@@ -1,14 +1,10 @@
-/* style.css - VERSÃO FINAL (BLUE METAL & STACK FIX) */
+/* style.css - VERSÃO FINAL FINALÍSSIMA (STACK MOBILE ATIVO + NÍVEIS CORRIGIDO) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
-    /* Cores Tech / Vibrantes */
-    --tech-blue-start: #007AFF; 
-    --tech-blue-end: #00C6FF;   
-    
     /* Cores da Marca */
-    --azul-riviera: #007AFF;
-    --azul-profundo: #0a2e7a; 
+    --azul-riviera: #007AFF; /* Azul Vibrante Principal */
+    --azul-profundo: #0a2e7a; /* Azul Escuro para textos/rodapé */
     --amarelo-sol: #FFcc00; 
     --laranja-vibrante: #FF9500;
     
@@ -55,7 +51,7 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--texto-corpo); 
-    line-height: 1.5;
+    line-height: 1.6; /* Leitura melhorada */
     min-height: 100vh; 
     overflow-x: hidden; 
     position: relative;
@@ -69,7 +65,7 @@ body {
 body.menu-open { overflow: hidden; }
 
 
-/* --- 4. TÍTULOS GERAIS (TECH BLUE) --- */
+/* --- 4. TÍTULOS GERAIS --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
 
 h2 {
@@ -85,15 +81,16 @@ h2 {
     filter: drop-shadow(0 2px 15px rgba(0, 122, 255, 0.2));
 }
 
-.sheet-card h3, .accordion-header h3, .metodo-card h3 {
+.sheet-card h3, .metodo-card h3 {
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     background: linear-gradient(90deg, var(--azul-riviera) 0%, #00C6FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 p { color: var(--texto-corpo); margin-bottom: 15px; font-size: 1.05rem; }
+.texto-justificado { text-align: justify; }
 
 
 /* --- 5. HEADER --- */
@@ -141,7 +138,7 @@ header {
 .prev { left: 24px; } .next { right: 24px; }
 
 
-/* --- 7. CARDS & SHEETS (STICKY FIX CORRIGIDO) --- */
+/* --- 7. CARDS & SHEETS (COM EMPILHAMENTO/STICKY) --- */
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
@@ -157,101 +154,77 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* --- AQUI ESTÁ A CORREÇÃO DO EMPILHAMENTO --- */
+/* --- LÓGICA DO EMPILHAMENTO (DESKTOP) --- */
 .sheet-card { 
     position: sticky; 
     border-radius: 32px 32px 0 0; 
-    /* Altura mínima maior para garantir o efeito de pilha */
-    min-height: 450px; 
+    min-height: 450px; /* Garante altura para o scroll */
     border-top: none; 
-    margin-bottom: 0; 
-    padding-bottom: 80px;
-    box-shadow: 0 -15px 40px rgba(0,0,0,0.1); 
-    background: rgba(255, 255, 255, 0.95); /* Fundo quase sólido para cobrir o de trás */
-    
-    /* Importante para o sticky funcionar bem no HTML */
+    margin-bottom: 0; /* Remove margem para colarem visualmente */
+    padding: 50px 50px 80px 50px; /* Padding interno generoso */
+    box-shadow: 0 -15px 40px rgba(0,0,0,0.1); /* Sombra invertida */
+    background: rgba(255, 255, 255, 0.98); /* Fundo sólido para cobrir o de trás */
     display: flex; flex-direction: column; 
 }
 .sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 10px; }
 
-/* Distâncias ajustadas para empilhar mais perto um do outro */
+/* Posições de travamento (Desktop) */
 .sheet-intro { top: 90px; z-index: 10; }
 .sheet-missao { top: 140px; z-index: 20; }
 .sheet-visao { 
     top: 190px; z-index: 30; 
-    border-radius: 32px; 
+    border-radius: 32px; /* O último fecha redondinho */
     margin-bottom: 50px; 
-    min-height: auto; /* O último não precisa ser tão alto */
+    min-height: auto; 
 }
-
 .sheet-card h2, .sheet-card h3 { text-align: center; }
-.sheet-card p { text-align: justify !important; }
 
 
-/* --- 8. NÍVEIS DE ENSINO (BLUE PREMIUM METAL) --- */
-/* Esta seção agora é exclusiva para a página Níveis */
+/* --- 8. NÍVEIS DE ENSINO (CORRIGIDO: AZUL VIBRANTE & LAYOUT) --- */
 #niveis {
-    /* Fundo Azul Profundo */
-    background: radial-gradient(circle at 50% 0%, #0040DD 0%, #001f54 100%);
+    /* Gradiente Riviera Vibrante */
+    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
     border-radius: 40px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 20px 50px rgba(0, 20, 80, 0.4);
-    padding: 80px 0;
+    margin-top: 30px; margin-bottom: 30px;
+    box-shadow: 0 20px 50px rgba(0, 85, 212, 0.3);
+    padding: 60px 0; position: relative; overflow: hidden;
 }
-
-/* O Título Metalizado Prateado */
+/* Título Branco Sólido */
 #niveis h2 {
-    background: linear-gradient(to bottom, #FFFFFF 0%, #B0B0B0 50%, #FFFFFF 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); /* Sombra para destacar o metal */
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
+    color: white !important; background: none !important;
+    -webkit-text-fill-color: white !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 40px;
 }
-
-/* Container do Acordeão no fundo azul */
-.accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 20px; }
-
+.accordion-container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; padding: 0 20px; }
 .accordion-item { 
-    /* Vidro Branco Translúcido sobre o Azul */
-    background: rgba(255, 255, 255, 0.1); 
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.2); 
-    border-radius: var(--radius-m); overflow: hidden; transition: 0.3s; 
+    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 16px; overflow: hidden; transition: all 0.3s ease;
 }
 .accordion-item.active { 
-    background: rgba(255, 255, 255, 0.15); 
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3); 
-    border-color: rgba(255,255,255,0.4);
+    background: rgba(255, 255, 255, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-color: rgba(255,255,255,0.6); transform: scale(1.01);
 }
+.item-bercario { border-left: 6px solid #FFcc00; }
+.item-infantil { border-left: 6px solid #FF9500; }
+.item-fundamental { border-left: 6px solid #00C6FF; }
 
-.item-bercario { border-left: 4px solid #FFcc00; }
-.item-infantil { border-left: 4px solid #FF9500; }
-.item-fundamental { border-left: 4px solid #00C6FF; }
-
-/* Textos dentro do Níveis (Brancos) */
+.accordion-header { 
+    padding: 25px 30px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%;
+}
 .accordion-header h3 { 
-    color: white !important; /* Força branco */
-    background: none !important; 
-    -webkit-text-fill-color: white !important; 
-    font-size: 1.3rem; 
+    margin: 0; font-size: 1.3rem; color: white !important; background: none !important;
+    -webkit-text-fill-color: white !important; text-align: left; display: flex; flex-direction: column; gap: 8px;
 }
-
-.accordion-content p { 
-    color: rgba(255, 255, 255, 0.9); /* Branco suave */
-    border-top: 1px solid rgba(255,255,255,0.1); 
-}
-
-/* Ícone do acordeão branco */
-.accordion-icon { color: rgba(255,255,255,0.6); }
-.accordion-item.active .accordion-icon { color: white; }
-
-/* Tag de nível */
 .level-detail { 
-    color: white; 
-    background: rgba(255, 255, 255, 0.2); 
-    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;
+    color: #ffffff; background: rgba(0, 0, 0, 0.2); padding: 6px 12px; border-radius: 20px; display: inline-block; width: fit-content; border: 1px solid rgba(255,255,255,0.2);
+}
+.accordion-icon { 
+    font-size: 1.2rem; color: rgba(255,255,255,0.7); transition: transform 0.3s; margin-left: 20px; flex-shrink: 0;
+}
+.accordion-item.active .accordion-icon { transform: rotate(180deg); color: white; }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+.accordion-content p { 
+    padding: 20px 30px 30px 30px; margin: 0; color: rgba(255, 255, 255, 0.95); font-size: 1rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.15); 
 }
 
 
@@ -281,7 +254,6 @@ header {
 /* --- 10. RODAPÉ --- */
 .extras-container { display: flex; gap: 30px; margin-bottom: 60px; }
 .map-container { border-radius: var(--radius-l); overflow: hidden; height: 300px; width: 100%; box-shadow: var(--vidro-shadow); }
-
 footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: relative; z-index: 2; }
 .footer-content-wrapper { 
     max-width: 1100px; margin: 0 auto; 
@@ -291,7 +263,6 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     color: #ffffff; position: relative; overflow: hidden;
 }
 .footer-content-wrapper::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); opacity: 0.1; }
-
 .footer-inner { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
 .footer-info h4 { color: white !important; font-size: 1.8rem; margin-bottom: 10px; font-weight: 700; background: none; -webkit-text-fill-color: white !important; }
 .footer-info p { margin-bottom: 5px; font-size: 0.95rem; color: rgba(255,255,255,0.9); } 
@@ -305,7 +276,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 .footer-copy { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; font-size: 0.85rem; opacity: 0.8; color: white; position: relative; z-index: 2; }
 
 
-/* --- MOBILE --- */
+/* --- MOBILE (CORREÇÕES FINAIS) --- */
 @media(max-width: 768px) {
     .top-bar { display: none; }
     header { width: 100%; top: 0; }
@@ -336,23 +307,32 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Ajuste Stack Mobile */
+    /* --- AJUSTE STACK MOBILE (ATIVADO E CORRIGIDO) --- */
     .sheet-card { 
-        position: relative !important; top: auto !important; 
-        padding: 30px 24px; border-radius: 24px 24px 0 0; 
-        min-height: auto; box-shadow: none; border-top: none; margin-bottom: 20px; 
-        background: white; padding-bottom: 30px;
+        /* Mantém o sticky no mobile */
+        border-radius: 24px 24px 0 0; 
+        min-height: 400px; /* Garante altura para rolar */
+        box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+        margin-bottom: 0;
+        background: white; 
+        padding: 30px 24px 80px 24px; /* Padding interno corrigido para mobile */
     }
-    .sheet-card::before { content: none; } 
+    .sheet-card::before { top: 10px; width: 30px; height: 3px; } /* Alça menor */
+
+    /* Posições de travamento ajustadas para o cabeçalho mobile (60px) */
+    .sheet-intro { top: 70px; z-index: 10; }
+    .sheet-missao { top: 110px; z-index: 20; }
+    .sheet-visao { top: 150px; z-index: 30; border-radius: 24px; margin-bottom: 30px; min-height: auto; }
 
     /* Ajuste Níveis Mobile */
-    #niveis { border-radius: 24px; padding: 40px 20px; width: 100%; margin: 20px 0; }
-    #niveis h2 { font-size: 1.8rem; }
+    #niveis { border-radius: 24px; padding: 40px 0; width: 100%; margin: 20px 0; }
+    #niveis h2 { font-size: 1.8rem; margin-bottom: 30px; }
+    .accordion-container { padding: 0 15px; } /* Margem lateral no mobile */
+    .accordion-header { padding: 20px; }
+    .accordion-header h3 { font-size: 1.1rem; }
     
     h2 { font-size: 1.8rem; margin-bottom: 20px; margin-top: 10px !important; }
     .card-container { gap: 0px; }
-    .accordion-header { padding: 20px; }
-    .accordion-header h3 { font-size: 1.1rem; }
     .glass-card { padding: 30px 24px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
     footer { padding: 0 15px 30px; }
