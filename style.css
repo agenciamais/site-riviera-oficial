@@ -1,37 +1,44 @@
-/* style.css - VERSÃO FINAL: ESTRUTURA ORIGINAL + FUNDO "BREATHING LIGHT" IOS */
+/* style.css - VERSÃO "iOS SCHOOL" - ESTRUTURA BLINDADA */
 
-/* --- 1. VARIÁVEIS & CORES --- */
+/* --- 1. VARIÁVEIS & CORES (Paleta Apple Education) --- */
 :root {
-    /* Cores da Marca */
-    --azul-riviera: #1c68d3;
-    --azul-profundo: #0a2e7a;
-    --amarelo-sol: #ffc400; 
-    --laranja-vibrante: #ff6b35;
+    /* Cores da Marca (Mantidas, mas aplicadas com mais sobriedade) */
+    --azul-riviera: #007AFF; /* Azul iOS System */
+    --azul-profundo: #0040DD;
+    --amarelo-sol: #FFcc00; 
+    --laranja-vibrante: #FF9500; /* Laranja iOS System */
     
     /* Cores de Texto */
-    --texto-escuro: #1e293b;
-    --texto-suave: #475569;
+    --texto-titulo: #1D1D1F; /* Preto suave da Apple ("Ink") */
+    --texto-corpo: #424245; /* Cinza escuro para leitura */
+    --texto-suave: #86868B;
 
-    /* Vidro (Ajustado para o novo fundo) */
-    --vidro-bg: rgba(255, 255, 255, 0.85); 
-    --vidro-borda: 1px solid rgba(255, 255, 255, 0.8);
-    --vidro-shadow: 0 15px 35px rgba(28, 104, 211, 0.08), 0 5px 15px rgba(0,0,0,0.03);
-    --blur-effect: blur(25px) saturate(120%);
+    /* Vidro Premium (Mais translúcido e focado no Blur) */
+    --vidro-bg: rgba(255, 255, 255, 0.75); 
+    --vidro-borda: 1px solid rgba(255, 255, 255, 0.6);
+    --vidro-shadow: 0 10px 40px -10px rgba(0,0,0,0.1); /* Sombra difusa e elegante */
+    --blur-effect: blur(30px) saturate(180%); /* Saturação alta para cores vivas atrás do vidro */
     
-    --vidro-dark-bg: rgba(255, 255, 255, 0.25);
-    --vidro-dark-borda: 1px solid rgba(255, 255, 255, 0.4);
+    --vidro-dark-bg: rgba(255, 255, 255, 0.4);
+    --vidro-dark-borda: 1px solid rgba(255, 255, 255, 0.5);
+    
+    /* Raios de Borda (Consistência Squircle) */
+    --radius-l: 24px;
+    --radius-m: 16px;
+    --radius-s: 12px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #f8fbff; }
-::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--azul-riviera), var(--azul-profundo)); border-radius: 5px; border: 2px solid #f8fbff; }
+/* Scrollbar Estilizada */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.3); }
 
-/* --- 2. PRELOADER --- */
+/* --- 2. PRELOADER (Mantido igual para não quebrar lógica) --- */
 #preloader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: #ffffff; z-index: 99999;
@@ -39,323 +46,342 @@ html { scroll-behavior: smooth; scroll-padding-top: 100px; }
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 .spinner {
-    width: 60px; height: 60px; border: 6px solid rgba(28, 104, 211, 0.1);
-    border-top: 6px solid var(--amarelo-sol); border-radius: 50%; animation: spin 1s linear infinite;
+    width: 50px; height: 50px; 
+    border: 4px solid rgba(0, 122, 255, 0.1);
+    border-top: 4px solid var(--azul-riviera); 
+    border-radius: 50%; animation: spin 0.8s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
 }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 body.loaded #preloader { opacity: 0; visibility: hidden; }
 
 
-/* --- 3. BACKGROUND PREMIUM "BREATHING LIGHT" (O NOVO FUNDO) --- */
+/* --- 3. BACKGROUND & TIPOGRAFIA SYSTEM --- */
 body {
-    font-family: 'Poppins', sans-serif; 
-    color: var(--texto-escuro); 
-    line-height: 1.6;
+    /* O SEGREDO DO IOS: Fontes do Sistema */
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--texto-corpo); 
+    line-height: 1.5;
     min-height: 100vh; 
     overflow-x: hidden; 
     position: relative;
     
-    /* O Fundo Interativo/Premium */
-    background: linear-gradient(-45deg, #ffffff, #f0f7ff, #eef2ff, #ffffff);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    /* Fundo Gradiente Mesh Suave */
+    background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
+                radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, #E8F5E9 0%, transparent 50%),
+                #FAFAFA; /* Base off-white */
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased; /* Renderização de texto nítida */
 }
 body.menu-open { overflow: hidden; }
 
-/* Animação suave do fundo (Respiração) */
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Ruído super fino para textura de "tela retina" */
-body::before {
-    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-    opacity: 0.5;
-}
-
-
-/* --- 4. GERAL & TIPOGRAFIA --- */
+/* --- 4. GERAL --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
 
-/* Títulos Bold com Degradê (Aprovado) */
+/* Títulos: Limpos, Escuros e com Tracking Apertado (Estilo Apple) */
 h2 {
-    font-size: 2.8rem; margin-bottom: 25px; text-align: center; font-weight: 800; letter-spacing: -1px; line-height: 1.1 !important;
-    background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-riviera) 50%, var(--laranja-vibrante) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    filter: drop-shadow(0 2px 10px rgba(28, 104, 211, 0.15));
+    font-size: 2.5rem; 
+    margin-bottom: 25px; 
+    text-align: center; 
+    font-weight: 700; 
+    letter-spacing: -0.025em; /* Tracking negativo clássico da Apple */
+    color: var(--texto-titulo);
+    line-height: 1.1;
 }
 
 .sheet-card h3, .accordion-header h3, .logo-text {
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-riviera) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    font-weight: 600;
     color: var(--azul-riviera);
+    letter-spacing: -0.01em;
 }
 
-p { color: var(--texto-suave); margin-bottom: 15px; }
+p { color: var(--texto-corpo); margin-bottom: 15px; font-size: 1.05rem; }
 #proposta p, #proposta .texto-justificado { text-align: center !important; }
 
 
-/* --- 5. HEADER (Fixo e Limpo) --- */
+/* --- 5. HEADER (Efeito Frost) --- */
 header {
-    background: rgba(255, 255, 255, 0.85); /* Vidro Branco Limpo */
-    backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.65); /* Mais transparente */
+    backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%);
     position: sticky; top: 0; 
     z-index: 1000; 
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5); 
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
 }
 
 .top-bar { display: none; } 
 
-.navbar { display: flex; justify-content: space-between; align-items: center; height: 85px; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
-.logo img { height: 55px; width: auto; transition: transform 0.3s; }
-.logo:hover img { transform: scale(1.08); }
+.navbar { display: flex; justify-content: space-between; align-items: center; height: 80px; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+.logo img { height: 50px; width: auto; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.logo:hover img { transform: scale(1.05); }
 
 .nav-menu { display: flex; list-style: none; gap: 30px; }
-.nav-link { text-decoration: none; color: var(--texto-escuro); font-weight: 600; position: relative; transition: color 0.3s; font-size: 0.95rem; }
+.nav-link { 
+    text-decoration: none; 
+    color: var(--texto-titulo); 
+    font-weight: 500; 
+    position: relative; 
+    transition: color 0.3s; 
+    font-size: 0.95rem; 
+}
 .nav-link:hover, .nav-link.active { color: var(--azul-riviera); }
-.nav-link::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 0%; height: 3px; background: var(--amarelo-sol); transition: width 0.3s ease; border-radius: 2px; }
-.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+/* Indicador de menu minimalista (ponto em vez de linha) */
+.nav-link::after { 
+    content: ''; position: absolute; bottom: -5px; left: 50%; width: 4px; height: 4px; 
+    background: var(--azul-riviera); border-radius: 50%; 
+    opacity: 0; transform: translateX(-50%) scale(0); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+.nav-link:hover::after, .nav-link.active::after { opacity: 1; transform: translateX(-50%) scale(1); }
 
 .hamburger { display: none; cursor: pointer; z-index: 1002; }
-.bar { display: block; width: 28px; height: 3px; margin: 6px auto; background: var(--azul-riviera); border-radius: 2px; transition: 0.3s; }
+.bar { display: block; width: 24px; height: 2px; margin: 6px auto; background: var(--texto-titulo); border-radius: 2px; transition: 0.3s; }
 
 
-/* --- 6. HERO SLIDER (Estrutura Original) --- */
+/* --- 6. HERO SLIDER (Preservado) --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { 
     position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; 
-    box-shadow: 0 20px 60px rgba(28, 104, 211, 0.2); 
-    border-radius: 0 0 50px 50px; 
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.3); /* Sombra mais difusa */
+    border-radius: 0 0 40px 40px; /* Curva mais suave */
 }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 .slide { min-width: 100%; position: relative; } 
 .slide img { width: 100%; height: auto; display: block; object-fit: cover; }
 
-.prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); color: white; border: 1px solid rgba(255,255,255,0.3); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
-.prev { left: 30px; } .next { right: 30px; }
-.prev:hover, .next:hover { background: var(--azul-riviera); border-color: var(--azul-riviera); }
+.prev, .next { 
+    position: absolute; top: 50%; transform: translateY(-50%); 
+    background: rgba(255,255,255,0.3); backdrop-filter: blur(10px); 
+    color: white; border: none; 
+    width: 44px; height: 44px; border-radius: 50%; 
+    cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; 
+    transition: all 0.3s; 
+}
+.prev { left: 24px; } .next { right: 24px; }
+.prev:hover, .next:hover { background: rgba(255,255,255,0.8); color: var(--azul-riviera); transform: translateY(-50%) scale(1.1); }
 
 
-/* --- 7. CARDS & SHEETS (A VOLTA DOS ORIGINAIS) --- */
-.content-section { padding: 80px 0; }
+/* --- 7. CARDS & SHEETS (Design iOS) --- */
+.content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
-/* Estilo Base Glass */
+/* O Cartão de Vidro Apple */
 .glass-card, .sheet-card { 
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); 
     border: var(--vidro-borda); 
     box-shadow: var(--vidro-shadow); 
-    border-radius: 30px; padding: 50px; margin-bottom: 40px; 
+    border-radius: var(--radius-l); 
+    padding: 50px; margin-bottom: 40px; 
     position: relative; overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
-.glass-card > *, .sheet-card > * { position: relative; z-index: 1; }
-.glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
+.glass-card:hover { transform: translateY(-3px); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15); }
 
-/* SHEETS (O que você gosta: Sticky + Bordas Coloridas) */
+/* SHEETS */
 .sheet-card { 
-    position: sticky; /* Empilhamento */
-    border-radius: 40px 40px 0 0; 
+    position: sticky; 
+    border-radius: 32px 32px 0 0; 
     min-height: 300px; 
-    box-shadow: 0 -10px 40px rgba(28, 104, 211, 0.12); 
-    border-top: 8px solid var(--azul-riviera); /* Borda Grossa de volta */
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.05); 
+    border-top: none; /* Removemos a borda grossa colorida para um visual mais clean */
 }
-.sheet-intro { top: 110px; z-index: 10; border-top-color: var(--azul-riviera); }
-.sheet-missao { top: 150px; z-index: 20; border-top-color: var(--amarelo-sol); }
-.sheet-visao { top: 190px; z-index: 30; border-top-color: var(--laranja-vibrante); border-radius: 40px; margin-bottom: 50px; }
+/* Reintroduzindo a cor como uma linha fina e elegante no topo */
+.sheet-card::after {
+    content: ''; position: absolute; top: 0; left: 30%; right: 30%; height: 4px; border-radius: 0 0 4px 4px;
+}
+.sheet-intro { top: 110px; z-index: 10; }
+.sheet-intro::after { background: var(--azul-riviera); }
+
+.sheet-missao { top: 150px; z-index: 20; }
+.sheet-missao::after { background: var(--amarelo-sol); }
+
+.sheet-visao { top: 190px; z-index: 30; border-radius: 32px; margin-bottom: 50px; }
+.sheet-visao::after { background: var(--laranja-vibrante); }
 
 .sheet-card h2, .sheet-card h3 { text-align: center; margin-bottom: 20px; }
-.sheet-card p { text-align: justify !important; font-size: 1.05rem; }
+.sheet-card p { text-align: justify !important; }
 
 
-/* --- 8. ACORDEÃO (COM OS "BLOQUINHOS" QUE VOCÊ AMOU) --- */
-.accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px; }
+/* --- 8. ACORDEÃO (Refinado) --- */
+.accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 16px; }
 .accordion-item { 
-    background: white; border: 1px solid rgba(255,255,255,0.6); 
-    border-radius: 15px; overflow: hidden; transition: 0.3s; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    background: rgba(255, 255, 255, 0.7); 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.8); 
+    border-radius: var(--radius-m); overflow: hidden; transition: 0.3s; 
 }
-.accordion-item.active { box-shadow: 0 15px 40px rgba(28, 104, 211, 0.15); background: rgba(255, 255, 255, 0.95); }
+.accordion-item.active { background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transform: scale(1.01); border-color: transparent; }
 
-.item-bercario { border-left: 6px solid #d49e13; }
-.item-infantil { border-left: 6px solid var(--laranja-vibrante); }
-.item-fundamental { border-left: 6px solid var(--azul-riviera); }
+/* Indicadores de Cor Laterais mais sutis */
+.item-bercario { border-left: 4px solid #FFcc00; }
+.item-infantil { border-left: 4px solid #FF9500; }
+.item-fundamental { border-left: 4px solid #007AFF; }
 
-.accordion-header { padding: 25px 30px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-.accordion-header h3 { margin: 0; font-size: 1.4rem; color: var(--texto-escuro); display: flex; flex-direction: column; gap: 5px; text-align: left; }
+.accordion-header { padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.accordion-header h3 { margin: 0; font-size: 1.25rem; color: var(--texto-titulo); display: flex; flex-direction: column; gap: 6px; text-align: left; }
 
-/* AQUI ESTÃO OS "BLOQUINHOS" (PÍLULAS) */
 .level-detail { 
-    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
     color: var(--azul-profundo); 
-    background: rgba(28, 104, 211, 0.08); /* Azulzinho bem claro */
-    padding: 6px 15px; 
-    border-radius: 50px; /* Borda redonda completa */
-    margin-top: 5px; display: inline-block; width: fit-content;
+    background: rgba(0, 122, 255, 0.1); 
+    padding: 6px 12px; 
+    border-radius: 20px; 
+    display: inline-block; width: fit-content;
 }
 
-.accordion-icon { font-size: 1.2rem; color: #aaa; transition: transform 0.3s ease; }
+.accordion-icon { font-size: 1.1rem; color: #C7C7CC; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .accordion-item.active .accordion-icon { transform: rotate(180deg); color: var(--azul-riviera); }
-.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 30px; }
-.accordion-content p { padding-bottom: 25px; margin-top: 10px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 24px; }
+.accordion-content p { padding-bottom: 24px; margin-top: 0px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px; }
 
 
-/* --- 9. MATRÍCULAS (Fontes e Botões Aprovados) --- */
+/* --- 9. MATRÍCULAS (Estilo App Store) --- */
 .cta-section { 
-    background: linear-gradient(160deg, var(--azul-riviera) 0%, var(--azul-profundo) 100%); 
+    background: linear-gradient(135deg, #007AFF 0%, #0055D4 100%); 
     color: white; padding: 100px 0; text-align: center; margin-top: 80px; 
-    border-radius: 50px 50px 0 0; clip-path: none; 
-    box-shadow: 0 -20px 50px rgba(28, 104, 211, 0.25); 
+    border-radius: 40px 40px 0 0; 
+    box-shadow: 0 -20px 60px rgba(0, 85, 212, 0.3); 
     position: relative; z-index: 2; margin-bottom: 80px; 
 }
-.cta-section::before { content: ''; position: absolute; inset: 0; background-image: var(--noise-pattern); opacity: 0.1; }
 
 .cta-titulo { 
-    color: var(--amarelo-sol) !important; margin-bottom: 40px; margin-top: 0; 
-    font-weight: 800; letter-spacing: -1px; line-height: 1.1 !important;
-    background: none; -webkit-text-fill-color: var(--amarelo-sol) !important; filter: none; 
+    color: white !important; margin-bottom: 40px; margin-top: 0; 
+    background: none; -webkit-text-fill-color: white !important; 
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.metodo-suporte-container { display: flex; gap: 30px; margin: 40px 0; text-align: left; }
+.metodo-suporte-container { display: flex; gap: 24px; margin: 40px 0; text-align: left; }
 .metodo-card { 
-    background: var(--vidro-dark-bg); backdrop-filter: blur(12px); 
-    border: var(--vidro-dark-borda); padding: 40px; border-radius: 20px; flex: 1; transition: 0.4s; 
+    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); 
+    border: 1px solid rgba(255, 255, 255, 0.2); padding: 32px; border-radius: var(--radius-l); flex: 1; transition: 0.3s; 
 }
-.metodo-card h3 { 
-    color: var(--amarelo-sol); margin-bottom: 15px; font-size: 1.4rem; 
-    background: none; -webkit-text-fill-color: var(--amarelo-sol); font-weight: 700;
-}
-.metodo-card p { color: rgba(255,255,255,0.9); }
+.metodo-card h3 { color: #FFD60A; margin-bottom: 10px; font-size: 1.3rem; }
+.metodo-card p { color: rgba(255,255,255,0.95); font-size: 0.95rem; }
 
-/* Botões Modernos */
-.cta-buttons-wrapper { display: flex; justify-content: center; gap: 20px; margin-top: 50px; }
+/* Botões Estilo iOS */
+.cta-buttons-wrapper { display: flex; justify-content: center; gap: 16px; margin-top: 50px; }
 .cta-button { 
-    padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; text-transform: uppercase; 
-    letter-spacing: 1px; font-size: 0.9rem; transition: all 0.3s; display: inline-block; text-align: center; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15); position: relative; overflow: hidden; 
+    padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; 
+    font-size: 0.9rem; transition: all 0.2s; display: inline-block; text-align: center; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
 }
-.cta-button::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: 0.5s; }
-.cta-button:hover::after { left: 100%; }
 
-.cta-button.primary { background: var(--amarelo-sol); color: var(--azul-profundo); border: 2px solid var(--amarelo-sol); }
-.cta-button.secondary { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
-.cta-button.simple { color: var(--azul-riviera); border: 2px solid var(--azul-riviera); background: transparent; padding: 12px 30px; }
+.cta-button.primary { 
+    background: #FFD60A; color: #000; border: none; 
+}
+.cta-button.primary:hover { background: #FFEA00; transform: scale(1.03); }
+
+.cta-button.secondary { 
+    background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px); 
+}
+.cta-button.secondary:hover { background: rgba(255,255,255,0.3); }
+
+.cta-button.simple { 
+    color: var(--azul-riviera); background: rgba(0, 122, 255, 0.1); 
+    border: none; padding: 14px 28px; 
+}
+.cta-button.simple:hover { background: rgba(0, 122, 255, 0.2); }
 
 
-/* --- 10. EXTRAS & RODAPÉ AZUL (TEXTO BRANCO) --- */
+/* --- 10. EXTRAS & RODAPÉ --- */
 .extras-container { display: flex; gap: 30px; margin-bottom: 60px; }
-.extra-card { flex: 1; text-align: center; }
-.map-container { border-radius: 20px; overflow: hidden; height: 300px; width: 100%; box-shadow: var(--vidro-shadow); }
+.map-container { border-radius: var(--radius-l); overflow: hidden; height: 300px; width: 100%; box-shadow: var(--vidro-shadow); }
 
-/* RODAPÉ AZUL FLUTUANTE */
 footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: relative; z-index: 2; }
 .footer-content-wrapper { 
     max-width: 1100px; margin: 0 auto; 
-    /* Azul Gradiente no lugar do preto */
-    background: linear-gradient(135deg, #1c68d3 0%, #0a2e7a 100%);
-    backdrop-filter: blur(20px); border-radius: 30px; padding: 50px; 
-    box-shadow: 0 20px 50px rgba(28, 104, 211, 0.3); border: 1px solid rgba(255,255,255,0.2); 
-    /* CORREÇÃO: TEXTO BRANCO */
-    color: #ffffff; 
+    background: #1C1C1E; /* Dark Gray Apple */
+    backdrop-filter: blur(20px); border-radius: 32px; padding: 50px; 
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); 
+    color: #F2F2F7; 
     position: relative; overflow: hidden;
 }
-.footer-content-wrapper::before { content: ''; position: absolute; inset: 0; background-image: var(--noise-pattern); opacity: 0.1; }
 
 .footer-inner { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
-.footer-info h4 { 
-    color: white !important; font-size: 1.8rem; margin-bottom: 10px; font-weight: 700; 
-    background: none; -webkit-text-fill-color: white !important; 
-}
-.footer-info p { margin-bottom: 5px; font-size: 0.95rem; color: rgba(255,255,255,0.9); } 
+.footer-info h4 { color: white !important; font-size: 1.5rem; margin-bottom: 12px; font-weight: 700; background: none; -webkit-text-fill-color: white !important; }
+.footer-info p { margin-bottom: 4px; font-size: 0.9rem; color: #AEAEB2; } 
 
-.footer-social { display: flex; gap: 15px; }
+.footer-social { display: flex; gap: 12px; }
 .social-btn { 
-    width: 50px; height: 50px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; 
-    background: rgba(255,255,255,0.15); color: white; text-decoration: none; font-weight: 800; transition: 0.3s; 
-    border: 1px solid rgba(255,255,255,0.3); font-size: 0; 
+    width: 44px; height: 44px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; 
+    background: rgba(255,255,255,0.1); color: white; text-decoration: none; font-weight: 700; transition: 0.2s; 
+    border: none; font-size: 0; 
 }
-.social-btn::before { font-size: 1rem; color: white; font-weight: bold; }
+.social-btn::before { font-size: 0.9rem; color: white; font-weight: 600; }
 .social-btn[href*="instagram"]::before { content: 'IG'; }
 .social-btn[href*="wa"]::before { content: 'WA'; }
-.social-btn:hover { background: var(--amarelo-sol); border-color: var(--amarelo-sol); transform: scale(1.1) rotate(10deg); }
-.social-btn:hover::before { color: var(--azul-profundo); }
+.social-btn:hover { background: var(--azul-riviera); transform: scale(1.1); }
 
-.footer-copy { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; font-size: 0.85rem; opacity: 0.8; color: white; position: relative; z-index: 2; }
+.footer-copy { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.8rem; color: #8E8E93; }
 
 
 /* =======================================================
-   🛠️ MOBILE 🛠️ - ESTRUTURA BLINDADA
+   🛠️ MOBILE 🛠️ - MANTIDO E OTIMIZADO
    ======================================================= */
 @media(max-width: 768px) {
     .top-bar { display: none; }
     header { width: 100%; top: 0; }
-    .navbar { height: 70px; }
-    .logo img { height: 45px; } 
+    .navbar { height: 60px; padding: 0 20px; }
+    .logo img { height: 40px; } 
     
     .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } 
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
     .nav-links-container {
-        position: fixed; top: 0; left: 0; height: 100vh; width: 80%; max-width: 320px;
-        background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
-        box-shadow: 5px 0 30px rgba(0,0,0,0.2);
+        position: fixed; top: 0; left: 0; height: 100vh; width: 85%; max-width: 320px;
+        background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px);
+        box-shadow: 10px 0 40px rgba(0,0,0,0.1);
         border-radius: 0 30px 30px 0; border-right: 1px solid rgba(255,255,255,0.5);
         transform: translateX(-100%); visibility: hidden;
-        z-index: 1002; padding: 90px 30px 40px; 
+        z-index: 1002; padding: 100px 30px 40px; 
         display: flex; flex-direction: column; justify-content: flex-start;
-        overflow-y: auto; transition: transform 0.4s, visibility 0s 0.4s;
+        overflow-y: auto; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s 0.4s;
     }
-    .nav-links-container.active { transform: translateX(0); visibility: visible; transition: transform 0.4s, visibility 0s; }
+    .nav-links-container.active { transform: translateX(0); visibility: visible; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s; }
     
     .menu-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.5); z-index: 998; opacity: 0; visibility: hidden; transition: 0.3s;
+        background: rgba(0,0,0,0.3); backdrop-filter: blur(2px); z-index: 998; opacity: 0; visibility: hidden; transition: 0.3s;
     }
     .menu-overlay.active { opacity: 1; visibility: visible; }
 
     .nav-menu { flex-direction: column; gap: 0; width: 100%; }
     .nav-item { width: 100%; border: none; }
     .nav-link { 
-        display: block; padding: 12px 0; 
-        font-size: 1.2rem; font-weight: 700; color: var(--azul-profundo); 
+        display: block; padding: 16px 0; 
+        font-size: 1.3rem; font-weight: 600; color: var(--texto-titulo); 
         border-bottom: 1px solid rgba(0,0,0,0.05); 
     }
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* LAYOUT MOBILE ORIGINAL (Sheets com borda colorida) */
+    /* Ajustes Mobile Cards */
     .sheet-card { 
         position: relative !important; top: auto !important; 
-        padding: 30px 20px; border-radius: 30px 30px 0 0; 
+        padding: 30px 24px; border-radius: 24px 24px 0 0; 
         min-height: auto; box-shadow: none; 
-        border-top: 5px solid var(--azul-riviera); margin-bottom: 20px; 
+        border-top: none; margin-bottom: 20px; 
+        background: white; /* Mobile prefere fundo sólido para leitura */
     }
-    .sheet-intro { border-top-color: var(--azul-riviera); }
-    .sheet-missao { border-top-color: var(--amarelo-sol); }
-    .sheet-visao { border-top-color: var(--laranja-vibrante); margin-bottom: 0; }
+    .sheet-card::after { content: none; } /* Sem linha colorida no mobile para simplificar */
 
-    h2 { font-size: 1.8rem; margin-bottom: 15px; margin-top: 10px !important; line-height: 1.1 !important; }
+    h2 { font-size: 1.7rem; margin-bottom: 20px; margin-top: 10px !important; letter-spacing: -0.02em; }
     .card-container { gap: 0px; }
     .accordion-header { padding: 20px; }
-    .accordion-header h3 { font-size: 1.2rem; }
-    .glass-card { padding: 30px 20px; border-radius: 20px; }
+    .accordion-header h3 { font-size: 1.1rem; }
+    .glass-card { padding: 30px 24px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
     
     footer { padding: 0 15px 30px; }
-    .footer-content-wrapper { padding: 30px 20px; border-radius: 20px; }
+    .footer-content-wrapper { padding: 40px 24px; border-radius: 24px; }
     .footer-inner { flex-direction: column; gap: 30px; text-align: center; }
     .footer-social { justify-content: center; }
-    .cta-button { width: 100%; margin-bottom: 10px; }
-    .cta-section { border-radius: 40px 40px 0 0; padding: 60px 0; margin-top: 40px; margin-bottom: 60px; }
+    .cta-button { width: 100%; margin-bottom: 12px; }
+    .cta-section { border-radius: 32px 32px 0 0; padding: 60px 20px; margin-top: 40px; margin-bottom: 60px; }
 }
 
 /* Animações */
-.fade-in-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+.fade-in-up { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
 .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
