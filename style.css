@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL (COLORED HANDLES + ROUNDED FIX) */
+/* style.css - VERSÃO FINAL GOLD MASTER (HANDLES COLORIDOS + ARREDONDAMENTO FIXO) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -138,7 +138,7 @@ header {
 .prev { left: 24px; } .next { right: 24px; }
 
 
-/* --- 7. CARDS & SHEETS (STICKY + CORES NOS TRACINHOS) --- */
+/* --- 7. CARDS & SHEETS (LÓGICA FINAL) --- */
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
@@ -154,7 +154,7 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* LÓGICA DO EMPILHAMENTO */
+/* --- CARTÕES EMPILHADOS --- */
 .sheet-card { 
     position: sticky; 
     border-radius: 32px 32px 0 0; 
@@ -166,42 +166,35 @@ header {
     background: rgba(255, 255, 255, 0.98); 
     display: flex; flex-direction: column; 
 }
-/* O Tracinho (Handle) Padrão */
-.sheet-card::before { 
-    content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); 
-    width: 40px; height: 4px; border-radius: 10px; 
-    background: rgba(0,0,0,0.1); /* Cor padrão */
-}
+/* Tracinho Padrão (Handle) */
+.sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; border-radius: 10px; background: rgba(0,0,0,0.1); }
 
-/* --- CARD 1: SOBRE (AZUL) --- */
+/* 1. SOBRE (AZUL) */
 .sheet-intro { 
-    top: 90px; 
-    z-index: 10; 
-    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%); 
-    color: white; 
+    top: 90px; z-index: 10; 
+    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%); color: white; 
 }
 .sheet-intro h2 { color: white !important; background: none !important; -webkit-text-fill-color: white !important; }
-.sheet-intro p { color: rgba(255, 255, 255, 0.95) !important; }
-/* Tracinho do cartão Azul: Branco Translúcido */
-.sheet-intro::before { background: rgba(255,255,255,0.3) !important; }
+.sheet-intro p { color: rgba(255, 255, 255, 0.95) !important; text-align: justify !important; }
+/* Handle Cinza/Branco Translúcido */
+.sheet-intro::before { background: rgba(255, 255, 255, 0.5) !important; }
 
-/* --- CARD 2: MISSÃO (AMARELO) --- */
-.sheet-missao { 
-    top: 140px; z-index: 20; 
-}
-/* Tracinho Amarelo */
+/* 2. MISSÃO (BRANCO) */
+.sheet-missao { top: 140px; z-index: 20; }
+.sheet-missao p { text-align: justify !important; }
+/* Handle Amarelo */
 .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-/* --- CARD 3: VISÃO (LARANJA + ARREDONDAMENTO TOTAL) --- */
+/* 3. VISÃO (BRANCO + CORREÇÃO ARREDONDAMENTO) */
 .sheet-visao { 
     top: 190px; z-index: 30; 
-    /* AQUI ESTÁ A CORREÇÃO DO ARREDONDAMENTO NA BASE */
-    border-radius: 32px !important; /* Força arredondamento total */
+    border-radius: 32px !important; /* FORÇA arredondamento completo sempre */
     margin-bottom: 50px; 
     min-height: auto; 
-    padding-bottom: 50px; /* Ajuste para ficar bonito */
+    padding-bottom: 50px;
 }
-/* Tracinho Laranja */
+.sheet-visao p { text-align: justify !important; }
+/* Handle Laranja */
 .sheet-visao::before { background: var(--laranja-vibrante) !important; }
 
 .sheet-card h2, .sheet-card h3 { text-align: center; }
@@ -338,19 +331,20 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     }
     .sheet-card::before { top: 10px; width: 30px; height: 3px; }
     
-    /* REPLICA A COR AZUL DO CARD DE ENTRADA NO MOBILE */
+    /* REPLICA COR AZUL NO MOBILE + TRACINHO */
     .sheet-intro { 
         top: 70px; z-index: 10; 
         background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
     }
-    .sheet-intro::before { background: rgba(255,255,255,0.3) !important; }
+    .sheet-intro::before { background: rgba(255,255,255,0.5) !important; }
 
     .sheet-missao { top: 110px; z-index: 20; }
     .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
+    /* VISÃO: FORÇA REDONDO EM BAIXO NO MOBILE */
     .sheet-visao { 
         top: 150px; z-index: 30; 
-        border-radius: 24px !important; /* CORREÇÃO MOBILE TBM */
+        border-radius: 24px !important; 
         margin-bottom: 30px; min-height: auto; 
     }
     .sheet-visao::before { background: var(--laranja-vibrante) !important; }
