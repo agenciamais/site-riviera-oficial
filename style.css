@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL DIAMANTE (SHADOW WATERMARK + ROUNDING FIX) */
+/* style.css - VERSÃO FINAL DIAMANTE (WATERMARK GLOW + SETA IOS + ROUND FIX) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -154,15 +154,17 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* == A MÁGICA DA MARCA D'ÁGUA (SHADOW GLOW) == */
+/* == MÁGICA DO ELEMENTO BRANCO: SHADOW GLOW == */
 #historia-previa { position: relative; }
 #historia-previa::before {
     content: '';
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%; 
-    height: 90%;
+    /* Centralizado */
+    top: 50%; left: 50%; 
+    transform: translate(-50%, -50%) rotate(-5deg);
+    
+    width: 100%; height: 120%; 
+    
     background-image: url('assets/forma-branca.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -170,10 +172,9 @@ header {
     z-index: 0;
     pointer-events: none;
     
-    /* AQUI ESTÁ O SEGREDO: DROP-SHADOW PARA REVELAR O BRANCO */
-    /* Cria uma sombra azulada suave ao redor da forma branca invisível */
-    filter: drop-shadow(0 10px 25px rgba(0, 122, 255, 0.15));
-    opacity: 0.8; /* Ajuste para não ficar muito forte */
+    /* AQUI: Sombra azulada forte para revelar a forma branca */
+    filter: drop-shadow(0 0 40px rgba(0, 85, 255, 0.15));
+    opacity: 0.9; 
 }
 #historia-previa .container { position: relative; z-index: 2; }
 
@@ -190,10 +191,9 @@ header {
     background: rgba(255, 255, 255, 0.98); 
     display: flex; flex-direction: column; 
 }
-/* Tracinho Padrão */
 .sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; border-radius: 10px; background: rgba(0,0,0,0.1); }
 
-/* ALINHAMENTO JUSTIFICADO GLOBAL NOS CARTÕES */
+/* Alinhamento */
 .sheet-card p { text-align: justify !important; }
 
 /* 1. SOBRE (AZUL) */
@@ -203,19 +203,17 @@ header {
 }
 .sheet-intro h2 { color: white !important; background: none !important; -webkit-text-fill-color: white !important; }
 .sheet-intro p { color: rgba(255, 255, 255, 0.95) !important; }
-/* Handle Translúcido */
 .sheet-intro::before { background: rgba(255, 255, 255, 0.5) !important; }
 
 /* 2. MISSÃO (BRANCO) */
 .sheet-missao { top: 140px; z-index: 20; }
-/* Handle Amarelo */
 .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-/* 3. VISÃO (BRANCO + FIX ARREDONDAMENTO FORÇADO) */
+/* 3. VISÃO (BRANCO + FIX TOTAL ARREDONDAMENTO) */
 .sheet-visao { 
     top: 190px; z-index: 30; 
     
-    /* SEGURANÇA TOTAL DE ARREDONDAMENTO */
+    /* SEGURANÇA TOTAL DE BORDA */
     border-radius: 32px !important;
     border-bottom-left-radius: 32px !important;
     border-bottom-right-radius: 32px !important;
@@ -223,15 +221,14 @@ header {
     margin-bottom: 50px; 
     min-height: auto; 
     padding-bottom: 50px;
-    overflow: hidden; /* Garante que nada vaze */
+    background: #fff; /* Fundo sólido para garantir */
 }
-/* Handle Laranja */
 .sheet-visao::before { background: var(--laranja-vibrante) !important; }
 
 .sheet-card h2, .sheet-card h3 { text-align: center; }
 
 
-/* --- 8. NÍVEIS DE ENSINO --- */
+/* --- 8. NÍVEIS DE ENSINO (SETINHA GLOW) --- */
 #niveis {
     background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
     border-radius: 40px; margin-top: 30px; margin-bottom: 30px;
@@ -266,10 +263,28 @@ header {
     font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;
     color: #ffffff; background: rgba(0, 0, 0, 0.2); padding: 6px 12px; border-radius: 20px; display: inline-block; width: fit-content; border: 1px solid rgba(255,255,255,0.2);
 }
+
+/* --- NOVA SETA GLOW ARREDONDADA (CSS PURO) --- */
 .accordion-icon { 
-    font-size: 1.2rem; color: rgba(255,255,255,0.7); transition: transform 0.3s; margin-left: 20px; flex-shrink: 0;
+    width: 14px; 
+    height: 14px; 
+    border-right: 3px solid rgba(255,255,255,0.9); /* Branco forte */
+    border-bottom: 3px solid rgba(255,255,255,0.9);
+    transform: rotate(45deg); /* Vira seta pra baixo */
+    margin-left: 20px; 
+    flex-shrink: 0;
+    border-radius: 2px; /* Pontas arredondadas */
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8)); /* Glow Branco */
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Pulo elástico */
 }
-.accordion-item.active .accordion-icon { transform: rotate(180deg); color: white; }
+/* Quando ativo, gira pra cima */
+.accordion-item.active .accordion-icon { 
+    transform: rotate(-135deg); 
+    border-color: #ffffff;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,1)); /* Glow mais forte */
+}
+
+
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
 .accordion-content p { 
     padding: 20px 30px 30px 30px; margin: 0; color: rgba(255, 255, 255, 0.95); font-size: 1rem; line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.15); 
@@ -374,12 +389,9 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     /* VISÃO MOBILE FIX */
     .sheet-visao { 
         top: 150px; z-index: 30; 
-        
-        /* FORÇA ARREDONDAMENTO MOBILE */
         border-radius: 24px !important; 
         border-bottom-left-radius: 24px !important;
         border-bottom-right-radius: 24px !important;
-        
         margin-bottom: 30px; min-height: auto; 
     }
     .sheet-visao::before { background: var(--laranja-vibrante) !important; }
