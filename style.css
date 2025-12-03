@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL (CLEAN BACKGROUND + BOTÃO IMPACTO + FIX SOMBRAS) */
+/* style.css - VERSÃO FINAL (CARTÕES SOBRE COMPACTOS + CLEAN BG + BOTÃO SOLAR) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -56,7 +56,7 @@ body {
     overflow-x: hidden; 
     position: relative;
     
-    /* Background Limpo (Sem a forma branca) */
+    /* Fundo Limpo (Sem formas, como pedido anteriormente) */
     background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
@@ -130,7 +130,7 @@ header {
 .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 
-/* --- 6. HERO SLIDER --- */
+/* --- 6. HERO SECTION (BOTÃO SOLAR) --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; box-shadow: 0 20px 60px -20px rgba(0, 122, 255, 0.2); border-radius: 0 0 40px 40px; }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -139,28 +139,8 @@ header {
 .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 .prev { left: 24px; } .next { right: 24px; }
 
-
-/* --- 7. CARDS & SHEETS --- */
-.content-section { padding: 60px 0; }
-.card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
-
-.glass-card { 
-    background: var(--vidro-bg); 
-    backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); 
-    border: var(--vidro-borda); 
-    box-shadow: var(--vidro-shadow); 
-    border-radius: var(--radius-l); 
-    padding: 50px; margin-bottom: 40px; 
-    position: relative; overflow: hidden;
-    transition: transform 0.3s ease; 
-}
-.glass-card:hover { transform: translateY(-5px); }
-
-/* == BOTÃO IMPACTANTE DA HOME (AMARELO) == */
-#historia-previa { position: relative; z-index: 1; }
-
+/* Botão Solar Impactante (Home) */
 #historia-previa .cta-button.primary {
-    /* Gradiente Ensolarado */
     background: linear-gradient(135deg, #FFD60A 0%, #FF9500 100%);
     color: var(--azul-profundo); 
     border: none;
@@ -177,19 +157,40 @@ header {
 }
 
 
+/* --- 7. CARDS & SHEETS --- */
+.content-section { padding: 60px 0; }
+.card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
+
+/* Estilo Base */
+.glass-card { 
+    background: var(--vidro-bg); 
+    backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); 
+    border: var(--vidro-borda); 
+    box-shadow: var(--vidro-shadow); 
+    border-radius: var(--radius-l); 
+    padding: 50px; margin-bottom: 40px; 
+    position: relative; overflow: hidden;
+    transition: transform 0.3s ease; 
+}
+.glass-card:hover { transform: translateY(-5px); }
+
+#historia-previa { position: relative; z-index: 1; }
+
+
 /* --- LÓGICA DO EMPILHAMENTO (STICKY) --- */
 .sheet-card { 
     position: sticky; 
     border-radius: 32px 32px 0 0; 
-    min-height: 450px; 
+    
+    /* --- CORREÇÃO: Altura Automática e Padding Menor --- */
+    min-height: auto; /* Remove altura fixa gigante */
+    padding: 40px 40px 80px 40px; /* Padding ajustado */
+    
     border-top: none; 
     margin-bottom: 0; 
-    padding: 50px 50px 80px 50px; 
-    /* Sombra ajustada para não criar "quadrados" laterais */
-    box-shadow: 0 -10px 25px rgba(0,0,0,0.06); 
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08); 
     background: rgba(255, 255, 255, 0.98); 
     display: flex; flex-direction: column; 
-    /* Isso ajuda a limpar renderizações fantasmas */
     transform: translateZ(0); 
 }
 .sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; border-radius: 10px; background: rgba(0,0,0,0.1); }
@@ -210,16 +211,16 @@ header {
 .sheet-missao { top: 140px; z-index: 20; }
 .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-/* 3. VISÃO (BRANCO + FIX "QUADRADOS INVISÍVEIS") */
+/* 3. VISÃO (BRANCO + FIX ARREDONDAMENTO) */
 .sheet-visao { 
     top: 190px; z-index: 30; 
-    /* Arredondamento forçado em todos os cantos */
     border-radius: 32px !important;
+    border-bottom-left-radius: 32px !important;
+    border-bottom-right-radius: 32px !important;
     margin-bottom: 50px; 
     min-height: auto; 
     padding-bottom: 50px;
     background-color: #ffffff !important;
-    /* Remove sombra do último para limpar o visual final */
     box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; 
 }
 .sheet-visao::before { background: var(--laranja-vibrante) !important; }
@@ -365,11 +366,13 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Ajuste Stack Mobile */
+    /* Ajuste Stack Mobile (COMPACTO) */
     .sheet-card { 
-        border-radius: 24px 24px 0 0; min-height: 400px; 
-        box-shadow: 0 -8px 25px rgba(0,0,0,0.06); /* Sombra mais leve para evitar quadrado */
-        margin-bottom: 0; background: white; padding: 30px 24px 80px 24px;
+        border-radius: 24px 24px 0 0; 
+        min-height: auto; /* Remove altura fixa no mobile */
+        box-shadow: 0 -8px 25px rgba(0,0,0,0.06); 
+        margin-bottom: 0; background: white; 
+        padding: 30px 24px 60px 24px; /* Padding Reduzido */
     }
     .sheet-card::before { top: 10px; width: 30px; height: 3px; }
     
@@ -382,7 +385,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .sheet-missao { top: 110px; z-index: 20; }
     .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-    /* VISÃO MOBILE FIX */
+    /* VISÃO MOBILE FIX ARREDONDAMENTO */
     .sheet-visao { 
         top: 150px; z-index: 30; 
         border-radius: 24px !important; 
