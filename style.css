@@ -1,10 +1,10 @@
-/* style.css - VERSÃO FINAL FINALÍSSIMA (STACK MOBILE ATIVO + NÍVEIS CORRIGIDO) */
+/* style.css - VERSÃO FINAL: BLUE INTRO SOBRE + STACK PERFEITO */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
     /* Cores da Marca */
-    --azul-riviera: #007AFF; /* Azul Vibrante Principal */
-    --azul-profundo: #0a2e7a; /* Azul Escuro para textos/rodapé */
+    --azul-riviera: #007AFF; 
+    --azul-profundo: #0a2e7a; 
     --amarelo-sol: #FFcc00; 
     --laranja-vibrante: #FF9500;
     
@@ -51,7 +51,7 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
 body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--texto-corpo); 
-    line-height: 1.6; /* Leitura melhorada */
+    line-height: 1.6;
     min-height: 100vh; 
     overflow-x: hidden; 
     position: relative;
@@ -138,7 +138,7 @@ header {
 .prev { left: 24px; } .next { right: 24px; }
 
 
-/* --- 7. CARDS & SHEETS (COM EMPILHAMENTO/STICKY) --- */
+/* --- 7. CARDS & SHEETS (STICKY STACK) --- */
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
@@ -154,42 +154,53 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* --- LÓGICA DO EMPILHAMENTO (DESKTOP) --- */
+/* LÓGICA DO EMPILHAMENTO */
 .sheet-card { 
     position: sticky; 
     border-radius: 32px 32px 0 0; 
-    min-height: 450px; /* Garante altura para o scroll */
+    min-height: 450px; 
     border-top: none; 
-    margin-bottom: 0; /* Remove margem para colarem visualmente */
-    padding: 50px 50px 80px 50px; /* Padding interno generoso */
-    box-shadow: 0 -15px 40px rgba(0,0,0,0.1); /* Sombra invertida */
-    background: rgba(255, 255, 255, 0.98); /* Fundo sólido para cobrir o de trás */
+    margin-bottom: 0; 
+    padding: 50px 50px 80px 50px; 
+    box-shadow: 0 -15px 40px rgba(0,0,0,0.1); 
+    background: rgba(255, 255, 255, 0.98); 
     display: flex; flex-direction: column; 
 }
 .sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 10px; }
 
-/* Posições de travamento (Desktop) */
-.sheet-intro { top: 90px; z-index: 10; }
-.sheet-missao { top: 140px; z-index: 20; }
-.sheet-visao { 
-    top: 190px; z-index: 30; 
-    border-radius: 32px; /* O último fecha redondinho */
-    margin-bottom: 50px; 
-    min-height: auto; 
+/* --- AQUI: A MUDANÇA PARA O PRIMEIRO CARTÃO SER AZUL --- */
+.sheet-intro { 
+    top: 90px; 
+    z-index: 10; 
+    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%); /* Fundo Azul */
+    color: white; /* Texto Branco */
 }
+/* Força o título dentro do cartão azul a ser branco */
+.sheet-intro h2 {
+    color: white !important;
+    background: none !important;
+    -webkit-text-fill-color: white !important;
+}
+/* Força o parágrafo a ser branco leve */
+.sheet-intro p {
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+/* Alça branca no cartão azul */
+.sheet-intro::before { background: rgba(255,255,255,0.3); }
+
+/* Cartões seguintes (Brancos) */
+.sheet-missao { top: 140px; z-index: 20; }
+.sheet-visao { top: 190px; z-index: 30; border-radius: 32px; margin-bottom: 50px; min-height: auto; }
 .sheet-card h2, .sheet-card h3 { text-align: center; }
 
 
-/* --- 8. NÍVEIS DE ENSINO (CORRIGIDO: AZUL VIBRANTE & LAYOUT) --- */
+/* --- 8. NÍVEIS DE ENSINO (AZUL VIBRANTE) --- */
 #niveis {
-    /* Gradiente Riviera Vibrante */
     background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
-    border-radius: 40px;
-    margin-top: 30px; margin-bottom: 30px;
+    border-radius: 40px; margin-top: 30px; margin-bottom: 30px;
     box-shadow: 0 20px 50px rgba(0, 85, 212, 0.3);
     padding: 60px 0; position: relative; overflow: hidden;
 }
-/* Título Branco Sólido */
 #niveis h2 {
     color: white !important; background: none !important;
     -webkit-text-fill-color: white !important;
@@ -276,7 +287,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 .footer-copy { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; font-size: 0.85rem; opacity: 0.8; color: white; position: relative; z-index: 2; }
 
 
-/* --- MOBILE (CORREÇÕES FINAIS) --- */
+/* --- MOBILE --- */
 @media(max-width: 768px) {
     .top-bar { display: none; }
     header { width: 100%; top: 0; }
@@ -307,27 +318,27 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* --- AJUSTE STACK MOBILE (ATIVADO E CORRIGIDO) --- */
+    /* Ajuste Stack Mobile */
     .sheet-card { 
-        /* Mantém o sticky no mobile */
-        border-radius: 24px 24px 0 0; 
-        min-height: 400px; /* Garante altura para rolar */
-        box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
-        margin-bottom: 0;
-        background: white; 
-        padding: 30px 24px 80px 24px; /* Padding interno corrigido para mobile */
+        border-radius: 24px 24px 0 0; min-height: 400px; box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+        margin-bottom: 0; background: white; padding: 30px 24px 80px 24px;
     }
-    .sheet-card::before { top: 10px; width: 30px; height: 3px; } /* Alça menor */
+    .sheet-card::before { top: 10px; width: 30px; height: 3px; }
+    
+    /* REPLICA A COR AZUL DO CARD DE ENTRADA NO MOBILE */
+    .sheet-intro { 
+        top: 70px; z-index: 10; 
+        background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
+    }
+    .sheet-intro::before { background: rgba(255,255,255,0.3); }
 
-    /* Posições de travamento ajustadas para o cabeçalho mobile (60px) */
-    .sheet-intro { top: 70px; z-index: 10; }
     .sheet-missao { top: 110px; z-index: 20; }
     .sheet-visao { top: 150px; z-index: 30; border-radius: 24px; margin-bottom: 30px; min-height: auto; }
 
     /* Ajuste Níveis Mobile */
     #niveis { border-radius: 24px; padding: 40px 0; width: 100%; margin: 20px 0; }
     #niveis h2 { font-size: 1.8rem; margin-bottom: 30px; }
-    .accordion-container { padding: 0 15px; } /* Margem lateral no mobile */
+    .accordion-container { padding: 0 15px; } 
     .accordion-header { padding: 20px; }
     .accordion-header h3 { font-size: 1.1rem; }
     
