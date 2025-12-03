@@ -1,44 +1,40 @@
-/* style.css - VERSÃO "iOS SCHOOL" - ESTRUTURA BLINDADA */
+/* style.css - VERSÃO FINAL GOLD MASTER: IOS TECH + FLOATING MENU */
 
-/* --- 1. VARIÁVEIS & CORES (Paleta Apple Education) --- */
+/* --- 1. VARIÁVEIS & CORES --- */
 :root {
-    /* Cores da Marca (Mantidas, mas aplicadas com mais sobriedade) */
-    --azul-riviera: #007AFF; /* Azul iOS System */
+    /* Cores Tech / Vibrantes */
+    --tech-blue-start: #007AFF; /* Azul iOS Brilhante */
+    --tech-blue-end: #00C6FF;   /* Azul Cyan Neon */
+    
+    /* Cores da Marca (Mantidas para detalhes) */
+    --azul-riviera: #007AFF;
     --azul-profundo: #0040DD;
     --amarelo-sol: #FFcc00; 
-    --laranja-vibrante: #FF9500; /* Laranja iOS System */
+    --laranja-vibrante: #FF9500;
     
-    /* Cores de Texto */
-    --texto-titulo: #1D1D1F; /* Preto suave da Apple ("Ink") */
-    --texto-corpo: #424245; /* Cinza escuro para leitura */
+    /* Textos */
+    --texto-corpo: #424245; 
     --texto-suave: #86868B;
 
-    /* Vidro Premium (Mais translúcido e focado no Blur) */
-    --vidro-bg: rgba(255, 255, 255, 0.75); 
-    --vidro-borda: 1px solid rgba(255, 255, 255, 0.6);
-    --vidro-shadow: 0 10px 40px -10px rgba(0,0,0,0.1); /* Sombra difusa e elegante */
-    --blur-effect: blur(30px) saturate(180%); /* Saturação alta para cores vivas atrás do vidro */
+    /* Vidro Premium */
+    --vidro-bg: rgba(255, 255, 255, 0.85); 
+    --vidro-borda: 1px solid rgba(255, 255, 255, 0.8);
+    --vidro-shadow: 0 15px 40px -10px rgba(0, 122, 255, 0.15);
+    --blur-effect: blur(30px) saturate(140%);
     
-    --vidro-dark-bg: rgba(255, 255, 255, 0.4);
-    --vidro-dark-borda: 1px solid rgba(255, 255, 255, 0.5);
-    
-    /* Raios de Borda (Consistência Squircle) */
     --radius-l: 24px;
     --radius-m: 16px;
-    --radius-s: 12px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 
-/* Scrollbar Estilizada */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.3); }
+::-webkit-scrollbar-thumb { background: rgba(0, 122, 255, 0.3); border-radius: 10px; }
 
-/* --- 2. PRELOADER (Mantido igual para não quebrar lógica) --- */
+/* --- 2. PRELOADER --- */
 #preloader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: #ffffff; z-index: 99999;
@@ -57,7 +53,6 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
 
 /* --- 3. BACKGROUND & TIPOGRAFIA SYSTEM --- */
 body {
-    /* O SEGREDO DO IOS: Fontes do Sistema */
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--texto-corpo); 
     line-height: 1.5;
@@ -65,45 +60,51 @@ body {
     overflow-x: hidden; 
     position: relative;
     
-    /* Fundo Gradiente Mesh Suave */
+    /* Fundo Gradiente "Breathing" Suave */
     background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
-                radial-gradient(circle at 0% 100%, #E8F5E9 0%, transparent 50%),
-                #FAFAFA; /* Base off-white */
+                #FAFAFA;
     background-attachment: fixed;
-    -webkit-font-smoothing: antialiased; /* Renderização de texto nítida */
+    -webkit-font-smoothing: antialiased;
 }
-body.menu-open { overflow: hidden; }
+body.menu-open { overflow: hidden; } /* Bloqueia scroll quando menu abre */
 
-/* --- 4. GERAL --- */
+
+/* --- 4. TÍTULOS TECH (O PEDIDO ESPECIAL) --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
 
-/* Títulos: Limpos, Escuros e com Tracking Apertado (Estilo Apple) */
 h2 {
     font-size: 2.5rem; 
     margin-bottom: 25px; 
     text-align: center; 
-    font-weight: 700; 
-    letter-spacing: -0.025em; /* Tracking negativo clássico da Apple */
-    color: var(--texto-titulo);
+    font-weight: 800; 
+    letter-spacing: -0.03em;
     line-height: 1.1;
+    
+    /* O Degradê Azul Tech Saturação Alta */
+    background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-riviera) 40%, #00C6FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 15px rgba(0, 122, 255, 0.2)); /* Glow Tech */
 }
 
-.sheet-card h3, .accordion-header h3, .logo-text {
-    font-weight: 600;
-    color: var(--azul-riviera);
-    letter-spacing: -0.01em;
+/* Subtítulos Tech */
+.sheet-card h3, .accordion-header h3, .metodo-card h3 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, var(--azul-riviera) 0%, #00C6FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 p { color: var(--texto-corpo); margin-bottom: 15px; font-size: 1.05rem; }
-#proposta p, #proposta .texto-justificado { text-align: center !important; }
 
 
-/* --- 5. HEADER (Efeito Frost) --- */
+/* --- 5. HEADER (Frost) --- */
 header {
-    background: rgba(255, 255, 255, 0.65); /* Mais transparente */
-    backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%);
+    background: rgba(255, 255, 255, 0.75); 
+    backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
     position: sticky; top: 0; 
     z-index: 1000; 
     width: 100%;
@@ -113,60 +114,49 @@ header {
 .top-bar { display: none; } 
 
 .navbar { display: flex; justify-content: space-between; align-items: center; height: 80px; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
-.logo img { height: 50px; width: auto; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.logo img { height: 50px; width: auto; transition: transform 0.3s; }
 .logo:hover img { transform: scale(1.05); }
 
 .nav-menu { display: flex; list-style: none; gap: 30px; }
 .nav-link { 
-    text-decoration: none; 
-    color: var(--texto-titulo); 
-    font-weight: 500; 
-    position: relative; 
-    transition: color 0.3s; 
-    font-size: 0.95rem; 
+    text-decoration: none; color: #1D1D1F; font-weight: 600; 
+    position: relative; transition: color 0.3s; font-size: 0.95rem; 
 }
 .nav-link:hover, .nav-link.active { color: var(--azul-riviera); }
-
-/* Indicador de menu minimalista (ponto em vez de linha) */
 .nav-link::after { 
-    content: ''; position: absolute; bottom: -5px; left: 50%; width: 4px; height: 4px; 
+    content: ''; position: absolute; bottom: -5px; left: 50%; width: 5px; height: 5px; 
     background: var(--azul-riviera); border-radius: 50%; 
-    opacity: 0; transform: translateX(-50%) scale(0); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    opacity: 0; transform: translateX(-50%) scale(0); transition: 0.3s; 
 }
 .nav-link:hover::after, .nav-link.active::after { opacity: 1; transform: translateX(-50%) scale(1); }
 
 .hamburger { display: none; cursor: pointer; z-index: 1002; }
-.bar { display: block; width: 24px; height: 2px; margin: 6px auto; background: var(--texto-titulo); border-radius: 2px; transition: 0.3s; }
+.bar { display: block; width: 26px; height: 2px; margin: 6px auto; background: var(--azul-riviera); border-radius: 2px; transition: 0.3s; }
 
 
-/* --- 6. HERO SLIDER (Preservado) --- */
+/* --- 6. HERO SLIDER --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { 
     position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; 
-    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.3); /* Sombra mais difusa */
-    border-radius: 0 0 40px 40px; /* Curva mais suave */
+    box-shadow: 0 20px 60px -20px rgba(0, 122, 255, 0.2);
+    border-radius: 0 0 40px 40px; 
 }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
 .slide { min-width: 100%; position: relative; } 
 .slide img { width: 100%; height: auto; display: block; object-fit: cover; }
-
 .prev, .next { 
     position: absolute; top: 50%; transform: translateY(-50%); 
-    background: rgba(255,255,255,0.3); backdrop-filter: blur(10px); 
-    color: white; border: none; 
-    width: 44px; height: 44px; border-radius: 50%; 
+    background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); 
+    color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; 
     cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; 
-    transition: all 0.3s; 
 }
 .prev { left: 24px; } .next { right: 24px; }
-.prev:hover, .next:hover { background: rgba(255,255,255,0.8); color: var(--azul-riviera); transform: translateY(-50%) scale(1.1); }
 
 
-/* --- 7. CARDS & SHEETS (Design iOS) --- */
+/* --- 7. CARDS & SHEETS --- */
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
-/* O Cartão de Vidro Apple */
 .glass-card, .sheet-card { 
     background: var(--vidro-bg); 
     backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); 
@@ -175,150 +165,143 @@ header {
     border-radius: var(--radius-l); 
     padding: 50px; margin-bottom: 40px; 
     position: relative; overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transition: transform 0.3s ease; 
 }
-.glass-card:hover { transform: translateY(-3px); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15); }
+.glass-card:hover { transform: translateY(-5px); }
 
-/* SHEETS */
-.sheet-card { 
-    position: sticky; 
-    border-radius: 32px 32px 0 0; 
-    min-height: 300px; 
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.05); 
-    border-top: none; /* Removemos a borda grossa colorida para um visual mais clean */
-}
-/* Reintroduzindo a cor como uma linha fina e elegante no topo */
-.sheet-card::after {
-    content: ''; position: absolute; top: 0; left: 30%; right: 30%; height: 4px; border-radius: 0 0 4px 4px;
-}
+/* Sheets Empilhados */
+.sheet-card { position: sticky; border-radius: 32px 32px 0 0; min-height: 300px; border-top: none; }
+.sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: rgba(0,0,0,0.1); border-radius: 10px; }
+
 .sheet-intro { top: 110px; z-index: 10; }
-.sheet-intro::after { background: var(--azul-riviera); }
-
 .sheet-missao { top: 150px; z-index: 20; }
-.sheet-missao::after { background: var(--amarelo-sol); }
-
 .sheet-visao { top: 190px; z-index: 30; border-radius: 32px; margin-bottom: 50px; }
-.sheet-visao::after { background: var(--laranja-vibrante); }
 
-.sheet-card h2, .sheet-card h3 { text-align: center; margin-bottom: 20px; }
+/* Correção de alinhamento de texto solicitada */
+.sheet-card h2, .sheet-card h3 { text-align: center; }
 .sheet-card p { text-align: justify !important; }
 
 
-/* --- 8. ACORDEÃO (Refinado) --- */
+/* --- 8. ACORDEÃO (NÍVEIS) --- */
 .accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 16px; }
 .accordion-item { 
-    background: rgba(255, 255, 255, 0.7); 
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.8); 
     border-radius: var(--radius-m); overflow: hidden; transition: 0.3s; 
 }
-.accordion-item.active { background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transform: scale(1.01); border-color: transparent; }
+.accordion-item.active { background: #fff; box-shadow: 0 10px 30px rgba(0, 122, 255, 0.1); transform: scale(1.01); }
 
-/* Indicadores de Cor Laterais mais sutis */
 .item-bercario { border-left: 4px solid #FFcc00; }
 .item-infantil { border-left: 4px solid #FF9500; }
 .item-fundamental { border-left: 4px solid #007AFF; }
 
 .accordion-header { padding: 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-.accordion-header h3 { margin: 0; font-size: 1.25rem; color: var(--texto-titulo); display: flex; flex-direction: column; gap: 6px; text-align: left; }
-
+.accordion-header h3 { margin: 0; font-size: 1.25rem; display: flex; flex-direction: column; gap: 6px; text-align: left; }
 .level-detail { 
-    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
-    color: var(--azul-profundo); 
-    background: rgba(0, 122, 255, 0.1); 
-    padding: 6px 12px; 
-    border-radius: 20px; 
-    display: inline-block; width: fit-content;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;
+    color: var(--azul-profundo); background: rgba(0, 122, 255, 0.1); 
+    padding: 6px 12px; border-radius: 20px; display: inline-block; width: fit-content;
 }
-
-.accordion-icon { font-size: 1.1rem; color: #C7C7CC; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.accordion-icon { font-size: 1.1rem; color: #C7C7CC; transition: transform 0.3s; }
 .accordion-item.active .accordion-icon { transform: rotate(180deg); color: var(--azul-riviera); }
 .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; padding: 0 24px; }
 .accordion-content p { padding-bottom: 24px; margin-top: 0px; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 16px; }
 
 
-/* --- 9. MATRÍCULAS (Estilo App Store) --- */
+/* --- 9. MATRÍCULAS (Com Botão Azul) --- */
 .cta-section { 
     background: linear-gradient(135deg, #007AFF 0%, #0055D4 100%); 
     color: white; padding: 100px 0; text-align: center; margin-top: 80px; 
     border-radius: 40px 40px 0 0; 
-    box-shadow: 0 -20px 60px rgba(0, 85, 212, 0.3); 
     position: relative; z-index: 2; margin-bottom: 80px; 
 }
-
+/* Título aqui deve ser branco/amarelo para contraste no fundo azul */
 .cta-titulo { 
-    color: white !important; margin-bottom: 40px; margin-top: 0; 
-    background: none; -webkit-text-fill-color: white !important; 
-    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: none !important; 
+    -webkit-text-fill-color: var(--amarelo-sol) !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .metodo-suporte-container { display: flex; gap: 24px; margin: 40px 0; text-align: left; }
 .metodo-card { 
     background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); 
-    border: 1px solid rgba(255, 255, 255, 0.2); padding: 32px; border-radius: var(--radius-l); flex: 1; transition: 0.3s; 
+    border: 1px solid rgba(255, 255, 255, 0.2); padding: 32px; border-radius: var(--radius-l); flex: 1; 
 }
-.metodo-card h3 { color: #FFD60A; margin-bottom: 10px; font-size: 1.3rem; }
-.metodo-card p { color: rgba(255,255,255,0.95); font-size: 0.95rem; }
+/* Subtítulos dentro do card de matrícula em amarelo para contraste */
+.metodo-card h3 { 
+    background: none; -webkit-text-fill-color: #FFD60A; 
+}
+.metodo-card p { color: rgba(255,255,255,0.95); }
 
-/* Botões Estilo iOS */
+/* BOTÕES */
 .cta-buttons-wrapper { display: flex; justify-content: center; gap: 16px; margin-top: 50px; }
 .cta-button { 
-    padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; 
-    font-size: 0.9rem; transition: all 0.2s; display: inline-block; text-align: center; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+    padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 700; 
+    font-size: 0.95rem; transition: all 0.2s; display: inline-block; text-align: center; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
 }
 
+/* O PEDIDO: Botão Branco com Letra Azul */
 .cta-button.primary { 
-    background: #FFD60A; color: #000; border: none; 
+    background: white; 
+    color: var(--azul-riviera); /* Letra Azul */
+    border: none; 
 }
-.cta-button.primary:hover { background: #FFEA00; transform: scale(1.03); }
+.cta-button.primary:hover { transform: scale(1.05); background: #f0f8ff; }
 
 .cta-button.secondary { 
-    background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px); 
+    background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); 
 }
 .cta-button.secondary:hover { background: rgba(255,255,255,0.3); }
 
+/* Botão simples da página Sobre */
 .cta-button.simple { 
     color: var(--azul-riviera); background: rgba(0, 122, 255, 0.1); 
-    border: none; padding: 14px 28px; 
+    border: none; padding: 14px 28px; box-shadow: none;
 }
-.cta-button.simple:hover { background: rgba(0, 122, 255, 0.2); }
 
 
-/* --- 10. EXTRAS & RODAPÉ --- */
+/* --- 10. RODAPÉ (RESTAURADO: AZUL + TEXTO BRANCO) --- */
 .extras-container { display: flex; gap: 30px; margin-bottom: 60px; }
 .map-container { border-radius: var(--radius-l); overflow: hidden; height: 300px; width: 100%; box-shadow: var(--vidro-shadow); }
 
 footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: relative; z-index: 2; }
 .footer-content-wrapper { 
     max-width: 1100px; margin: 0 auto; 
-    background: #1C1C1E; /* Dark Gray Apple */
-    backdrop-filter: blur(20px); border-radius: 32px; padding: 50px; 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); 
-    color: #F2F2F7; 
+    /* Azul Gradiente no lugar do preto */
+    background: linear-gradient(135deg, #1c68d3 0%, #0a2e7a 100%);
+    backdrop-filter: blur(20px); border-radius: 30px; padding: 50px; 
+    box-shadow: 0 20px 50px rgba(28, 104, 211, 0.3); border: 1px solid rgba(255,255,255,0.2); 
+    /* CORREÇÃO: TEXTO BRANCO */
+    color: #ffffff; 
     position: relative; overflow: hidden;
 }
+.footer-content-wrapper::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); opacity: 0.1; }
 
 .footer-inner { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
-.footer-info h4 { color: white !important; font-size: 1.5rem; margin-bottom: 12px; font-weight: 700; background: none; -webkit-text-fill-color: white !important; }
-.footer-info p { margin-bottom: 4px; font-size: 0.9rem; color: #AEAEB2; } 
-
-.footer-social { display: flex; gap: 12px; }
-.social-btn { 
-    width: 44px; height: 44px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; 
-    background: rgba(255,255,255,0.1); color: white; text-decoration: none; font-weight: 700; transition: 0.2s; 
-    border: none; font-size: 0; 
+.footer-info h4 { 
+    color: white !important; font-size: 1.8rem; margin-bottom: 10px; font-weight: 700; 
+    background: none; -webkit-text-fill-color: white !important; 
 }
-.social-btn::before { font-size: 0.9rem; color: white; font-weight: 600; }
+.footer-info p { margin-bottom: 5px; font-size: 0.95rem; color: rgba(255,255,255,0.9); } 
+
+.footer-social { display: flex; gap: 15px; }
+.social-btn { 
+    width: 50px; height: 50px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; 
+    background: rgba(255,255,255,0.15); color: white; text-decoration: none; font-weight: 800; transition: 0.3s; 
+    border: 1px solid rgba(255,255,255,0.3); font-size: 0; 
+}
+.social-btn::before { font-size: 1rem; color: white; font-weight: bold; }
 .social-btn[href*="instagram"]::before { content: 'IG'; }
 .social-btn[href*="wa"]::before { content: 'WA'; }
-.social-btn:hover { background: var(--azul-riviera); transform: scale(1.1); }
+.social-btn:hover { background: var(--amarelo-sol); border-color: var(--amarelo-sol); transform: scale(1.1) rotate(10deg); }
+.social-btn:hover::before { color: var(--azul-profundo); }
 
-.footer-copy { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 0.8rem; color: #8E8E93; }
+.footer-copy { text-align: center; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; font-size: 0.85rem; opacity: 0.8; color: white; position: relative; z-index: 2; }
 
 
 /* =======================================================
-   🛠️ MOBILE 🛠️ - MANTIDO E OTIMIZADO
+   🛠️ MOBILE 🛠️ - DESIGN FINAL (FLOATING MENU)
    ======================================================= */
 @media(max-width: 768px) {
     .top-bar { display: none; }
@@ -329,45 +312,71 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } 
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
+    /* MENU FLUTUANTE ESTILO IOS WIDGET (A CORREÇÃO DO BUG) */
     .nav-links-container {
-        position: fixed; top: 0; left: 0; height: 100vh; width: 85%; max-width: 320px;
-        background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(30px);
-        box-shadow: 10px 0 40px rgba(0,0,0,0.1);
-        border-radius: 0 30px 30px 0; border-right: 1px solid rgba(255,255,255,0.5);
-        transform: translateX(-100%); visibility: hidden;
-        z-index: 1002; padding: 100px 30px 40px; 
+        position: fixed; 
+        top: 20px; 
+        left: 20px; 
+        width: calc(100% - 40px); /* Margem de 20px dos lados */
+        max-width: 320px; /* Não deixa ficar gigante em tablets */
+        height: auto; 
+        max-height: calc(100vh - 40px);
+        
+        background: rgba(255, 255, 255, 0.95); 
+        backdrop-filter: blur(30px) saturate(180%);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        border: 1px solid rgba(255,255,255,0.5);
+        
+        border-radius: 24px; /* Bem arredondado */
+        
+        /* Começa invisível e menor */
+        transform: scale(0.9) translateY(-20px); 
+        opacity: 0; 
+        visibility: hidden;
+        
+        z-index: 1002; 
+        padding: 30px 24px; 
         display: flex; flex-direction: column; justify-content: flex-start;
-        overflow-y: auto; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s 0.4s;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .nav-links-container.active { transform: translateX(0); visibility: visible; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s; }
+    
+    /* Estado Ativo: Pop In */
+    .nav-links-container.active { 
+        transform: scale(1) translateY(0); 
+        opacity: 1; 
+        visibility: visible; 
+    }
     
     .menu-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.3); backdrop-filter: blur(2px); z-index: 998; opacity: 0; visibility: hidden; transition: 0.3s;
+        background: rgba(0,0,0,0.3); backdrop-filter: blur(4px); z-index: 998; 
+        opacity: 0; visibility: hidden; transition: 0.3s;
     }
     .menu-overlay.active { opacity: 1; visibility: visible; }
 
     .nav-menu { flex-direction: column; gap: 0; width: 100%; }
     .nav-item { width: 100%; border: none; }
+    
+    /* Links mais compactos (Pedido atendido) */
     .nav-link { 
-        display: block; padding: 16px 0; 
-        font-size: 1.3rem; font-weight: 600; color: var(--texto-titulo); 
+        display: block; padding: 12px 0; 
+        font-size: 1.15rem; font-weight: 600; color: #1D1D1F; 
         border-bottom: 1px solid rgba(0,0,0,0.05); 
     }
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Ajustes Mobile Cards */
+    /* Ajustes Gerais Mobile */
     .sheet-card { 
         position: relative !important; top: auto !important; 
         padding: 30px 24px; border-radius: 24px 24px 0 0; 
         min-height: auto; box-shadow: none; 
         border-top: none; margin-bottom: 20px; 
-        background: white; /* Mobile prefere fundo sólido para leitura */
+        background: white; 
     }
-    .sheet-card::after { content: none; } /* Sem linha colorida no mobile para simplificar */
+    .sheet-card::before { content: none; } 
 
-    h2 { font-size: 1.7rem; margin-bottom: 20px; margin-top: 10px !important; letter-spacing: -0.02em; }
+    h2 { font-size: 1.8rem; margin-bottom: 20px; margin-top: 10px !important; }
     .card-container { gap: 0px; }
     .accordion-header { padding: 20px; }
     .accordion-header h3 { font-size: 1.1rem; }
