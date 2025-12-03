@@ -7,24 +7,18 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ESTILOS EXCLUSIVOS DA TIMELINE */
-        .timeline-year {
+        /* ESTILOS ESPECÍFICOS PARA ESTA PÁGINA */
+        
+        /* Ajuste para o título Destaques 2025 */
+        .ano-destaque-titulo {
             text-align: center;
-            margin: 60px 0 40px;
+            color: var(--azul-riviera);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
             position: relative;
         }
-        .timeline-year h2 {
-            font-size: 4rem;
-            opacity: 0.1; 
-            margin: 0;
-            line-height: 1;
-            color: var(--azul-riviera);
-            background: none;
-            -webkit-text-fill-color: initial; 
-        }
-        
-        /* Removi o estilo .timeline-badge pois tiramos o botão */
 
+        /* Estilos do Cartão de Evento */
         .event-card {
             display: flex;
             flex-direction: column; 
@@ -34,7 +28,8 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: transform 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
-            margin-bottom: 40px;
+            /* Margem inferior removida pois estará dentro do bloco de vidro */
+            margin-bottom: 0; 
         }
         .event-card:hover { transform: translateY(-5px); }
 
@@ -101,11 +96,11 @@
         </nav>
     </header>
     <main>
-        <section class="content-section" style="padding-bottom: 0;">
+        <section class="content-section" style="padding-bottom: 20px;">
             <div class="container">
-                <div class="glass-card fade-in-up" style="text-align: center;">
-                    <h2>Mural Riviera</h2>
-                    <p>Acompanhe nossos melhores momentos e celebre nossas conquistas!</p>
+                <div class="glass-card fade-in-up" style="text-align: center; padding: 30px;">
+                    <h2 style="margin-bottom: 10px;">Mural Riviera</h2>
+                    <p>Nossos melhores momentos e conquistas!</p>
                 </div>
             </div>
         </section>
@@ -113,24 +108,24 @@
         <section class="content-section" style="padding-top: 0;">
             <div class="container">
 
-                <div class="timeline-year fade-in-up">
-                    <h2>2025</h2>
+                <div class="glass-card fade-in-up" style="border: 2px solid #ffffff;">
+                    
+                    <h2 class="ano-destaque-titulo">Destaques 2025</h2>
+
+                    <div class="event-card fade-in-up">
+                        <div class="event-img-wrapper">
+                            <img src="assets/capa-formatura.jpg" alt="Formatura ABC Escola Riviera">
+                            <span class="event-date">Dezembro</span>
+                        </div>
+                        <div class="event-content">
+                            <h3>Formatura do ABC</h3>
+                            <p>Um momento mágico marcando o encerramento de um ciclo lindo! Confira todas as fotos oficiais da nossa cerimônia no álbum completo.</p>
+                            
+                            <a href="https://photos.app.goo.gl/ypHBpypSSfzSFbwd9" class="cta-button primary" target="_blank">Ver Ensaio Fotográfico</a>
+                        </div>
                     </div>
 
-                <div class="event-card fade-in-up">
-                    <div class="event-img-wrapper">
-                        <img src="assets/capa-formatura.jpg" alt="Formatura ABC Escola Riviera">
-                        <span class="event-date">Dezembro</span>
-                    </div>
-                    <div class="event-content">
-                        <h3>Formatura do ABC</h3>
-                        <p>Um momento mágico marcando o encerramento de um ciclo lindo! Confira todas as fotos oficiais da nossa cerimônia no álbum completo.</p>
-                        
-                        <a href="https://photos.app.goo.gl/ypHBpypSSfzSFbwd9" class="cta-button primary" target="_blank">Ver Ensaio Fotográfico</a>
-                    </div>
-                </div>
-
-            </div>
+                </div> </div>
         </section>
 
         <section class="content-section">
