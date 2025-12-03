@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL (BACKGROUND SHAPES + STACK FIX) */
+/* style.css - VERSÃO FINAL (LAÇOS DECORATIVOS + FIX GERAL) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -55,7 +55,6 @@ body {
     min-height: 100vh; 
     overflow-x: hidden; 
     position: relative;
-    /* O Fundo precisa ter cor para o branco aparecer por cima */
     background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
@@ -156,51 +155,53 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* == CONFIGURAÇÃO DO BACKGROUND COM FORMAS (Aba Início) == */
+/* == CONFIGURAÇÃO DOS LAÇOS NO BACKGROUND (Aba Início) == */
 #historia-previa { 
     position: relative; 
-    overflow: hidden; /* Corta o que passar da seção lateralmente */
+    /* overflow: visible; Permite que vaze se necessário, ou hidden para cortar */
+    overflow: hidden;
 }
 
-/* FORMA 1 (Superior Esquerda) */
-#historia-previa::before {
-    content: '';
-    position: absolute;
-    top: -50px; /* Sobe um pouco para cortar */
-    left: -80px; /* Sai para a esquerda */
-    width: 350px; 
-    height: 350px;
-    background-image: url('assets/forma-branca.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    opacity: 0.3; /* Translucidez */
-    transform: rotate(-15deg);
-    z-index: 0; /* Atrás de tudo */
-    pointer-events: none;
-}
-
-/* FORMA 2 (Inferior Direita) */
+/* Configuração Comum dos Laços */
+#historia-previa::before, 
 #historia-previa::after {
     content: '';
     position: absolute;
-    bottom: -50px; 
-    right: -80px;
-    width: 400px; /* Um pouco maior */
-    height: 400px;
+    width: 280px; /* Tamanho do laço */
+    height: 280px;
     background-image: url('assets/forma-branca.png');
     background-repeat: no-repeat;
     background-size: contain;
-    opacity: 0.3; /* Translucidez */
-    transform: rotate(20deg);
-    z-index: 0; /* Atrás de tudo */
+    z-index: 0; /* Fica no fundo */
     pointer-events: none;
+    
+    /* AQUI ESTÁ O TRUQUE DE VISIBILIDADE */
+    /* Sombra azulada para destacar o branco no fundo claro */
+    filter: drop-shadow(0 0 15px rgba(28, 104, 211, 0.4)); 
+    opacity: 0.7; /* Mais visível */
 }
 
-/* Garante que o cartão de texto fique NA FRENTE das formas */
+/* LAÇO 1 (Topo Esquerdo) */
+#historia-previa::before {
+    top: -40px; /* Sobe um pouco */
+    left: -40px; /* Sai um pouco para esquerda */
+    /* Rotaciona para o laço ficar pra fora e pontas pra dentro */
+    transform: rotate(-20deg); 
+}
+
+/* LAÇO 2 (Rodapé Direito) */
+#historia-previa::after {
+    bottom: -40px; 
+    right: -40px;
+    /* Rotaciona o oposto */
+    transform: rotate(160deg); 
+}
+
+/* O CARTÃO DE TEXTO (Fica na frente das pontas) */
 #historia-previa .glass-card { 
     position: relative; 
-    z-index: 2; /* Fica acima do z-index 0 das formas */
-    background: rgba(255, 255, 255, 0.9); /* Um pouco mais sólido para cobrir as formas atrás dele */
+    z-index: 2; /* Importante: Fica em cima do z-index 0 dos laços */
+    background: rgba(255, 255, 255, 0.95); /* Fundo sólido para esconder as pontas */
 }
 
 
@@ -407,7 +408,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .sheet-missao { top: 110px; z-index: 20; }
     .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-    /* VISÃO MOBILE FIX */
+    /* VISÃO MOBILE FIX ARREDONDAMENTO */
     .sheet-visao { 
         top: 150px; z-index: 30; 
         border-radius: 24px !important; 
