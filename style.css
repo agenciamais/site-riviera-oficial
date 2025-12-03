@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL DIAMANTE (FORMA BRANCA + HANDLES COLORIDOS + ARREDONDAMENTO) */
+/* style.css - VERSÃO FINAL DIAMANTE (SHADOW WATERMARK + ROUNDING FIX) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -90,7 +90,6 @@ h2 {
 }
 
 p { color: var(--texto-corpo); margin-bottom: 15px; font-size: 1.05rem; }
-/* Classe global para justificar texto */
 .texto-justificado { text-align: justify !important; }
 
 
@@ -139,7 +138,7 @@ header {
 .prev { left: 24px; } .next { right: 24px; }
 
 
-/* --- 7. CARDS & SHEETS (COM A FORMA BRANCA NO FUNDO) --- */
+/* --- 7. CARDS & SHEETS --- */
 .content-section { padding: 60px 0; }
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 
@@ -155,27 +154,28 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* == NOVO: FUNDO FORMA BRANCA NA HISTÓRIA == */
-#historia-previa {
-    position: relative;
-    /* Mantém o padding original */
-}
+/* == A MÁGICA DA MARCA D'ÁGUA (SHADOW GLOW) == */
+#historia-previa { position: relative; }
 #historia-previa::before {
     content: '';
     position: absolute;
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%); /* Centraliza */
-    width: 120%; 
-    height: 120%;
+    transform: translate(-50%, -50%);
+    width: 90%; 
+    height: 90%;
     background-image: url('assets/forma-branca.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    opacity: 0.15; /* Transparência suave */
     z-index: 0;
     pointer-events: none;
+    
+    /* AQUI ESTÁ O SEGREDO: DROP-SHADOW PARA REVELAR O BRANCO */
+    /* Cria uma sombra azulada suave ao redor da forma branca invisível */
+    filter: drop-shadow(0 10px 25px rgba(0, 122, 255, 0.15));
+    opacity: 0.8; /* Ajuste para não ficar muito forte */
 }
-#historia-previa .container { position: relative; z-index: 2; } /* Garante que o texto fique na frente */
+#historia-previa .container { position: relative; z-index: 2; }
 
 
 /* --- LÓGICA DO EMPILHAMENTO (STICKY) --- */
@@ -193,7 +193,7 @@ header {
 /* Tracinho Padrão */
 .sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; border-radius: 10px; background: rgba(0,0,0,0.1); }
 
-/* ALINHAMENTO JUSTIFICADO FORÇADO NOS CARTÕES */
+/* ALINHAMENTO JUSTIFICADO GLOBAL NOS CARTÕES */
 .sheet-card p { text-align: justify !important; }
 
 /* 1. SOBRE (AZUL) */
@@ -211,13 +211,19 @@ header {
 /* Handle Amarelo */
 .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-/* 3. VISÃO (BRANCO + FIX ARREDONDAMENTO) */
+/* 3. VISÃO (BRANCO + FIX ARREDONDAMENTO FORÇADO) */
 .sheet-visao { 
     top: 190px; z-index: 30; 
-    border-radius: 32px !important; /* CORREÇÃO DIAMANTE */
+    
+    /* SEGURANÇA TOTAL DE ARREDONDAMENTO */
+    border-radius: 32px !important;
+    border-bottom-left-radius: 32px !important;
+    border-bottom-right-radius: 32px !important;
+    
     margin-bottom: 50px; 
     min-height: auto; 
     padding-bottom: 50px;
+    overflow: hidden; /* Garante que nada vaze */
 }
 /* Handle Laranja */
 .sheet-visao::before { background: var(--laranja-vibrante) !important; }
@@ -356,7 +362,6 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     }
     .sheet-card::before { top: 10px; width: 30px; height: 3px; }
     
-    /* REPLICA A COR AZUL DO CARD DE ENTRADA NO MOBILE */
     .sheet-intro { 
         top: 70px; z-index: 10; 
         background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
@@ -366,10 +371,15 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .sheet-missao { top: 110px; z-index: 20; }
     .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-    /* VISÃO: FORÇA REDONDO EM BAIXO NO MOBILE */
+    /* VISÃO MOBILE FIX */
     .sheet-visao { 
         top: 150px; z-index: 30; 
+        
+        /* FORÇA ARREDONDAMENTO MOBILE */
         border-radius: 24px !important; 
+        border-bottom-left-radius: 24px !important;
+        border-bottom-right-radius: 24px !important;
+        
         margin-bottom: 30px; min-height: auto; 
     }
     .sheet-visao::before { background: var(--laranja-vibrante) !important; }
