@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL DIAMANTE (LAÇO LIVRE SEM CORTE + STACK + SETA) */
+/* style.css - VERSÃO FINAL (BACKGROUND ELEMENTS GLOBAIS + FIX GERAL) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -55,11 +55,25 @@ body {
     min-height: 100vh; 
     overflow-x: hidden; 
     position: relative;
-    background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
-                radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
-                #FAFAFA;
+    
+    /* AQUI ESTÁ A MÁGICA: Múltiplos Backgrounds no Body */
+    background: 
+        /* Laço Superior Esquerdo (Grande, Transparente, Fixo) */
+        url('assets/forma-branca.png') -150px -100px / 600px no-repeat,
+        /* Laço Inferior Direito (Grande, Transparente, Fixo) */
+        url('assets/forma-branca.png') right -150px bottom -100px / 700px no-repeat,
+        /* O Degradê Original do Fundo */
+        radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
+        radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
+        #FAFAFA;
+
+    /* Mantém tudo fixo enquanto a página rola */
     background-attachment: fixed;
+    /* Aplica uma transparência geral nas imagens de fundo para elas se fundirem */
+    /* Nota: Isso afeta o degradê também, mas o resultado é suave e agradável */
+    background-blend-mode: overlay; 
+
     -webkit-font-smoothing: antialiased;
 }
 body.menu-open { overflow: hidden; }
@@ -155,51 +169,10 @@ header {
 }
 .glass-card:hover { transform: translateY(-5px); }
 
-/* == CORREÇÃO DOS LAÇOS: SEM CORTE (OVERFLOW VISIBLE) == */
+/* REMOVIDO: Não precisamos mais de regras específicas para os laços aqui */
 #historia-previa { 
     position: relative; 
-    overflow: visible; /* AQUI ESTÁ A CORREÇÃO: LIBERA O CORTE */
-    z-index: 1; /* Garante ordem */
-}
-
-/* Configuração Comum dos Laços */
-#historia-previa::before, 
-#historia-previa::after {
-    content: '';
-    position: absolute;
-    width: 280px; /* Tamanho bom para mobile e desktop */
-    height: 280px;
-    background-image: url('assets/forma-branca.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-    z-index: -1; /* Fica atrás de tudo na seção */
-    pointer-events: none;
-    
-    /* VISIBILIDADE: Sombra azulada forte para contornar o branco */
-    filter: drop-shadow(0 0 15px rgba(28, 104, 211, 0.4)); 
-    opacity: 0.8; 
-}
-
-/* LAÇO 1 (Topo Esquerdo) */
-#historia-previa::before {
-    top: -50px; /* Sobe para vazar do cartão */
-    left: -40px; 
-    transform: rotate(-20deg); 
-}
-
-/* LAÇO 2 (Rodapé Direito) */
-#historia-previa::after {
-    bottom: -50px; 
-    right: -40px;
-    transform: rotate(160deg); 
-}
-
-/* O CARTÃO DE TEXTO (Precisa cobrir as pontas do laço) */
-#historia-previa .glass-card { 
-    position: relative; 
-    z-index: 2; /* Fica NA FRENTE dos laços */
-    /* Fundo bem sólido para esconder as pontas que passam por trás */
-    background: rgba(255, 255, 255, 0.98); 
+    z-index: 1;
 }
 
 
@@ -406,7 +379,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .sheet-missao { top: 110px; z-index: 20; }
     .sheet-missao::before { background: var(--amarelo-sol) !important; }
 
-    /* VISÃO MOBILE FIX (ARREDONDAMENTO) */
+    /* VISÃO MOBILE FIX */
     .sheet-visao { 
         top: 150px; z-index: 30; 
         border-radius: 24px !important; 
