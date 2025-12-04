@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: CORREÇÃO SOBRE (FUNDO MAIOR + CARDS ARREDONDADOS) */
+/* style.css - VERSÃO FINAL (MENU MOBILE AJUSTADO + GERAL MANTIDO) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -55,8 +55,6 @@ body {
     min-height: 100vh; 
     overflow-x: hidden; 
     position: relative;
-    
-    /* Fundo Limpo */
     background: radial-gradient(circle at 0% 0%, #E3F2FD 0%, transparent 50%),
                 radial-gradient(circle at 100% 0%, #FFF3E0 0%, transparent 50%),
                 radial-gradient(circle at 100% 100%, #F3E5F5 0%, transparent 50%),
@@ -139,7 +137,7 @@ header {
 .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 .prev { left: 24px; } .next { right: 24px; }
 
-/* Botão da Home padronizado */
+/* Botão Home (Estilo Matricule-se) */
 #historia-previa .cta-button.primary {
     background: rgba(28, 104, 211, 0.1); 
     color: var(--azul-riviera); 
@@ -178,68 +176,77 @@ header {
 #historia-previa { position: relative; z-index: 1; }
 
 
-/* --- 8. PÁGINA SOBRE (CORREÇÃO: FUNDO MAIOR + CARDS ARREDONDADOS) --- */
-
-/* O Fundo Azul da Seção */
-#sobre {
-    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
-    border-radius: 40px; 
-    margin-top: 30px; margin-bottom: 30px;
-    box-shadow: 0 20px 50px rgba(0, 85, 212, 0.3);
-    /* AUMENTEI O PADDING BOTTOM PARA O FUNDO CRESCER */
-    padding: 60px 0 100px 0; 
-    position: relative; 
-    overflow: visible; 
-}
-
-/* Títulos Brancos dentro do Sobre */
-#sobre h2, #sobre h3 {
-    color: white !important; 
-    background: none !important;
-    -webkit-text-fill-color: white !important;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2); 
-    text-align: center;
-}
-
-/* Cartões Empilhados dentro do Sobre (MODO VIDRO) */
-#sobre .sheet-card { 
+/* --- LÓGICA DO EMPILHAMENTO (STICKY) --- */
+.sheet-card { 
     position: sticky; 
-    top: 100px; 
-    /* TODOS OS CARDS AGORA TÊM BASE ARREDONDADA */
-    border-radius: 32px; 
-    min-height: auto;
-    padding: 50px 50px 80px 50px; 
+    border-radius: 32px 32px 0 0; 
+    min-height: auto; 
+    padding: 40px 40px 80px 40px; 
     border-top: none; 
-    margin-bottom: 20px; /* Espaço entre os cards */
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2); 
-    background: rgba(255, 255, 255, 0.15); 
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,0.3);
+    margin-bottom: 0; 
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08); 
+    background: rgba(255, 255, 255, 0.98); 
     display: flex; flex-direction: column; 
     transform: translateZ(0); 
 }
+.sheet-card::before { content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; border-radius: 10px; background: rgba(0,0,0,0.1); }
 
-/* Texto branco dentro dos cartões de vidro */
-#sobre .sheet-card p { 
-    color: white !important; 
-    text-align: justify !important; 
+/* ALINHAMENTO JUSTIFICADO GLOBAL */
+.sheet-card p { text-align: justify !important; }
+
+/* 1. SOBRE (AZUL) */
+.sheet-intro { 
+    top: 90px; z-index: 10; 
+    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%); color: white; 
 }
+.sheet-intro h2 { color: white !important; background: none !important; -webkit-text-fill-color: white !important; }
+.sheet-intro p { color: rgba(255, 255, 255, 0.95) !important; }
+.sheet-intro::before { background: rgba(255, 255, 255, 0.5) !important; }
 
-/* Ajuste dos "tracinhos" para serem brancos semi-transparentes */
-#sobre .sheet-card::before { 
-    content: ''; position: absolute; top: 15px; left: 50%; transform: translateX(-50%); 
-    width: 40px; height: 4px; border-radius: 10px; 
-    background: rgba(255,255,255,0.5); 
+/* 2. MISSÃO (BRANCO) */
+.sheet-missao { top: 140px; z-index: 20; }
+.sheet-missao::before { background: var(--amarelo-sol) !important; }
+
+/* 3. VISÃO (BRANCO + FIX ARREDONDAMENTO) */
+.sheet-visao { 
+    top: 190px; z-index: 30; 
+    border-radius: 32px !important;
+    border-bottom-left-radius: 32px !important;
+    border-bottom-right-radius: 32px !important;
+    margin-bottom: 50px; 
+    min-height: auto; 
+    padding-bottom: 50px;
+    background-color: #ffffff !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; 
 }
+.sheet-visao::before { background: var(--laranja-vibrante) !important; }
 
-/* Posições de Empilhamento */
+.sheet-card h2, .sheet-card h3 { text-align: center; }
+
+/* PÁGINA SOBRE (AZUL) */
+#sobre {
+    background: linear-gradient(135deg, #0055D4 0%, #007AFF 100%);
+    border-radius: 40px; margin-top: 30px; margin-bottom: 30px;
+    box-shadow: 0 20px 50px rgba(0, 85, 212, 0.3);
+    padding: 60px 0 100px 0; position: relative; overflow: visible; 
+    color: white;
+}
+#sobre h2, #sobre h3 {
+    color: white !important; background: none !important;
+    -webkit-text-fill-color: white !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 25px;
+}
+#sobre p { color: rgba(255, 255, 255, 0.95); }
+#sobre .sheet-card { 
+    background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 32px; margin-bottom: 20px; padding: 50px 50px 80px 50px;
+}
+#sobre .sheet-card p { color: white !important; }
+#sobre .sheet-card::before { background: rgba(255,255,255,0.5); }
 #sobre .sheet-intro { top: 80px; z-index: 10; }
 #sobre .sheet-missao { top: 130px; z-index: 20; background: rgba(255, 255, 255, 0.2) !important; } 
-#sobre .sheet-visao { 
-    top: 180px; z-index: 30; 
-    margin-bottom: 0; /* O último não precisa de margem */
-    background: rgba(255, 255, 255, 0.25) !important; 
-}
+#sobre .sheet-visao { top: 180px; z-index: 30; margin-bottom: 0; background: rgba(255, 255, 255, 0.25) !important; border-radius: 32px !important; }
 
 
 /* --- 9. NÍVEIS DE ENSINO --- */
@@ -362,39 +369,33 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 
     .nav-menu { flex-direction: column; gap: 10px; width: 100%; text-align: left; }
     .nav-item { width: 100%; border: none; }
-    .nav-link { display: block; padding: 14px 0; font-size: 1.25rem; font-weight: 700; color: var(--azul-profundo); border-bottom: 1px solid rgba(0,0,0,0.04); }
+    /* AQUI ESTÁ O AJUSTE DO ESPAÇAMENTO DO MENU MOBILE */
+    .nav-link { 
+        display: block; 
+        padding: 8px 0; /* Reduzi de 14px para 8px */
+        font-size: 1.25rem; 
+        font-weight: 700; 
+        color: var(--azul-profundo); 
+        border-bottom: 1px solid rgba(0,0,0,0.04); 
+    }
     .nav-link:last-child { border-bottom: none; }
     .nav-link::after { display: none; }
 
-    /* Ajuste Stack Mobile (COMPACTO + CORREÇÃO SOBRE) */
+    /* Ajuste Stack Mobile */
     .sheet-card { 
-        border-radius: 24px 24px 0 0; 
-        min-height: auto; 
+        border-radius: 24px 24px 0 0; min-height: auto; 
         box-shadow: 0 -8px 25px rgba(0,0,0,0.06); 
         margin-bottom: 0; padding: 30px 24px 60px 24px; 
     }
     .sheet-card::before { top: 10px; width: 30px; height: 3px; }
 
-    /* SOBRE: Mobile Fixes para o fundo azul e cards arredondados */
-    #sobre { 
-        border-radius: 24px; 
-        /* AUMENTO DO PADDING BOTTOM NO MOBILE TAMBÉM */
-        padding: 40px 0 80px 0; 
-        width: 100%; margin: 20px 0; 
-    }
+    /* SOBRE: Mobile Fixes */
+    #sobre { border-radius: 24px; padding: 40px 0 80px 0; width: 100%; margin: 20px 0; }
     #sobre h2 { font-size: 1.8rem; }
-    #sobre .sheet-card { 
-        padding: 30px 20px 60px 20px; 
-        /* TODOS OS CARDS ARREDONDADOS NO MOBILE */
-        border-radius: 24px;
-        margin-bottom: 15px;
-    }
+    #sobre .sheet-card { padding: 30px 20px 60px 20px; border-radius: 24px; margin-bottom: 15px; }
     #sobre .sheet-intro { top: 70px; }
     #sobre .sheet-missao { top: 120px; }
-    #sobre .sheet-visao { 
-        top: 170px; 
-        margin-bottom: 0; 
-    }
+    #sobre .sheet-visao { top: 170px; margin-bottom: 0; }
 
     /* Ajuste Níveis Mobile */
     #niveis { border-radius: 24px; padding: 40px 0; width: 100%; margin: 20px 0; }
