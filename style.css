@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: CORREÇÃO SOBRE (STACK + AZUL) & BOTÃO HOME */
+/* style.css - VERSÃO FINAL: CORREÇÃO SOBRE (FUNDO MAIOR + CARDS ARREDONDADOS) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -130,7 +130,7 @@ header {
 .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 
-/* --- 6. HERO SECTION (CORREÇÃO DO BOTÃO HOME) --- */
+/* --- 6. HERO SECTION --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
 .hero-slider { position: relative; overflow: hidden; max-width: 1920px; margin: 0 auto; box-shadow: 0 20px 60px -20px rgba(0, 122, 255, 0.2); border-radius: 0 0 40px 40px; }
 .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -139,15 +139,15 @@ header {
 .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); color: var(--azul-riviera); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; }
 .prev { left: 24px; } .next { right: 24px; }
 
-/* CORREÇÃO: Botão da Home agora usa estilo AZUL/TRANSPARENTE (Igual Matricule-se) */
+/* Botão da Home padronizado */
 #historia-previa .cta-button.primary {
-    background: rgba(28, 104, 211, 0.1); /* Azul bem claro */
+    background: rgba(28, 104, 211, 0.1); 
     color: var(--azul-riviera); 
     border: 1px solid rgba(28, 104, 211, 0.2);
     font-weight: 700; 
     letter-spacing: 0.5px;
     padding: 16px 32px; 
-    box-shadow: none; /* Remove sombra amarela */
+    box-shadow: none; 
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 #historia-previa .cta-button.primary:hover {
@@ -178,7 +178,7 @@ header {
 #historia-previa { position: relative; z-index: 1; }
 
 
-/* --- 8. PÁGINA SOBRE (CORREÇÃO COMPLETA: AZUL + STACK) --- */
+/* --- 8. PÁGINA SOBRE (CORREÇÃO: FUNDO MAIOR + CARDS ARREDONDADOS) --- */
 
 /* O Fundo Azul da Seção */
 #sobre {
@@ -186,10 +186,10 @@ header {
     border-radius: 40px; 
     margin-top: 30px; margin-bottom: 30px;
     box-shadow: 0 20px 50px rgba(0, 85, 212, 0.3);
-    /* IMPORTANTE: Padding apenas em cima para os cartões colarem no fundo se precisar */
-    padding: 60px 0 0 0; 
+    /* AUMENTEI O PADDING BOTTOM PARA O FUNDO CRESCER */
+    padding: 60px 0 100px 0; 
     position: relative; 
-    overflow: visible; /* HABILITA O STICKY NOVAMENTE */
+    overflow: visible; 
 }
 
 /* Títulos Brancos dentro do Sobre */
@@ -204,15 +204,14 @@ header {
 /* Cartões Empilhados dentro do Sobre (MODO VIDRO) */
 #sobre .sheet-card { 
     position: sticky; 
-    top: 100px; /* Ajuste fino do topo */
-    border-radius: 32px 32px 0 0; 
+    top: 100px; 
+    /* TODOS OS CARDS AGORA TÊM BASE ARREDONDADA */
+    border-radius: 32px; 
     min-height: auto;
     padding: 50px 50px 80px 50px; 
     border-top: none; 
-    margin-bottom: 0; 
-    /* Sombra escura suave para destacar no fundo azul */
+    margin-bottom: 20px; /* Espaço entre os cards */
     box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2); 
-    /* FUNDO VIDRO TRANSLÚCIDO (Não branco sólido) */
     background: rgba(255, 255, 255, 0.15); 
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255,255,255,0.3);
@@ -235,14 +234,11 @@ header {
 
 /* Posições de Empilhamento */
 #sobre .sheet-intro { top: 80px; z-index: 10; }
-#sobre .sheet-missao { top: 130px; z-index: 20; background: rgba(255, 255, 255, 0.2) !important; } /* Um pouco mais claro */
+#sobre .sheet-missao { top: 130px; z-index: 20; background: rgba(255, 255, 255, 0.2) !important; } 
 #sobre .sheet-visao { 
     top: 180px; z-index: 30; 
-    /* Fecha o arredondamento em baixo */
-    border-radius: 32px !important; 
-    margin-bottom: 50px; /* Margem para afastar do rodapé */
-    padding-bottom: 50px;
-    background: rgba(255, 255, 255, 0.25) !important; /* O mais claro */
+    margin-bottom: 0; /* O último não precisa de margem */
+    background: rgba(255, 255, 255, 0.25) !important; 
 }
 
 
@@ -379,14 +375,25 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     }
     .sheet-card::before { top: 10px; width: 30px; height: 3px; }
 
-    /* SOBRE: Mobile Fixes para o fundo azul */
-    #sobre { border-radius: 24px; padding: 40px 0 0 0; width: 100%; margin: 20px 0; }
+    /* SOBRE: Mobile Fixes para o fundo azul e cards arredondados */
+    #sobre { 
+        border-radius: 24px; 
+        /* AUMENTO DO PADDING BOTTOM NO MOBILE TAMBÉM */
+        padding: 40px 0 80px 0; 
+        width: 100%; margin: 20px 0; 
+    }
     #sobre h2 { font-size: 1.8rem; }
-    #sobre .sheet-card { padding: 30px 20px 60px 20px; }
+    #sobre .sheet-card { 
+        padding: 30px 20px 60px 20px; 
+        /* TODOS OS CARDS ARREDONDADOS NO MOBILE */
+        border-radius: 24px;
+        margin-bottom: 15px;
+    }
     #sobre .sheet-intro { top: 70px; }
     #sobre .sheet-missao { top: 120px; }
     #sobre .sheet-visao { 
-        top: 170px; border-radius: 24px !important; margin-bottom: 30px; 
+        top: 170px; 
+        margin-bottom: 0; 
     }
 
     /* Ajuste Níveis Mobile */
