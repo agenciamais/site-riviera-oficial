@@ -12,7 +12,7 @@ window.addEventListener("load", function() {
     }
 });
 
-// 2. MENU MOBILE
+// 2. MENU MOBILE (Gaveta Lateral)
 const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
@@ -49,9 +49,9 @@ menuOverlay.addEventListener('click', closeMenu);
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
 
 
-// 3. SLIDER DE BANNERS (COM PROGRESS BAR)
+// 3. SLIDER DE BANNERS COM BARRA DE PROGRESSO
 const slideContainer = document.querySelector(".slider-container");
-const progressBar = document.querySelector(".slider-progress-bar"); 
+const progressBar = document.querySelector(".slider-progress-bar"); // Seleciona a barra
 
 if (slideContainer) {
     let slideIndex = 0;
@@ -60,17 +60,18 @@ if (slideContainer) {
     const slideIntervalTime = 5000;
     let slideInterval;
 
+    // Função para reiniciar a animação da barra
     function resetProgressBar() {
         if(progressBar) {
             progressBar.classList.remove("animate");
-            void progressBar.offsetWidth; // Força reinício da animação
+            void progressBar.offsetWidth; // Truque para forçar o reinício do CSS
             progressBar.classList.add("animate");
         }
     }
 
     function updateSlidePosition() {
         slideContainer.style.transform = `translateX(${-slideIndex * 100}%)`;
-        resetProgressBar();
+        resetProgressBar(); // Reinicia a barra
     }
 
     function nextSlide() {
@@ -83,9 +84,9 @@ if (slideContainer) {
         updateSlidePosition();
     }
 
-    // Inicia o slider
+    // Inicia o slider e a barra
     slideInterval = setInterval(nextSlide, slideIntervalTime);
-    resetProgressBar(); // Inicia a primeira barra
+    resetProgressBar(); 
 
     const nextBtn = document.querySelector('.next');
     const prevBtn = document.querySelector('.prev');
@@ -101,7 +102,7 @@ if (slideContainer) {
 }
 
 
-// 4. MENU ATIVO
+// 4. MENU ATIVO (Link Laranja)
 document.addEventListener('DOMContentLoaded', () => {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll("header nav ul li a.nav-link");
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 5. ANIMAÇÃO SCROLL
+// 5. ANIMAÇÃO SCROLL (Fade In Up)
 const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -122,7 +123,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
 
 
-// 6. ACORDEÃO
+// 6. ACORDEÃO (Níveis de Ensino)
 const accordionHeaders = document.querySelectorAll('.accordion-header');
 accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
