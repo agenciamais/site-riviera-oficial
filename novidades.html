@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <style>
         /* ESTILOS ESPECÍFICOS PARA ESTA PÁGINA */
+        
+        /* Ajuste para o título Destaques 2025 */
         .ano-destaque-titulo {
             text-align: center;
             color: var(--azul-riviera);
@@ -15,6 +17,8 @@
             margin-bottom: 40px;
             position: relative;
         }
+
+        /* Estilos do Cartão de Evento */
         .event-card {
             display: flex;
             flex-direction: column; 
@@ -24,9 +28,11 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: transform 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
+            /* Margem inferior removida pois estará dentro do bloco de vidro */
             margin-bottom: 0; 
         }
         .event-card:hover { transform: translateY(-5px); }
+
         .event-img-wrapper {
             height: 250px;
             overflow: hidden;
@@ -37,6 +43,7 @@
             transition: transform 0.5s ease;
         }
         .event-card:hover .event-img-wrapper img { transform: scale(1.05); }
+        
         .event-date {
             position: absolute;
             top: 20px; left: 20px;
@@ -48,12 +55,14 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             font-size: 0.85rem;
         }
+
         .event-content { padding: 30px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .event-content h3 { 
             font-size: 1.5rem; margin-bottom: 10px; color: var(--azul-profundo); 
             background: none; -webkit-text-fill-color: initial;
         }
         .event-content p { font-size: 0.95rem; margin-bottom: 25px; }
+
         @media(min-width: 768px) {
             .event-card { flex-direction: row; height: 350px; }
             .event-img-wrapper { flex: 1.3; height: 100%; }
@@ -98,8 +107,11 @@
 
         <section class="content-section" style="padding-top: 0;">
             <div class="container">
+
                 <div class="glass-card fade-in-up" style="border: 2px solid #ffffff;">
+                    
                     <h2 class="ano-destaque-titulo">Destaques 2025</h2>
+
                     <div class="event-card fade-in-up">
                         <div class="event-img-wrapper">
                             <img src="assets/capa-formatura.jpg" alt="Formatura ABC Escola Riviera">
@@ -108,11 +120,12 @@
                         <div class="event-content">
                             <h3>Formatura do ABC</h3>
                             <p>Um momento mágico marcando o encerramento de um ciclo lindo! Confira todas as fotos oficiais da nossa cerimônia no álbum completo.</p>
+                            
                             <a href="https://photos.app.goo.gl/s3WERYeVyRY8XGKDA" class="cta-button primary" target="_blank">Ver Ensaio Fotográfico</a>
                         </div>
                     </div>
-                </div> 
-            </div>
+
+                </div> </div>
         </section>
 
         <section class="content-section">
@@ -123,6 +136,7 @@
                 </div>
             </div>
         </section>
+
     </main>
     
     <footer id="contato-footer">
