@@ -5,6 +5,7 @@ window.addEventListener("load", function() {
     const body = document.querySelector("body");
     const preloader = document.getElementById("preloader");
     if(preloader) {
+        // Pequeno delay para garantir que o CSS carregou
         setTimeout(() => {
             body.classList.add("loaded");
             setTimeout(() => { preloader.style.display = 'none'; }, 500);
@@ -17,6 +18,7 @@ const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
 
+// Cria a camada escura (overlay) dinamicamente se ela não existir no HTML
 let menuOverlay = document.querySelector('.menu-overlay');
 if (!menuOverlay) {
     menuOverlay = document.createElement('div');
@@ -45,6 +47,7 @@ if (hamburger) {
     });
 }
 
+// Fecha o menu ao clicar fora (na parte escura) ou nos links
 menuOverlay.addEventListener('click', closeMenu);
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
 
@@ -99,6 +102,8 @@ if (slideContainer) {
 
     if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
     if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
+    
+    updateSlidePosition();
 }
 
 
@@ -130,11 +135,13 @@ accordionHeaders.forEach(header => {
         const item = header.parentElement;
         const isActive = item.classList.contains('active');
 
+        // Fecha todos os outros
         document.querySelectorAll('.accordion-item').forEach(i => {
             i.classList.remove('active');
             i.querySelector('.accordion-content').style.maxHeight = null;
         });
 
+        // Abre o clicado
         if (!isActive) {
             item.classList.add('active');
             const content = item.querySelector('.accordion-content');
