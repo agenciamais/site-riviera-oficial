@@ -1,4 +1,4 @@
-// --- script.js - LÓGICA FINAL ---
+// --- script.js - LÓGICA FINAL (COM BARRA DE PROGRESSO) ---
 
 // 1. PRELOADER (Tela de Carregamento)
 window.addEventListener("load", function() {
@@ -52,7 +52,7 @@ menuOverlay.addEventListener('click', closeMenu);
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
 
 
-// 3. SLIDER DE BANNERS COM BARRA DE PROGRESSO
+// 3. SLIDER DE BANNERS (COM BARRA DE PROGRESSO)
 const slideContainer = document.querySelector(".slider-container");
 const progressBar = document.querySelector(".slider-progress-bar"); // Seleciona a barra
 
@@ -67,7 +67,7 @@ if (slideContainer) {
     function resetProgressBar() {
         if(progressBar) {
             progressBar.classList.remove("animate");
-            void progressBar.offsetWidth; // Truque para forçar o reinício do CSS
+            void progressBar.offsetWidth; // Força reinício da animação
             progressBar.classList.add("animate");
         }
     }
@@ -81,15 +81,14 @@ if (slideContainer) {
         slideIndex = (slideIndex + 1) % totalSlides;
         updateSlidePosition();
     }
-    
     function prevSlide() {
         slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
         updateSlidePosition();
     }
 
-    // Inicia o slider e a barra
+    // Inicia o slider
     slideInterval = setInterval(nextSlide, slideIntervalTime);
-    resetProgressBar(); 
+    resetProgressBar(); // Inicia a barra na primeira vez
 
     const nextBtn = document.querySelector('.next');
     const prevBtn = document.querySelector('.prev');
