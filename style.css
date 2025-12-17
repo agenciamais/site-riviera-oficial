@@ -1,4 +1,4 @@
-/* style.css - VERSÃO RESTAURADA + AJUSTES PONTUAIS */
+/* style.css - VERSÃO RESTAURADA (BASE ORIGINAL DO USUÁRIO) + AJUSTES MENU */
 
 /* --- VARIÁVEIS --- */
 :root {
@@ -22,15 +22,14 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Ajuste do scroll para não esconder títulos atrás do menu fixo */
-html { scroll-behavior: smooth; scroll-padding-top: 140px; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 
-/* Scrollbar */
+/* Scrollbar (ORIGINAL) */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: linear-gradient(var(--azul-riviera), var(--azul-profundo)); border-radius: 10px; }
 
-/* --- PRELOADER --- */
+/* --- PRELOADER (ORIGINAL) --- */
 #preloader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: #f4f7fc; z-index: 99999;
@@ -44,7 +43,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 140px; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 body.loaded #preloader { opacity: 0; visibility: hidden; }
 
-/* --- FUNDO ANIMADO --- */
+/* --- FUNDO ANIMADO (ORIGINAL) --- */
 body {
     font-family: 'Poppins', sans-serif; color: var(--texto-escuro); line-height: 1.6;
     min-height: 100vh; overflow-x: hidden; position: relative; background-color: #f4f7fc;
@@ -80,57 +79,55 @@ h2 {
 p { color: var(--texto-suave); margin-bottom: 15px; }
 #proposta p, #proposta .texto-justificado { text-align: center !important; }
 
-/* --- HEADER (MODIFICADO: BARRA AZUL + MENU BRANCO) --- */
+/* --- HEADER (AQUI ESTÃO AS MUDANÇAS DO MENU) --- */
 
-/* Barra Azul Superior (Estilo Pequena Estrela) */
+/* 1. BARRA AZUL SUPERIOR (AGORA VISÍVEL TAMBÉM NO PC) */
 .top-bar { 
     background: linear-gradient(90deg, var(--azul-riviera), var(--azul-profundo)); 
     padding: 10px 0; font-size: 0.85rem; color: rgba(255,255,255,0.9); 
-    display: block; /* Garante que apareça */
-    position: relative; z-index: 1002; /* Acima do header */
+    display: block; /* Antes era 'none', agora aparece sempre */
+    position: relative; z-index: 1002;
 }
 .top-bar-content { display: flex; justify-content: flex-end; gap: 25px; }
 .top-link { color: white; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: 0.3s; }
 .top-link img { width: 14px; filter: brightness(0) invert(1); }
 
-/* Menu Branco (Fica abaixo da barra azul) */
+/* 2. MENU PRINCIPAL */
 header {
-    background: rgba(255, 255, 255, 0.9); 
+    background: rgba(255, 255, 255, 0.9); /* Mais sólido para contraste */
     backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%);
     position: sticky; top: 0; 
     z-index: 1000; 
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4); 
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 
 .navbar { display: flex; justify-content: space-between; align-items: center; height: 85px; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 .logo img { height: 55px; width: auto; transition: transform 0.3s; }
 .logo:hover img { transform: scale(1.08); }
 
-.nav-menu { display: flex; list-style: none; gap: 30px; align-items: center; }
+.nav-menu { display: flex; list-style: none; gap: 30px; }
 
-/* Link do Menu (Com Traço Amarelo) */
+/* 3. LINK DO MENU (COM O TRAÇO AMARELO PEDIDO) */
 .nav-link { 
     text-decoration: none; color: var(--texto-escuro); font-weight: 600; 
     position: relative; transition: color 0.3s; font-size: 0.95rem; 
-    padding: 28px 0; /* Aumenta a área clicável verticalmente */
-    display: flex; align-items: center;
+    padding: 28px 0; /* Aumentei a área para o traço ficar alinhado na base */
+    display: block;
 }
 .nav-link:hover, .nav-link.active { color: var(--azul-riviera); }
 
-/* O Traço Amarelo (Substitui a bolinha) */
+/* O TRAÇO AMARELO (SUBSTITUI A BOLINHA) */
 .nav-link::after { 
     content: ''; position: absolute; 
     bottom: 0; /* Cola na base do header */
     left: 0; 
     width: 0%; /* Começa invisível */
-    height: 4px; /* Espessura */
+    height: 4px; /* Altura do traço */
     background: var(--amarelo); 
     transition: width 0.3s ease; 
     border-radius: 4px 4px 0 0; 
 }
-.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; } /* Enche ao passar o mouse */
 
 .hamburger { display: none; cursor: pointer; z-index: 1002; }
 .bar { display: block; width: 28px; height: 3px; margin: 6px auto; background: var(--azul-riviera); border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
@@ -148,7 +145,7 @@ header {
 .prev { left: 30px; } .next { right: 30px; }
 .prev:hover, .next:hover { background: var(--azul-riviera); border-color: var(--azul-riviera); }
 
-/* BARRA DE PROGRESSO DO SLIDER (NOVA) */
+/* 4. BARRA DE PROGRESSO DO SLIDER (NOVA) */
 .slider-progress-container {
     position: absolute; bottom: 0; left: 0; width: 100%; height: 5px;
     background: rgba(255,255,255,0.3); z-index: 5;
@@ -202,7 +199,7 @@ header {
 .cta-button.secondary { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
 .cta-button.simple { color: var(--azul-riviera); border: 2px solid var(--azul-riviera); background: transparent; padding: 12px 30px; }
 
-/* --- RODAPÉ FLUTUANTE --- */
+/* --- RODAPÉ FLUTUANTE (ORIGINAL PRETO/CINZA) --- */
 footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: relative; z-index: 2; }
 .footer-content-wrapper { max-width: 1100px; margin: 0 auto; background: rgba(44, 62, 80, 0.95); backdrop-filter: blur(20px); border-radius: 30px; padding: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.1); color: #b0bec5; }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; }
@@ -221,10 +218,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
    🛠️ MOBILE 🛠️ - MENU GAVETA LATERAL (Z-INDEX AJUSTADO)
    ======================================================= */
 @media(max-width: 768px) {
-    /* Barra Azul Mobile também aparece */
-    .top-bar { display: block; text-align: center; }
-    .top-bar-content { justify-content: center; font-size: 0.8rem; }
-
+    .top-bar { display: none; }
     header { width: 100%; top: 0; }
     .navbar { height: 70px; }
     .logo img { height: 45px; } 
@@ -282,7 +276,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .nav-link { display: block; padding: 12px 0; font-size: 1.3rem; font-weight: 700; color: var(--azul-profundo); border-bottom: 1px solid rgba(0,0,0,0.05); }
     .nav-link:last-child { border-bottom: none; }
     
-    /* No mobile não usa o traço, usa o texto colorido mesmo */
+    /* REMOVE TRAÇO NO MOBILE */
     .nav-link::after { display: none; }
 
     /* SHEETS MOBILE (Sem Sticky) */
