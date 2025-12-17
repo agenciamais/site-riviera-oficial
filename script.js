@@ -12,7 +12,7 @@ window.addEventListener("load", function() {
     }
 });
 
-// 2. MENU MOBILE (Gaveta Lateral)
+// 2. MENU MOBILE
 const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
@@ -63,7 +63,7 @@ if (slideContainer) {
     function resetProgressBar() {
         if(progressBar) {
             progressBar.classList.remove("animate");
-            void progressBar.offsetWidth; // Força reflow
+            void progressBar.offsetWidth; // Força reinício da animação
             progressBar.classList.add("animate");
         }
     }
@@ -83,7 +83,7 @@ if (slideContainer) {
         updateSlidePosition();
     }
 
-    // Inicialização
+    // Inicia o slider
     slideInterval = setInterval(nextSlide, slideIntervalTime);
     resetProgressBar(); // Inicia a primeira barra
 
@@ -101,7 +101,7 @@ if (slideContainer) {
 }
 
 
-// 4. MENU ATIVO (Link Laranja)
+// 4. MENU ATIVO
 document.addEventListener('DOMContentLoaded', () => {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll("header nav ul li a.nav-link");
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 5. ANIMAÇÃO SCROLL (Fade In Up)
+// 5. ANIMAÇÃO SCROLL
 const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -122,7 +122,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
 
 
-// 6. ACORDEÃO (Níveis de Ensino)
+// 6. ACORDEÃO
 const accordionHeaders = document.querySelectorAll('.accordion-header');
 accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
