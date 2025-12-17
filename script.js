@@ -5,7 +5,6 @@ window.addEventListener("load", function() {
     const body = document.querySelector("body");
     const preloader = document.getElementById("preloader");
     if(preloader) {
-        // Pequeno delay para garantir que o CSS carregou
         setTimeout(() => {
             body.classList.add("loaded");
             setTimeout(() => { preloader.style.display = 'none'; }, 500);
@@ -18,7 +17,6 @@ const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
 
-// Cria a camada escura (overlay) dinamicamente se ela não existir no HTML
 let menuOverlay = document.querySelector('.menu-overlay');
 if (!menuOverlay) {
     menuOverlay = document.createElement('div');
@@ -47,13 +45,14 @@ if (hamburger) {
     });
 }
 
-// Fecha o menu ao clicar fora (na parte escura) ou nos links
 menuOverlay.addEventListener('click', closeMenu);
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
 
 
-// 3. SLIDER DE BANNERS
+// 3. SLIDER DE BANNERS (COM PROGRESS BAR)
 const slideContainer = document.querySelector(".slider-container");
+const progressBar = document.querySelector(".slider-progress-bar"); 
+
 if (slideContainer) {
     let slideIndex = 0;
     const slides = document.querySelectorAll(".slide");
@@ -61,31 +60,44 @@ if (slideContainer) {
     const slideIntervalTime = 5000;
     let slideInterval;
 
+    function resetProgressBar() {
+        if(progressBar) {
+            progressBar.classList.remove("animate");
+            void progressBar.offsetWidth; // Força reflow
+            progressBar.classList.add("animate");
+        }
+    }
+
     function updateSlidePosition() {
         slideContainer.style.transform = `translateX(${-slideIndex * 100}%)`;
+        resetProgressBar();
     }
+
     function nextSlide() {
         slideIndex = (slideIndex + 1) % totalSlides;
         updateSlidePosition();
     }
+    
     function prevSlide() {
         slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
         updateSlidePosition();
     }
 
+    // Inicialização
     slideInterval = setInterval(nextSlide, slideIntervalTime);
+    resetProgressBar(); // Inicia a primeira barra
+
     const nextBtn = document.querySelector('.next');
     const prevBtn = document.querySelector('.prev');
 
     const resetInterval = () => {
         clearInterval(slideInterval);
         slideInterval = setInterval(nextSlide, slideIntervalTime);
+        resetProgressBar();
     }
 
     if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
     if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
-    
-    updateSlidePosition();
 }
 
 
@@ -117,13 +129,11 @@ accordionHeaders.forEach(header => {
         const item = header.parentElement;
         const isActive = item.classList.contains('active');
 
-        // Fecha todos os outros
         document.querySelectorAll('.accordion-item').forEach(i => {
             i.classList.remove('active');
             i.querySelector('.accordion-content').style.maxHeight = null;
         });
 
-        // Abre o clicado
         if (!isActive) {
             item.classList.add('active');
             const content = item.querySelector('.accordion-content');
