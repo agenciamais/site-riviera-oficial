@@ -1,11 +1,11 @@
-/* style.css - VERSÃO RESTAURADA + MENU INSTITUCIONAL + TRAÇO AMARELO */
+/* style.css - VERSÃO RESTAURADA + AJUSTES PONTUAIS */
 
 /* --- VARIÁVEIS --- */
 :root {
     --azul-riviera: #1c68d3;
     --azul-neon: #2979ff; 
     --azul-profundo: #0a2e7a;
-    --amarelo: #febb15; /* Amarelo Riviera */
+    --amarelo: #febb15;
     --laranja: #ff7e2c;
     --branco: #ffffff;
     --texto-escuro: #2c3e50;
@@ -22,14 +22,15 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 140px; /* Ajuste para o cabeçalho maior */ }
+/* Ajuste do scroll para não esconder títulos atrás do menu fixo */
+html { scroll-behavior: smooth; scroll-padding-top: 140px; }
 
-/* Scrollbar (SEU ORIGINAL AZUL) */
+/* Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: linear-gradient(var(--azul-riviera), var(--azul-profundo)); border-radius: 10px; }
 
-/* --- PRELOADER (SEU ORIGINAL AZUL) --- */
+/* --- PRELOADER --- */
 #preloader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: #f4f7fc; z-index: 99999;
@@ -43,7 +44,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 140px; /* Ajuste para o cabe
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 body.loaded #preloader { opacity: 0; visibility: hidden; }
 
-/* --- FUNDO ANIMADO (SEU ORIGINAL) --- */
+/* --- FUNDO ANIMADO --- */
 body {
     font-family: 'Poppins', sans-serif; color: var(--texto-escuro); line-height: 1.6;
     min-height: 100vh; overflow-x: hidden; position: relative; background-color: #f4f7fc;
@@ -79,28 +80,28 @@ h2 {
 p { color: var(--texto-suave); margin-bottom: 15px; }
 #proposta p, #proposta .texto-justificado { text-align: center !important; }
 
-/* --- HEADER INSTITUCIONAL (MODIFICADO COMO PEDIU) --- */
+/* --- HEADER (MODIFICADO: BARRA AZUL + MENU BRANCO) --- */
 
-/* 1. Barra Azul no Topo (Agora visível no Desktop) */
+/* Barra Azul Superior (Estilo Pequena Estrela) */
 .top-bar { 
     background: linear-gradient(90deg, var(--azul-riviera), var(--azul-profundo)); 
-    padding: 10px 0; 
-    font-size: 0.9rem; 
-    color: rgba(255,255,255,0.95); 
-    display: block; /* Força aparecer */
-    position: relative; z-index: 1002;
+    padding: 10px 0; font-size: 0.85rem; color: rgba(255,255,255,0.9); 
+    display: block; /* Garante que apareça */
+    position: relative; z-index: 1002; /* Acima do header */
 }
-.top-bar-content { display: flex; justify-content: flex-end; gap: 25px; align-items: center; }
-.top-link { color: white; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: 0.3s; font-weight: 500; }
+.top-bar-content { display: flex; justify-content: flex-end; gap: 25px; }
+.top-link { color: white; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: 0.3s; }
 .top-link img { width: 14px; filter: brightness(0) invert(1); }
 
-/* 2. Menu Branco logo abaixo */
+/* Menu Branco (Fica abaixo da barra azul) */
 header {
     background: rgba(255, 255, 255, 0.9); 
     backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%);
     position: sticky; top: 0; 
     z-index: 1000; 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4); 
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
 }
 
 .navbar { display: flex; justify-content: space-between; align-items: center; height: 85px; max-width: 1200px; margin: 0 auto; padding: 0 30px; }
@@ -109,16 +110,16 @@ header {
 
 .nav-menu { display: flex; list-style: none; gap: 30px; align-items: center; }
 
-/* Link do Menu (Estilo Institucional) */
+/* Link do Menu (Com Traço Amarelo) */
 .nav-link { 
     text-decoration: none; color: var(--texto-escuro); font-weight: 600; 
     position: relative; transition: color 0.3s; font-size: 0.95rem; 
-    padding: 28px 0; /* Aumenta a área de clique vertical */
+    padding: 28px 0; /* Aumenta a área clicável verticalmente */
     display: flex; align-items: center;
 }
 .nav-link:hover, .nav-link.active { color: var(--azul-riviera); }
 
-/* O TRAÇO AMARELO (Substitui a bolinha) */
+/* O Traço Amarelo (Substitui a bolinha) */
 .nav-link::after { 
     content: ''; position: absolute; 
     bottom: 0; /* Cola na base do header */
@@ -163,8 +164,6 @@ header {
 .card-container { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; }
 .glass-card { background: var(--vidro-bg); backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); border: var(--vidro-borda); box-shadow: var(--vidro-shadow); border-radius: 30px; padding: 50px; margin-bottom: 40px; transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
-
-/* SEUS SHEETS ORIGINAIS (EMPILHAMENTO MANTIDO) */
 .sheet-card { background: var(--vidro-bg); backdrop-filter: var(--blur-effect); -webkit-backdrop-filter: var(--blur-effect); border: var(--vidro-borda); padding: 50px; border-radius: 40px 40px 0 0; box-shadow: 0 -10px 30px rgba(28, 104, 211, 0.1); position: sticky; border-top: 8px solid var(--azul-riviera); transition: transform 0.3s ease; min-height: 300px; }
 .sheet-intro { top: 110px; z-index: 10; border-top-color: var(--azul-riviera); }
 .sheet-missao { top: 150px; z-index: 20; border-top-color: var(--amarelo); }
@@ -219,7 +218,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 
 
 /* =======================================================
-   🛠️ MOBILE 🛠️
+   🛠️ MOBILE 🛠️ - MENU GAVETA LATERAL (Z-INDEX AJUSTADO)
    ======================================================= */
 @media(max-width: 768px) {
     /* Barra Azul Mobile também aparece */
@@ -230,9 +229,11 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .navbar { height: 70px; }
     .logo img { height: 45px; } 
     
+    /* HAMBÚRGUER (Z-Index 1003: Acima do menu) */
     .hamburger { display: block; position: absolute; left: 20px; z-index: 1003; } 
     .logo { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1001; }
     
+    /* MENU GAVETA LATERAL */
     .nav-links-container {
         position: fixed; top: 0; left: 0; 
         height: 100vh; width: 80%; max-width: 320px;
@@ -245,8 +246,11 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
         border-right: 1px solid rgba(255,255,255,0.5);
         
         transform: translateX(-100%); 
-        visibility: hidden; 
+        visibility: hidden; /* EVITA O BLUR FANTASMA QUANDO FECHADO */
+        
+        /* Z-INDEX 1002: Acima do overlay, mas abaixo do hambúrguer */
         z-index: 1002; 
+        
         padding: 90px 30px 40px; 
         display: flex; flex-direction: column; justify-content: flex-start;
         overflow-y: auto; 
@@ -259,25 +263,27 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
         transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0s;
     }
     
+    /* PELÍCULA ESCURA DE FUNDO */
     .menu-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        
+        /* APENAS COR ESCURA, SEM BLUR (Para evitar bugs em alguns celulares) */
         background: rgba(0,0,0,0.5); 
+        
+        /* Z-INDEX 998: Abaixo do Header (1000) e do Menu (1002) */
         z-index: 998; 
+        
         opacity: 0; visibility: hidden; transition: 0.3s;
     }
     .menu-overlay.active { opacity: 1; visibility: visible; }
 
     .nav-menu { flex-direction: column; gap: 20px; text-align: left; width: 100%; }
     .nav-item { width: 100%; border: none; }
-    
-    .nav-link { 
-        display: block; padding: 12px 0; 
-        font-size: 1.3rem; font-weight: 700; color: var(--azul-profundo); 
-        border-bottom: 1px solid rgba(0,0,0,0.05); 
-    }
+    .nav-link { display: block; padding: 12px 0; font-size: 1.3rem; font-weight: 700; color: var(--azul-profundo); border-bottom: 1px solid rgba(0,0,0,0.05); }
     .nav-link:last-child { border-bottom: none; }
+    
     /* No mobile não usa o traço, usa o texto colorido mesmo */
-    .nav-link::after { display: none; } 
+    .nav-link::after { display: none; }
 
     /* SHEETS MOBILE (Sem Sticky) */
     .sheet-card { position: relative !important; top: auto !important; padding: 30px 20px; border-radius: 30px 30px 0 0; min-height: auto; box-shadow: none; border-top: 5px solid var(--azul-riviera); margin-bottom: 20px; }
@@ -301,3 +307,7 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
     .cta-button { width: 100%; margin-bottom: 10px; }
     .cta-section { border-radius: 40px 40px 0 0; padding: 60px 0; margin-top: 40px; margin-bottom: 60px; }
 }
+
+/* Animações */
+.fade-in-up { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+.fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
