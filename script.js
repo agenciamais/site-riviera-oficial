@@ -1,11 +1,10 @@
-// --- script.js - LÓGICA FINAL (COM BARRA DE PROGRESSO) ---
+// --- script.js - VERSÃO RESTAURADA + PROGRESS BAR ---
 
-// 1. PRELOADER (Tela de Carregamento)
+// 1. PRELOADER
 window.addEventListener("load", function() {
     const body = document.querySelector("body");
     const preloader = document.getElementById("preloader");
     if(preloader) {
-        // Pequeno delay para garantir que o CSS carregou
         setTimeout(() => {
             body.classList.add("loaded");
             setTimeout(() => { preloader.style.display = 'none'; }, 500);
@@ -13,12 +12,11 @@ window.addEventListener("load", function() {
     }
 });
 
-// 2. MENU MOBILE (Gaveta Lateral)
+// 2. MENU MOBILE
 const hamburger = document.querySelector(".hamburger");
 const navMenuContainer = document.querySelector(".nav-links-container");
 const body = document.querySelector("body");
 
-// Cria a camada escura (overlay) dinamicamente se ela não existir no HTML
 let menuOverlay = document.querySelector('.menu-overlay');
 if (!menuOverlay) {
     menuOverlay = document.createElement('div');
@@ -47,12 +45,11 @@ if (hamburger) {
     });
 }
 
-// Fecha o menu ao clicar fora (na parte escura) ou nos links
 menuOverlay.addEventListener('click', closeMenu);
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", closeMenu));
 
 
-// 3. SLIDER DE BANNERS (COM BARRA DE PROGRESSO)
+// 3. SLIDER DE BANNERS COM BARRA DE PROGRESSO
 const slideContainer = document.querySelector(".slider-container");
 const progressBar = document.querySelector(".slider-progress-bar"); // Seleciona a barra
 
@@ -81,6 +78,7 @@ if (slideContainer) {
         slideIndex = (slideIndex + 1) % totalSlides;
         updateSlidePosition();
     }
+    
     function prevSlide() {
         slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
         updateSlidePosition();
@@ -88,7 +86,7 @@ if (slideContainer) {
 
     // Inicia o slider
     slideInterval = setInterval(nextSlide, slideIntervalTime);
-    resetProgressBar(); // Inicia a barra na primeira vez
+    resetProgressBar(); 
 
     const nextBtn = document.querySelector('.next');
     const prevBtn = document.querySelector('.prev');
@@ -106,7 +104,7 @@ if (slideContainer) {
 }
 
 
-// 4. MENU ATIVO (Link Laranja)
+// 4. MENU ATIVO
 document.addEventListener('DOMContentLoaded', () => {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll("header nav ul li a.nav-link");
@@ -117,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 5. ANIMAÇÃO SCROLL (Fade In Up)
+// 5. ANIMAÇÃO SCROLL
 const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -127,7 +125,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
 
 
-// 6. ACORDEÃO (Níveis de Ensino)
+// 6. ACORDEÃO
 const accordionHeaders = document.querySelectorAll('.accordion-header');
 accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
