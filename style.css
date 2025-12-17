@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL COMPLETA: INSTITUCIONAL + PREMIUM IOS */
+/* style.css - VERSÃO FINAL COMPLETA: INSTITUCIONAL + PREMIUM */
 
 /* --- 1. VARIÁVEIS & TEXTURAS --- */
 :root {
@@ -25,6 +25,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Ajuste do scroll para não esconder títulos atrás do menu fixo */
 html { scroll-behavior: smooth; scroll-padding-top: 140px; }
 
 /* Scrollbar */
@@ -94,11 +95,13 @@ p { color: var(--texto-suave); margin-bottom: 15px; font-weight: 500; }
 #historia-previa p { text-align: center; max-width: 800px; margin: 0 auto 30px; } 
 #proposta p, #proposta .texto-justificado { text-align: center !important; }
 
-/* --- 5. CABEÇALHO INSTITUCIONAL --- */
-/* Barra Azul Sólida no Topo */
+/* --- 5. CABEÇALHO INSTITUCIONAL (Barra Azul + Menu Branco) --- */
+
+/* Barra Azul Escura no Topo */
 .top-bar { 
     background: var(--azul-profundo); 
-    padding: 10px 0; font-size: 0.9rem; color: white; display: block;
+    padding: 12px 0; font-size: 0.9rem; color: white; display: block;
+    position: relative; z-index: 1002;
 }
 .top-bar-content { display: flex; justify-content: flex-end; gap: 30px; align-items: center; }
 .top-link { 
@@ -108,7 +111,7 @@ p { color: var(--texto-suave); margin-bottom: 15px; font-weight: 500; }
 .top-link:hover { color: var(--amarelo-sol); }
 .top-link img { width: 16px; filter: brightness(0) invert(1); }
 
-/* Menu Branco Logo Abaixo */
+/* Menu Branco (Fixo logo abaixo) */
 header {
     background: rgba(255, 255, 255, 0.95); 
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -131,15 +134,23 @@ header {
 }
 .nav-link:hover, .nav-link.active { color: var(--azul-riviera); }
 
-/* O Traço Amarelo (Institucional) */
+/* O TRAÇO AMARELO (Corrigido para ficar logo abaixo do texto) */
 .nav-link::after { 
-    content: ''; position: absolute; bottom: -2px; left: 0; width: 0%; height: 3px; 
-    background: var(--amarelo-sol); transition: width 0.3s ease; border-radius: 2px; 
+    content: ''; 
+    position: absolute; 
+    bottom: -4px; /* Ajustado para não ficar muito longe */
+    left: 0; 
+    width: 0%; 
+    height: 3px; /* Espessura */
+    background: var(--amarelo-sol); 
+    transition: width 0.3s ease; 
+    border-radius: 2px; 
 }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
 .hamburger { display: none; cursor: pointer; z-index: 1002; }
 .bar { display: block; width: 28px; height: 3px; margin: 6px auto; background: var(--azul-riviera); border-radius: 2px; transition: 0.3s; }
+
 
 /* --- 6. HERO SLIDER COM PROGRESS BAR --- */
 .hero-wrapper { width: 100%; margin-bottom: 60px; background: transparent; }
@@ -185,7 +196,7 @@ header {
 .glass-card > *, .sheet-card > * { position: relative; z-index: 1; }
 .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(28, 104, 211, 0.15); }
 
-/* Sheets Empilhados com Bordas Coloridas */
+/* Sheets Empilhados com Bordas Coloridas (ORIGINAL) */
 .sheet-card { 
     position: sticky; 
     border-radius: 40px 40px 0 0; min-height: 300px; 
@@ -198,6 +209,7 @@ header {
 
 .sheet-card h2, .sheet-card h3 { text-align: center; margin-bottom: 20px; }
 .sheet-card p { text-align: justify !important; font-size: 1.05rem; }
+
 
 /* --- 8. ACORDEÃO (Níveis de Ensino) --- */
 .accordion-container { max-width: 900px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 15px; }
