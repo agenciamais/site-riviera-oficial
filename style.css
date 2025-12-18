@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: BARRA SUPERIOR CORRIGIDA (AZUL RIVIERA) */
+/* style.css - VERSÃO FINAL: LINHA AMARELA COLADA NO TEXTO + AJUSTES FINAIS */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -97,10 +97,10 @@ p { color: var(--texto-corpo); margin-bottom: 15px; font-size: 1.05rem; }
 
 /* --- 5. HEADER, BARRA SUPERIOR E MENU --- */
 
-/* BARRA SUPERIOR - CORRIGIDA */
+/* BARRA SUPERIOR */
 .top-bar {
     display: block;
-    background-color: var(--azul-riviera); /* CORREÇÃO: Agora usa o azul vivo oficial */
+    background-color: var(--azul-riviera); /* Azul Vivo Oficial */
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
     font-size: 13px;
@@ -157,8 +157,8 @@ header {
 .nav-links-container { height: 100%; display: flex; align-items: center; }
 .nav-menu { display: flex; list-style: none; gap: 35px; height: 100%; align-items: center; }
 
-/* O LINK DO MENU */
-.nav-item { height: 100%; display: flex; align-items: center; position: relative; }
+/* O LINK DO MENU - AJUSTE: Altura automática para o traço colar no texto */
+.nav-item { height: auto; display: flex; align-items: center; position: relative; }
 
 .nav-link { 
     text-decoration: none; 
@@ -169,7 +169,8 @@ header {
     letter-spacing: 0.3px; 
     position: relative; 
     transition: color 0.3s;
-    height: 100%; 
+    height: auto; /* Deixa a altura se ajustar ao texto */
+    padding: 5px 0; /* Pequeno respiro */
     display: flex; 
     align-items: center;
 }
@@ -180,7 +181,7 @@ header {
 .nav-link::after { 
     content: ''; 
     position: absolute; 
-    bottom: 0; 
+    bottom: -2px; /* Posiciona logo abaixo do texto */
     left: 0; 
     width: 0%; 
     height: 4px; 
