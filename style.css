@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: RODAPÉ AZUL RIVIERA (RETO) + TÍTULO NOVIDADES CORRIGIDO */
+/* style.css - VERSÃO FINAL: TUDO CORRIGIDO (RODAPÉ + TÍTULOS NOVIDADES AZUL RIVIERA) */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -83,19 +83,14 @@ h2 {
     filter: drop-shadow(0 2px 15px rgba(0, 122, 255, 0.2));
 }
 
-.sheet-card h3, .metodo-card h3 {
+/* CORREÇÃO GLOBAL: Títulos H3 (Cards, Novidades, Diferenciais) */
+/* Agora força o AZUL RIVIERA SÓLIDO em todos os subtítulos */
+h3, .sheet-card h3, .metodo-card h3, .glass-card h3 {
     font-weight: 700;
     margin-bottom: 15px;
-    background: linear-gradient(90deg, var(--azul-riviera) 0%, #00C6FF 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* CORREÇÃO: Título na página de Novidades */
-#novidades .glass-card h3 {
-    color: var(--azul-riviera) !important;
-    background: none !important;
-    -webkit-text-fill-color: var(--azul-riviera) !important;
+    color: var(--azul-riviera) !important; /* Azul Vivo */
+    background: none !important; /* Remove gradiente que escurece */
+    -webkit-text-fill-color: initial !important; /* Remove preenchimento transparente */
 }
 
 p { color: var(--texto-corpo); margin-bottom: 15px; font-size: 1.05rem; }
@@ -398,19 +393,17 @@ header {
 .cta-button.simple { color: var(--azul-riviera); background: rgba(0, 122, 255, 0.1); border: none; padding: 14px 28px; box-shadow: none; }
 
 
-/* --- 11. RODAPÉ (MODIFICADO PARA AZUL RIVIERA E RETO) --- */
+/* --- 11. RODAPÉ (RETO + AZUL RIVIERA SÓLIDO) --- */
 .extras-container { display: flex; gap: 30px; margin-bottom: 60px; }
 .map-container { border-radius: var(--radius-l); overflow: hidden; height: 300px; width: 100%; box-shadow: var(--vidro-shadow); }
 footer { background: transparent; padding: 0; margin-top: 0; position: relative; z-index: 2; }
 .footer-content-wrapper { 
     width: 100%;
     margin: 0; 
-    background: var(--azul-riviera); /* MUDANÇA: Azul Riviera Sólido */
+    background: var(--azul-riviera); /* COR: Azul Riviera Sólido */
     padding: 50px; 
     color: #ffffff; position: relative; overflow: hidden;
-    /* Removido: backdrop-filter, border-radius, box-shadow, border */
 }
-/* Removido o efeito de ruído (noiseFilter) */
 .footer-inner { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
 .footer-info h4 { color: white !important; font-size: 1.8rem; margin-bottom: 10px; font-weight: 700; background: none; -webkit-text-fill-color: white !important; }
 .footer-info p { margin-bottom: 5px; font-size: 0.95rem; color: rgba(255,255,255,0.9); } 
@@ -421,7 +414,7 @@ footer { background: transparent; padding: 0; margin-top: 0; position: relative;
 .social-btn[href*="wa"]::before { content: 'WA'; }
 .social-btn:hover { background: var(--amarelo-sol); border-color: var(--amarelo-sol); transform: scale(1.1) rotate(10deg); }
 .social-btn:hover::before { color: var(--azul-profundo); }
-.footer-copy { text-align: center; margin-top: 40px; padding-top: 20px; font-size: 0.85rem; opacity: 0.8; color: white; position: relative; z-index: 2; max-width: 1100px; margin: 40px auto 0; } /* Removido border-top */
+.footer-copy { text-align: center; margin-top: 40px; padding-top: 20px; font-size: 0.85rem; opacity: 0.8; color: white; position: relative; z-index: 2; max-width: 1100px; margin: 40px auto 0; } 
 
 
 /* --- MOBILE --- */
@@ -496,8 +489,8 @@ footer { background: transparent; padding: 0; margin-top: 0; position: relative;
     .card-container { gap: 0px; }
     .glass-card { padding: 30px 24px; border-radius: 20px; }
     .metodo-suporte-container, .extras-container, .footer-content, .cta-buttons-wrapper { flex-direction: column; }
-    footer { padding: 0; } /* Removido padding lateral no mobile */
-    .footer-content-wrapper { padding: 40px 24px; /* Removido border-radius */ }
+    footer { padding: 0; } 
+    .footer-content-wrapper { padding: 40px 24px; }
     .footer-inner { flex-direction: column; gap: 30px; text-align: center; }
     .footer-social { justify-content: center; }
     .cta-button { width: 100%; margin-bottom: 12px; }
