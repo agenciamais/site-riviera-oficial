@@ -1,4 +1,4 @@
-/* style.css - VERSÃO FINAL: MENU INSTITUCIONAL (TRAÇO) + LAYOUT CORRIGIDO */
+/* style.css - VERSÃO ATUALIZADA: BARRINHA AZUL + MENU POPPINS */
 
 /* --- 1. VARIÁVEIS & CORES --- */
 :root {
@@ -49,6 +49,7 @@ body.loaded #preloader { opacity: 0; visibility: hidden; }
 
 /* --- 3. BACKGROUND & TIPOGRAFIA --- */
 body {
+    /* Fonte Padrão para o corpo (se não carregar outra) */
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--texto-corpo); 
     line-height: 1.6;
@@ -94,7 +95,46 @@ p { color: var(--texto-corpo); margin-bottom: 15px; font-size: 1.05rem; }
 .texto-justificado { text-align: justify !important; }
 
 
-/* --- 5. HEADER & MENU INSTITUCIONAL (AQUI ESTÁ A MUDANÇA) --- */
+/* --- 5. HEADER, BARRA SUPERIOR E MENU --- */
+
+/* BARRA SUPERIOR AZUL - ATIVADA */
+.top-bar {
+    display: block; /* Visível */
+    background-color: var(--azul-profundo); /* Fundo Azul Escuro */
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif; /* Fonte Nova */
+    font-size: 13px;
+    padding: 8px 0;
+    position: relative;
+    z-index: 1002;
+}
+
+.top-bar-content {
+    display: flex;
+    justify-content: flex-end; /* Ícones à direita */
+    align-items: center;
+    gap: 25px; /* Espaço entre telefone e insta */
+}
+
+.top-link {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre ícone e texto */
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.top-link:hover { opacity: 0.8; }
+
+.top-link img {
+    height: 16px; /* Altura do ícone */
+    width: auto;
+    filter: brightness(0) invert(1); /* Deixa ícones brancos */
+}
+
+/* HEADER PRINCIPAL */
 header {
     background: rgba(255, 255, 255, 0.85); 
     backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -102,10 +142,9 @@ header {
     z-index: 1000; 
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05); 
-    height: 80px; /* Altura fixa para garantir alinhamento */
-    display: flex; align-items: center; /* Centraliza verticalmente */
+    height: 80px; 
+    display: flex; align-items: center; 
 }
-.top-bar { display: none; } 
 
 .navbar { 
     display: flex; justify-content: space-between; align-items: center; 
@@ -118,39 +157,40 @@ header {
 .nav-links-container { height: 100%; display: flex; align-items: center; }
 .nav-menu { display: flex; list-style: none; gap: 35px; height: 100%; align-items: center; }
 
-/* O LINK DO MENU (Estilo Texto) */
+/* O LINK DO MENU - ATUALIZADO COM NOVA FONTE E COR */
 .nav-item { height: 100%; display: flex; align-items: center; position: relative; }
+
 .nav-link { 
     text-decoration: none; 
-    color: var(--azul-profundo); 
-    font-weight: 700; /* Mais negrito = mais institucional */
+    color: var(--azul-riviera); /* COR NOVA: AZUL VIVO */
+    font-family: 'Poppins', sans-serif; /* FONTE NOVA: POPPINS */
+    font-weight: 600; 
     font-size: 0.95rem; 
-    letter-spacing: 0.5px; /* Espaçamento leve */
+    letter-spacing: 0.3px; 
     position: relative; 
     transition: color 0.3s;
-    height: 100%; /* Ocupa toda altura para o traço ficar na borda */
+    height: 100%; 
     display: flex; 
     align-items: center;
 }
 
 .nav-link:hover, .nav-link.active { color: var(--azul-riviera); }
 
-/* O TRAÇO (LINHA) - Substitui o Ponto */
+/* O TRAÇO (LINHA) ABAIXO DO MENU */
 .nav-link::after { 
     content: ''; 
     position: absolute; 
-    bottom: 0; /* Cola na base do header */
+    bottom: 0; 
     left: 0; 
-    width: 0%; /* Começa invisível */
-    height: 4px; /* Espessura da linha */
-    background: var(--amarelo-sol); /* Cor de destaque (Amarelo) */
-    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animação suave */
-    border-radius: 4px 4px 0 0; /* Arredondado só no topo */
+    width: 0%; 
+    height: 4px; 
+    background: var(--amarelo-sol); 
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    border-radius: 4px 4px 0 0; 
 }
 
-/* Efeito ao passar o mouse ou estar ativo */
 .nav-link:hover::after, .nav-link.active::after { 
-    width: 100%; /* Expande para preencher */
+    width: 100%; 
 }
 
 /* HAMBURGER (Mobile) */
@@ -377,7 +417,9 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 
 /* --- MOBILE --- */
 @media(max-width: 768px) {
+    /* NO MOBILE, A BARRA SUPERIOR SOME PARA NÃO POLUIR */
     .top-bar { display: none; }
+    
     header { width: 100%; top: 0; height: 70px; }
     .navbar { height: 100%; padding: 0 20px; }
     .logo img { height: 40px; } 
@@ -455,4 +497,3 @@ footer { background: transparent; padding: 0 0 40px; margin-top: 0; position: re
 
 .fade-in-up { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
 .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
-
